@@ -1,0 +1,87 @@
+LVM - Logical Volume Manager
+============================
+
+.Resources
+http://tldp.org/HOWTO/LVM-HOWTO/index.html
+
+Usage
+-----
+
+.Create PV
+[source,bash]
+----
+pvcreate /dev/sda
+----
+
+.Create VG
+[source,bash]
+----
+vgcreate vgdev /dev/sdd2
+----
+
+.Extend VG
+[source,bash]
+----
+fdisk # choose the device or create partition
+pvcreate /dev/sdd1
+vgextend vgos /dev/sdd1
+----
+
+.Extend LV
+[source,bash]
+----
+vgdisplay # check Free PE / Size
+lvextend -L+10G /dev/vgos/optlv
+resize2fs /dev/mapper/vgos-optlv
+----
+
+.Reduce LV
+[source,bash]
+----
+# Exemple 30GB -> 25GB
+umount /opt
+e2fsck -f /dev/mapper/vgos-optlv
+resize2fs /dev/mapper/vgos-optlv 25G
+lvreduce -L-5G /dev/vgos/optlv
+mount /opt
+----
+
+.Reduce VG
+[source,bash]
+----
+# Check if we have enough place for for all lv
+lvdisplay
+vgdisplay
+# Reducve LV is necessary & reduce vg
+vgreduce vgos /dev/sdd1
+----
+
+.Snapshot & Backups
+[source,bash]
+----
+lvcreate -L10G -s -n backups /dev/vgos/optlv
+mkdir /mnt/backups
+mount /dev/vgos/backups/mnt/backups
+----
+
+.Remove LV
+[source,bash]
+----
+umount /mnt/backups
+lvremove /dev/vgos/backups
+----
+
+.Remove an unused disk
+[source,bash]
+----
+vgreduce vgos /dev/sdd
+pvremove /dev/sdd
+----
+
+.Restore PV
+[source,bash]
+----
+pvdisplay
+pvcreate --uuid=HptAZH-bqh1-8qc5-E0wT-bn5h-5YCw-vyK6sV /dev/sdd \
+--restorefile /etc/lvm/archive/vgos_00008-84526315.vg
+----

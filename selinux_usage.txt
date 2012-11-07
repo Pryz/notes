@@ -1,0 +1,47 @@
+SELinux usage
+=============
+
+Install dependencies
+--------------------
+[source,bash]
+----
+semanage # yum install policycoreutil-python
+----
+
+On/Off
+------
+[source,bash]
+----
+setenforce 1
+getenforce
+----
+
+Show file's selinux settings
+----------------------------
+[source,bash]
+----
+ls -Z [file]
+----
+SELinux booleans
+----------------
+[source,bash]
+----
+getsebool -a
+setsebool -P boolean value
+semanage boolean -l
+----
+
+Monitor selinux violations
+--------------------------
+[source,bash]
+----
+yum instal setroubleshoot-server
+----
+
+Modify SELinux setting on file(s)
+---------------------------------
+[source,bash]
+----
+semanage fcontext -a -f "" -t httpd_sys_content_t '/var/www/html/test_site(/.*)?' # marche pas !!!
+restorecon -RFv /var/www/html/test_site
+----

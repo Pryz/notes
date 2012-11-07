@@ -1,0 +1,21 @@
+Install Graphite
+================
+
+Dependencies
+------------
+Use yum to install
+[source,bash]
+----
+yum install python-devel python-pip mod_wsgi mod_python python-sqlite2 bitmap pycairo \
+python-zope-interface python-simplejson django-tagging python-pip python-twisted-web \
+bitmap bitmap-fonts gcc-c++ openssl-devel git make
+----
+
+Graphite components
+-------------------
+[source,bash]
+----
+pip install carbon
+pip install whisper
+pip install graphite-web
+----
