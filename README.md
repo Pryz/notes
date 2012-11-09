@@ -1,16 +1,6 @@
-Personal notes
-==============
-List
-----
-link:dhcpd_pxe.html[Install & configure DHCP for PXE using]
+Notes
+=====
 
-link:graphite.html[Install Graphite]
+Some technical notes about system, dev and other stuff.
 
-link:iptables.html[Iptables]
-
-link:lvm.html[LVM - Logical Volume Manager]
-
-link:nfs.html[NFS]
-
-link:selinux_usage.html[SELinux usage]
-
+Write in asciidoc with a personnal css template.
