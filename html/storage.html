@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>NFS</title>
+<title>Storage (SAN, EMC, &#8230;)</title>
 <style type="text/css">
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -508,34 +508,82 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>NFS</h1>
+<h1>Storage (SAN, EMC, &#8230;)</h1>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
+<h2 id="_misc_informations">Misc informations</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum groupinstall nfs-file-server
-</pre></div></div></div>
+<div class="sect2">
+<h3 id="_levels">Levels</h3>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Disks</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Luns</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Metaluns</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Raidgroup</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_configuration">Configuration</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>vim /etc/export
-<span class="c"># i.e</span>
-<span class="c"># /var/ftp/pub  192.168.0.0/24(ro,sync)</span>
-<span class="c"># /var/www/html *.labo.fr(rw,sync)</span>
-</pre></div></div></div>
+<div class="sect2">
+<h3 id="_raid_types">Raid types</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+RAID 0 : entrelacement, capacité = plus petit x nb disques
+</p>
+</li>
+<li>
+<p>
+RAID 1 : redondance de la data, capacité = plus petit
+</p>
+</li>
+<li>
+<p>
+RAID 5 : redondance N+1, minimum 3 disques
+</p>
+</li>
+<li>
+<p>
+RAID 1+0 : minimum 4 disques
+</p>
+</li>
+<li>
+<p>
+RAID 0+1 : minimum 4 disques
+</p>
+</li>
+</ul></div>
 </div>
+<div class="sect2">
+<h3 id="_raid_group">RAID GROUP</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+1 raid protection level,
+</p>
+</li>
+<li>
+<p>
+Max 16 drives
+</p>
+</li>
+</ul></div>
 </div>
-<div class="sect1">
-<h2 id="_apply_new_exports">Apply new exports</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>exportfs -rv
-</pre></div></div></div>
 </div>
 </div>
 </div>

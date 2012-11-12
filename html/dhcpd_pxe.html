@@ -6,17 +6,13 @@
 <meta name="generator" content="AsciiDoc 8.6.6" />
 <title>Install &amp; configure DHCP for PXE using</title>
 <style type="text/css">
-/* ---------------------------------------------------------------------------
-   Bare AsciiDoc styles
-   Ryan Tomayko <r@tomayko.com>
---------------------------------------------------------------------------- */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
+dl, dt, dd,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
@@ -30,14 +26,9 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
-}
-
-ol, ul {
-  list-style: none;
 }
 
 blockquote, q {
@@ -51,23 +42,18 @@ table {
 a:focus {
   outline: none;
 }
-/*******************************************************************/
 
 body {
 	font-family:verdana,helvetica,arial,sans-serif;
-	/*font-size:81.25%;   /* 13px */
-	/*line-height:1.538;  /* 20px */
 	margin:40px 50px;
-	max-width:53.8461538462em; /* 790px */
-	/*color:#333;*/
-  box-sizing: border-box;
-  color:#373737;
-  /*background: #212121;*/
-  background: #f2f2f2;
-  font-size: 16px;
-  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+	max-width:53.8461538462em;
+    box-sizing: border-box;
+    color:#373737;
+    background: #f2f2f2;
+    font-size: 16px;
+    font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
 em {
@@ -100,14 +86,11 @@ dt {
 }
 
 h1, h2, h3, h4, h5 {
-	/*font-family:'lucida grande',georgia,verdana,helvetica,arial,sans-serif;*/
-	/*font-weight:normal;*/
-	/*color:#000;*/
-  margin: 10px 0;
-  font-weight: 700;
-  color:#222222;
-  font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
-  letter-spacing: -1px;
+    margin: 10px 0;
+    font-weight: 700;
+    color:#222222;
+    font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+    letter-spacing: -1px;
 }
 
 h1 {
@@ -118,7 +101,7 @@ h1 {
 
 h2 {
 	font-size:23px;
-	line-height:1.36363636; /* repeating, of course */
+	line-height:1.36363636;
 	margin:20px 0;
 }
 
@@ -248,6 +231,16 @@ pre {
 #author {
 	color:#000;
 	text-transform:uppercase
+}
+
+a:link, a:visited {
+    text-decoration:none;
+    color:#1C1C1C;
+}
+
+a:hover {
+    text-decoration:underline;
+    text-decoration-color:red;
 }
 
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
@@ -559,7 +552,7 @@ chkconfig dhcpd on
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-11-09 13:06:47 CET
+Last updated 2012-11-12 13:42:35 CET
 </div>
 </div>
 </body>

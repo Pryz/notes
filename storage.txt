@@ -1,0 +1,27 @@
+Storage (SAN, EMC, ...)
+=======================
+
+Misc informations
+-----------------
+
+Levels
+~~~~~~
+|=========
+|Disks     
+|Luns      
+|Metaluns  
+|Raidgroup 
+|=========
+
+Raid types
+~~~~~~~~~~
+* RAID 0 : entrelacement, capacité = plus petit x nb disques
+* RAID 1 : redondance de la data, capacité = plus petit
+* RAID 5 : redondance N+1, minimum 3 disques
+* RAID 1+0 : minimum 4 disques
+* RAID 0+1 : minimum 4 disques
+
+RAID GROUP
+~~~~~~~~~~
+* 1 raid protection level,
+* Max 16 drives

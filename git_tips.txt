@@ -1,0 +1,33 @@
+GIT tips
+========
+
+[source,bash]
+----
+# Merge master with a debug branch
+git merge --no-commit -s resolve debug_branch_name
+
+# Delete a remote branch
+git push origin --delete remote_branch_name
+# or
+git branch -rd origin/remote_branch_name
+
+# Github - enable ssh keys
+git remote set-url origin git@github.com:user/repo.git
+
+# Create a local repository
+NAMEREPO='myrepo'
+REPOPATH='/opt/git'
+git init
+git add .
+git commit -a
+cd /opt/git
+git clone --bare /home/bob/$NAMEREPO $NAMEREPO.git
+cd $NAMEREPO.git
+touch git-daemon-export-ok
+git --bare update-server-info
+chmod a+x hooks/post-update
+cat > $REPOPATH/$NAMEREPO/config << EOF
+[daemon]
+        receivepack = true
+EOF
+----

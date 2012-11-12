@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>NFS</title>
+<title>Neo4j for Ruby</title>
 <style type="text/css">
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -508,33 +508,62 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>NFS</h1>
+<h1>Neo4j for Ruby</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
+<div id="preamble">
 <div class="sectionbody">
+<div class="paragraph"><p><a href="http://maxdemarzi.com/2012/01/04/getting-started-with-ruby-and-neo4j/">http://maxdemarzi.com/2012/01/04/getting-started-with-ruby-and-neo4j/</a></p></div>
+<div class="paragraph"><p>Install the gem and launch neo4j</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum groupinstall nfs-file-server
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configuration">Configuration</h2>
-<div class="sectionbody">
+<div class="content">
+<pre><tt>By default neo4j is binded on http://localhost:7474 but you can change it in neo4j/conf/neo4j-server.properties file.
+[source,bash]</tt></pre>
+</div></div>
+<div class="paragraph"><p>gem install neography
+echo "require <em>neography/tasks</em>" &gt; Rakefile
+rake neo4j:install
+rake neo4j:start</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>vim /etc/export
-<span class="c"># i.e</span>
-<span class="c"># /var/ftp/pub  192.168.0.0/24(ro,sync)</span>
-<span class="c"># /var/www/html *.labo.fr(rw,sync)</span>
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_apply_new_exports">Apply new exports</h2>
-<div class="sectionbody">
+<div class="content">
+<pre><tt>Example of usage</tt></pre>
+</div></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>exportfs -rv
+<div class="content"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;neography&#39;</span>
+
+<span class="vi">@neo</span> <span class="o">=</span> <span class="no">Neography</span><span class="o">::</span><span class="no">Rest</span><span class="o">.</span><span class="n">new</span>
+
+<span class="n">node1</span> <span class="o">=</span> <span class="vi">@neo</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;node1&quot;</span><span class="p">)</span>
+<span class="n">node2</span> <span class="o">=</span> <span class="vi">@neo</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;node2&quot;</span><span class="p">)</span>
+
+<span class="vi">@neo</span><span class="o">.</span><span class="n">create_relationship</span><span class="p">(</span><span class="s2">&quot;there_is_a_relation&quot;</span><span class="p">,</span> <span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">suggestions_for</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+  <span class="vi">@neo</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">,</span>
+                <span class="s2">&quot;nodes&quot;</span><span class="p">,</span>
+                <span class="p">{</span><span class="s2">&quot;order&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;breadth first&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;uniqueness&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;node global&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;relationships&quot;</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="o">=&gt;</span> <span class="s2">&quot;friends&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;direction&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;in&quot;</span><span class="p">},</span>
+                 <span class="s2">&quot;return filter&quot;</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;language&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;javascript&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;body&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;position.length() == 2;&quot;</span><span class="p">},</span>
+                 <span class="s2">&quot;depth&quot;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">[</span><span class="s2">&quot;data&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span><span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">johnathan</span> <span class="o">=</span> <span class="n">create_person</span><span class="p">(</span><span class="s1">&#39;Johnathan&#39;</span><span class="p">)</span>
+<span class="n">mark</span>      <span class="o">=</span> <span class="n">create_person</span><span class="p">(</span><span class="s1">&#39;Mark&#39;</span><span class="p">)</span>
+<span class="n">phil</span>      <span class="o">=</span> <span class="n">create_person</span><span class="p">(</span><span class="s1">&#39;Phil&#39;</span><span class="p">)</span>
+<span class="n">mary</span>      <span class="o">=</span> <span class="n">create_person</span><span class="p">(</span><span class="s1">&#39;Mary&#39;</span><span class="p">)</span>
+<span class="n">luke</span>      <span class="o">=</span> <span class="n">create_person</span><span class="p">(</span><span class="s1">&#39;Luke&#39;</span><span class="p">)</span>
+
+<span class="n">make_mutual_friends</span><span class="p">(</span><span class="n">johnathan</span><span class="p">,</span> <span class="n">mark</span><span class="p">)</span>
+<span class="n">make_mutual_friends</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="n">mary</span><span class="p">)</span>
+<span class="n">make_mutual_friends</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="n">phil</span><span class="p">)</span>
+<span class="n">make_mutual_friends</span><span class="p">(</span><span class="n">phil</span><span class="p">,</span> <span class="n">mary</span><span class="p">)</span>
+<span class="n">make_mutual_friends</span><span class="p">(</span><span class="n">phil</span><span class="p">,</span> <span class="n">luke</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;Johnathan should become friends with </span><span class="si">#{</span><span class="n">suggestions_for</span><span class="p">(</span><span class="n">johnathan</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div></div></div>
 </div>
 </div>

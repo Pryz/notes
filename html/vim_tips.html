@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>NFS</title>
+<title>VIM tips</title>
 <style type="text/css">
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -508,33 +508,41 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>NFS</h1>
+<h1>VIM tips</h1>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
+<h2 id="_plugins">Plugins</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_autoloaders">Autoloaders</h3>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum groupinstall nfs-file-server
+<div class="content"><div class="highlight"><pre>tree autoload/
+<span class="c"># autoload/</span>
+<span class="c"># ├── pathogen.vim</span>
+<span class="c"># └── snipMate.vim</span>
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_bundles">Bundles</h3>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>tree -L 1 bundle/
+<span class="c"># bundle/</span>
+<span class="c"># ├── nerdtree</span>
+<span class="c"># ├── vim-endwise</span>
+<span class="c"># ├── vim-puppet</span>
+<span class="c"># └── vim-ruby</span>
 </pre></div></div></div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_configuration">Configuration</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>vim /etc/export
-<span class="c"># i.e</span>
-<span class="c"># /var/ftp/pub  192.168.0.0/24(ro,sync)</span>
-<span class="c"># /var/www/html *.labo.fr(rw,sync)</span>
-</pre></div></div></div>
-</div>
 </div>
 <div class="sect1">
-<h2 id="_apply_new_exports">Apply new exports</h2>
+<h2 id="_commands_amp_settings">Commands &amp; settings</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>exportfs -rv
+<div class="content"><div class="highlight"><pre><span class="c"># &lt;CTRL+w&gt; + &lt;Arrows&gt; -&gt; change the current buffer/window</span>
+:set expandtab
+:set <span class="nv">tabstop</span><span class="o">=</span>4
 </pre></div></div></div>
 </div>
 </div>

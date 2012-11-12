@@ -1,0 +1,36 @@
+VIM tips
+========
+
+Plugins
+-------
+
+Autoloaders
+~~~~~~~~~~~
+[source,bash]
+----
+tree autoload/
+# autoload/
+# ├── pathogen.vim
+# └── snipMate.vim
+----
+
+Bundles
+~~~~~~~
+[source,bash]
+----
+tree -L 1 bundle/
+# bundle/
+# ├── nerdtree
+# ├── vim-endwise
+# ├── vim-puppet
+# └── vim-ruby
+----
+
+Commands & settings
+-------------------
+[source,bash]
+----
+# <CTRL+w> + <Arrows> -> change the current buffer/window
+:set expandtab
+:set tabstop=4
+----
