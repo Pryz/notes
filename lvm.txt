@@ -4,6 +4,9 @@ LVM - Logical Volume Manager
 .Resources
 http://tldp.org/HOWTO/LVM-HOWTO/index.html
 
+.Todo
+* Add pvmove example
+
 Usage
 -----
 
@@ -84,4 +87,13 @@ pvremove /dev/sdd
 pvdisplay
 pvcreate --uuid=HptAZH-bqh1-8qc5-E0wT-bn5h-5YCw-vyK6sV /dev/sdd \
 --restorefile /etc/lvm/archive/vgos_00008-84526315.vg
+----
+
+Get informations
+----------------
+[source,bash]
+----
+# Display logical devices using device-mapper
+dmsetup info
+dmsetup ls
 ----

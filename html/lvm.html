@@ -514,6 +514,13 @@ asciidoc.install();
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><div class="title">Resources</div><p><a href="http://tldp.org/HOWTO/LVM-HOWTO/index.html">http://tldp.org/HOWTO/LVM-HOWTO/index.html</a></p></div>
+<div class="ulist"><div class="title">Todo</div><ul>
+<li>
+<p>
+Add pvmove example
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 <div class="sect1">
@@ -580,11 +587,21 @@ pvcreate --uuid<span class="o">=</span>HptAZH-bqh1-8qc5-E0wT-bn5h-5YCw-vyK6sV /d
 </pre></div></div></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_get_informations">Get informations</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># Display logical devices using device-mapper</span>
+dmsetup info
+dmsetup ls
+</pre></div></div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-11-12 13:42:35 CET
+Last updated 2012-11-16 17:44:13 CET
 </div>
 </div>
 </body>
