@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Linux perf &amp; troubleshooting</title>
+<title>Tune and limit the nework bandwidth</title>
 <style type="text/css">
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -510,193 +510,44 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Linux perf &amp; troubleshooting</h1>
+<h1>Tune and limit the nework bandwidth</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_ram">RAM</h2>
+<div id="preamble">
 <div class="sectionbody">
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cpu">CPU</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-runq = number of process waiting CPU time
-</p>
-</li>
-<li>
-<p>
-cswitch (context switch) = change of process = parallel calculations
-</p>
-</li>
-<li>
-<p>
-system load
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-load average : 1min 5min 15min (over the last Xmin)
-</p>
-</li>
-<li>
-<p>
-traffic analogy : X single processor(s) = X bridge(s) of traffic
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-load (i.e a single processor)
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-0 = no traffic
-</p>
-</li>
-<li>
-<p>
-0,70 = begin to check if there is something wrong
-</p>
-</li>
-<li>
-<p>
-1 = full traffic without "contention"
-</p>
-</li>
-<li>
-<p>
-&gt; 1 = full traffic + waiting processes
-</p>
-</li>
-<li>
-<p>
-3 = 3x the full traffic capacity
-</p>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
+<div class="paragraph"><p><a href="http://www.cyberciti.biz/faq/linux-traffic-shaping-using-tc-to-control-http-traffic">http://www.cyberciti.biz/faq/linux-traffic-shaping-using-tc-to-control-http-traffic</a></p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_commands_amp_tools">Commands &amp; tools</h2>
+<h2 id="_create_traffic_shaping_with_tc_and_iptables">Create traffic shaping with tc and iptables</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_ganglia">GANGLIA</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-CPU graph
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-User / System CPU : utilisation du CPU user/applicatif et system
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-Nice CPU : %CPU time occupé par des process à faible prio
-</p>
-</li>
-<li>
-<p>
-WAIT CPU : %tps passé par le CPU à attendre des remontées d&#8217;IO disques (= CPU wio)
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-Idle CPU : %tps CPU à glander
-</p>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_vmstat">VMSTAT</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-R : running queue
-</p>
-</li>
-<li>
-<p>
-B : blocked (wait io - wio | blocked)
-</p>
-</li>
-<li>
-<p>
-IN : Number of interrupts
-</p>
-</li>
-<li>
-<p>
-CS : Number of context switchs
-</p>
-</li>
-<li>
-<p>
-US : %CPU time sur User Thread
-</p>
-</li>
-<li>
-<p>
-SYS : %CPU time sur Kernel + Interrupts
-</p>
-</li>
-<li>
-<p>
-WA : %CPU idle à case d&#8217;un wait IO
-</p>
-</li>
-<li>
-<p>
-ID : %CPU time complétement idle
-</p>
-</li>
-<li>
-<p>
-BI : IO Write
-</p>
-</li>
-<li>
-<p>
-BO : IO Read
-</p>
-</li>
-<li>
-<p>
-SI : swap in = vers la RAM
-</p>
-</li>
-<li>
-<p>
-SO : swap out = vers le disque
-</p>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_sar">SAR</h3>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>sar -q <span class="o">(</span>queue length, task list length + load avg<span class="o">)</span>
+<div class="content"><div class="highlight"><pre><span class="c"># Delete existing rules</span>
+tc qdisc del dev eth0 root
+
+<span class="c"># Queuing discipline</span>
+tc qdisc add dev eth0 root handle 1:0 htb default 10
+
+<span class="c"># Create a class with bandwidth limitation</span>
+tc class add dev eth0 parent 1:0 classid 1:10 htb rate 512kbps ceil 640kbps prio 0
+
+
+<span class="c"># Mark all packages for http request</span>
+iptables -A OUTPUT -t mangle -p tcp --sport 80 -j MARK --set-mark 10
+service iptables save
+
+<span class="c"># Assign packages marked to the right class</span>
+tc filter add dev eth0 parent 1:0 prio 0 protocol ip handle 10 fw flowid 1:10
 </pre></div></div></div>
-<div class="paragraph"><p>tag : perf, audit, troubleshooting</p></div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_limit_the_bandwith_in_scp">Limit the bandwith in scp</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># SCP with 128Kbits/s bandwith</span>
+scp -l 128 source.file user@target
+</pre></div></div></div>
 </div>
 </div>
 </div>

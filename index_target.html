@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Linux perf &amp; troubleshooting</title>
+<title>Notes</title>
 <style type="text/css">
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -244,7 +244,6 @@ a:hover {
 }
 
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
-
 /*
   pygmentize filter
 */
@@ -310,7 +309,6 @@ a:hover {
 .highlight .vg { color: #B8860B } /* Name.Variable.Global */
 .highlight .vi { color: #B8860B } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
-
 
 </style>
 <script type="text/javascript">
@@ -510,201 +508,45 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Linux perf &amp; troubleshooting</h1>
+<h1>Notes</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_ram">RAM</h2>
+<div id="preamble">
 <div class="sectionbody">
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cpu">CPU</h2>
-<div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-runq = number of process waiting CPU time
-</p>
-</li>
-<li>
-<p>
-cswitch (context switch) = change of process = parallel calculations
-</p>
-</li>
-<li>
-<p>
-system load
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-load average : 1min 5min 15min (over the last Xmin)
-</p>
-</li>
-<li>
-<p>
-traffic analogy : X single processor(s) = X bridge(s) of traffic
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-load (i.e a single processor)
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-0 = no traffic
-</p>
-</li>
-<li>
-<p>
-0,70 = begin to check if there is something wrong
-</p>
-</li>
-<li>
-<p>
-1 = full traffic without "contention"
-</p>
-</li>
-<li>
-<p>
-&gt; 1 = full traffic + waiting processes
-</p>
-</li>
-<li>
-<p>
-3 = 3x the full traffic capacity
-</p>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
+<div class="paragraph"><p><a href="https://github.com/pryz">github.com/Pryz</a></p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_commands_amp_tools">Commands &amp; tools</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_ganglia">GANGLIA</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-CPU graph
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-User / System CPU : utilisation du CPU user/applicatif et system
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-Nice CPU : %CPU time occupé par des process à faible prio
-</p>
-</li>
-<li>
-<p>
-WAIT CPU : %tps passé par le CPU à attendre des remontées d&#8217;IO disques (= CPU wio)
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-Idle CPU : %tps CPU à glander
-</p>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_vmstat">VMSTAT</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-R : running queue
-</p>
-</li>
-<li>
-<p>
-B : blocked (wait io - wio | blocked)
-</p>
-</li>
-<li>
-<p>
-IN : Number of interrupts
-</p>
-</li>
-<li>
-<p>
-CS : Number of context switchs
-</p>
-</li>
-<li>
-<p>
-US : %CPU time sur User Thread
-</p>
-</li>
-<li>
-<p>
-SYS : %CPU time sur Kernel + Interrupts
-</p>
-</li>
-<li>
-<p>
-WA : %CPU idle à case d&#8217;un wait IO
-</p>
-</li>
-<li>
-<p>
-ID : %CPU time complétement idle
-</p>
-</li>
-<li>
-<p>
-BI : IO Write
-</p>
-</li>
-<li>
-<p>
-BO : IO Read
-</p>
-</li>
-<li>
-<p>
-SI : swap in = vers la RAM
-</p>
-</li>
-<li>
-<p>
-SO : swap out = vers le disque
-</p>
-</li>
-</ul></div>
-</div>
-<div class="sect2">
-<h3 id="_sar">SAR</h3>
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>sar -q <span class="o">(</span>queue length, task list length + load avg<span class="o">)</span>
-</pre></div></div></div>
-<div class="paragraph"><p>tag : perf, audit, troubleshooting</p></div>
-</div>
+<h2 id="_list">List</h2>
+<div id="hacked-ulist"><input class="search" /><span class="sort" data-sort="linklist">Sort by name</span><ul class="list">
+        <li><p class="linklist"><a href="html/dhcpd_pxe.html">Install &amp; configure DHCP for PXE using</a></p></li>
+        <li><p class="linklist"><a href="html/git_tips.html">GIT tips</a></p></li>
+        <li><p class="linklist"><a href="html/graphite.html">Install Graphite</a></p></li>
+        <li><p class="linklist"><a href="html/iptables.html">Iptables</a></p></li>
+        <li><p class="linklist"><a href="html/linux_perf.html">Linux perf &amp; troubleshooting</a></p></li>
+        <li><p class="linklist"><a href="html/lvm.html">LVM - Logical Volume Manager</a></p></li>
+        <li><p class="linklist"><a href="html/misc_bash.html">Misc bash commands</a></p></li>
+        <li><p class="linklist"><a href="html/nfs.html">NFS</a></p></li>
+        <li><p class="linklist"><a href="html/selinux_usage.html">SELinux usage</a></p></li>
+        <li><p class="linklist"><a href="html/vim_tips.html">VIM tips</a></p></li>
+</ul>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-11-25 16:39:15 CET
+Last updated 2012-11-09 17:36:06 CET
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="static/list.min.js"></script>
+<script type="text/javascript">
+var options = {
+    valueNames: [ 'linklist' ]
+};
+
+var hackerList = new List('hacked-ulist', options);
+</script>
 </body>
 </html>

@@ -6,17 +6,13 @@
 <meta name="generator" content="AsciiDoc 8.6.6" />
 <title>Notes</title>
 <style type="text/css">
-/* ---------------------------------------------------------------------------
-   Bare AsciiDoc styles
-   Ryan Tomayko <r@tomayko.com>
---------------------------------------------------------------------------- */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
+dl, dt, dd,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
@@ -30,14 +26,9 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
-}
-
-ol, ul {
-  list-style: none;
 }
 
 blockquote, q {
@@ -51,23 +42,18 @@ table {
 a:focus {
   outline: none;
 }
-/*******************************************************************/
 
 body {
 	font-family:verdana,helvetica,arial,sans-serif;
-	/*font-size:81.25%;   /* 13px */
-	/*line-height:1.538;  /* 20px */
 	margin:40px 50px;
-	max-width:53.8461538462em; /* 790px */
-	/*color:#333;*/
-  box-sizing: border-box;
-  color:#373737;
-  /*background: #212121;*/
-  background: #f2f2f2;
-  font-size: 16px;
-  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+	max-width:53.8461538462em;
+    box-sizing: border-box;
+    color:#373737;
+    background: #f2f2f2;
+    font-size: 16px;
+    font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
 em {
@@ -100,14 +86,11 @@ dt {
 }
 
 h1, h2, h3, h4, h5 {
-	/*font-family:'lucida grande',georgia,verdana,helvetica,arial,sans-serif;*/
-	/*font-weight:normal;*/
-	/*color:#000;*/
-  margin: 10px 0;
-  font-weight: 700;
-  color:#222222;
-  font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
-  letter-spacing: -1px;
+    margin: 10px 0;
+    font-weight: 700;
+    color:#222222;
+    font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+    letter-spacing: -1px;
 }
 
 h1 {
@@ -118,7 +101,7 @@ h1 {
 
 h2 {
 	font-size:23px;
-	line-height:1.36363636; /* repeating, of course */
+	line-height:1.36363636;
 	margin:20px 0;
 }
 
@@ -250,7 +233,18 @@ pre {
 	text-transform:uppercase
 }
 
+a:link, a:visited {
+    text-decoration:none;
+    color:#1C1C1C;
+}
+
+a:hover {
+    text-decoration:underline;
+    text-decoration-color:red;
+}
+
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
+
 /*
   pygmentize filter
 */
@@ -316,6 +310,7 @@ pre {
 .highlight .vg { color: #B8860B } /* Name.Variable.Global */
 .highlight .vi { color: #B8860B } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+
 
 </style>
 <script type="text/javascript">
@@ -520,25 +515,106 @@ asciidoc.install();
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>github.com/pryz</p></div>
+<div class="paragraph"><p><a href="https://github.com/pryz">github.com/Pryz</a></p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_list">List</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><a href="dhcpd_pxe.html">Install &amp; configure DHCP for PXE using</a></p></div>
-<div class="paragraph"><p><a href="graphite.html">Install Graphite</a></p></div>
-<div class="paragraph"><p><a href="iptables.html">Iptables</a></p></div>
-<div class="paragraph"><p><a href="lvm.html">LVM - Logical Volume Manager</a></p></div>
-<div class="paragraph"><p><a href="nfs.html">NFS</a></p></div>
-<div class="paragraph"><p><a href="selinux_usage.html">SELinux usage</a></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="html/acl.html">ACL management for Linux filesystem</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/chroot_sftp.html">How to create a chrooted SFTP platform</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/dhcpd_pxe.html">Install &amp; configure DHCP for PXE using</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/git_tips.html">GIT tips</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/graphite.html">Install Graphite</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/iptables.html">Iptables</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/limit_bandwith.html">Tune and limit the nework bandwidth</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/linux_perf.html">Linux perf &amp; troubleshooting</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/lvm.html">LVM - Logical Volume Manager</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/misc_bash.html">Misc bash commands</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/misc_ubuntu.html">Misc informations about Ubuntu</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/multipath.html">Multipath for Linux</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/nfs.html">NFS</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/ruby_neo4j.html">Neo4j for Ruby</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/selinux_usage.html">SELinux usage</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/storage.html">Storage (SAN, EMC, &#8230;)</a>
+</p>
+</li>
+<li>
+<p>
+<a href="html/vim_tips.html">VIM tips</a>
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-11-08 13:32:03 CET
+Last updated 2012-11-25 16:39:15 CET
 </div>
 </div>
 </body>
