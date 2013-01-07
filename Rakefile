@@ -2,9 +2,10 @@ require 'rubygems'
 require 'nokogiri'
 require 'fileutils'
 
+subheader_link = "https://github.com/pryz[github.com/Pryz]"
+
 html_folder = "./html" # Where you generate your html files
 txt_folder = "./" # Where you write your notes
-github_link = "https://github.com/pryz[github.com/Pryz]"
 
 desc "Default task : build html and index"
 task :default do
@@ -23,7 +24,6 @@ task :genhtml, [:theme, :backend] do |t, args|
         Dir.mkdir html_folder
     end
     FileUtils.cp(Dir.glob("#{txt_folder}/*.txt"),html_folder)
-    #FileUtils.cd(html_folder)
     txtfilelist=Dir.glob("#{html_folder}/*.txt")
 
     if txtfilelist.empty?
@@ -44,6 +44,7 @@ task :genhtml, [:theme, :backend] do |t, args|
         end
         sleep 0.1
     end
+    `sed -i '/^Last updated/d' #{html_folder}/*.html`
 end
 
 desc "Generate one file"
@@ -51,7 +52,7 @@ task :genfile, [:file, :theme, :backend] do |t, args|
     args.with_defaults(:theme => "pryz", :backend => "lofic")
     if File.exists?(args.file)
         puts "Building html for : #{args.file}"
-        %x[asciidoc -o html/#{args.file.delete(".txt")}.html --theme=#{args.theme} --backend=#{args.backend} #{args.file}]
+        %x[asciidoc -o #{html_folder}/#{args.file.delete(".txt")}.html --theme=#{args.theme} --backend=#{args.backend} #{args.file}]
     else
         puts "File #{args.file} doesn't exist"
     end
@@ -62,28 +63,33 @@ task :genindex, [:theme, :backend] do |t, args|
     args.with_defaults(:theme => "pryz", :backend => "index_list")
     puts "Building index with the theme : #{args.theme} and the backend : #{args.backend}"
     index_file = "index.txt"
+    FileUtils.cd(html_folder)
     index = File.open(index_file, 'w+')
     head_content = <<EOT
 Notes 
 ===== 
 
-link:#{github_link}
+link:#{subheader_link}
 
 List
 ---- 
     
 EOT
     index.write(head_content)
-    txtfilelist=Dir.glob("#{html_folder}/*.html")
+    txtfilelist=Dir.glob("*.html")
     until txtfilelist.empty?
         note_file = txtfilelist.pop
         page = Nokogiri::HTML(open(note_file))
         title = page.css('title').text
         tags = ""
         page.xpath('//div[@class="paragraph"]').each do | div |
-            tags = div.content if div.content.match(/Additional tags :/)
+            tags = div.content if div.content.match(/Additional tag/)
         end
-        index.write("* link:#{note_file}[#{title}] #{tags}\n")
+        if tags.empty?
+            index.write("* link:#{note_file}[#{title}]\n")
+        else
+            index.write("* link:#{note_file}[#{title}] -h-#{tags}-h-\n")
+        end
     end
     index.close
     %x[asciidoc --theme=#{args.theme} --backend=#{args.backend} #{index_file}]
