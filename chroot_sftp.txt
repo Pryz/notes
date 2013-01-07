@@ -21,9 +21,6 @@ Match group sftpusers
 ----
 #!/bin/bash
  
-# Author : Julien Fabre <julien.fabre@think.fr>
-# Last update : 15/11/2012
- 
  
 if [[ $EUID -ne 0 ]];then
         echo "This script must be run as root" 1>&2

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Install &amp; configure DHCP for PXE using</title>
+<title>Generate sar file of the current session</title>
 <style type="text/css">
 /* ---------------------------------------------------------------------------
  *  Pryz theme based on Bare Theme (http://tomayko.com/src/adoc-themes/)
@@ -539,43 +539,13 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Install &amp; configure DHCP for PXE using</h1>
+<h1>Generate sar file of the current session</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>TODO: Change this note to : Install PXE server</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
-<div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum -y install dhcpd
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_start_service">Start service</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>service dhcpd start
-chkconfig dhcpd on
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_the_dhcp">Configure the DHCP</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>cat &gt;&gt; /etc/dhcp/dhcpd.conf <span class="s">&lt;&lt; EOF</span>
-<span class="s">subnet 192.168.0.0 netmask 255.255.255.0 {</span>
-<span class="s">    range 192.168.0.100 192.168.0.200;</span>
-<span class="s">    filename &quot;pxelinux.0&quot;;</span>
-<span class="s">    option routers 192.168.0.1;</span>
-<span class="s">    option domain-name-servers 89.2.0.1;</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
+<div class="content"><div class="highlight"><pre><span class="nv">LC_ALL</span><span class="o">=</span>C sar -A &gt; /tmp/<span class="sb">`</span>hostname<span class="sb">`</span>_<span class="sb">`</span>date +<span class="s2">&quot;%d-%m-%Y&quot;</span><span class="sb">`</span>.sar
 </pre></div></div></div>
 </div>
 </div>

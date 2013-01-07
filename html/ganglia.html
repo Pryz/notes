@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Install &amp; configure DHCP for PXE using</title>
+<title>Ganglia</title>
 <style type="text/css">
 /* ---------------------------------------------------------------------------
  *  Pryz theme based on Bare Theme (http://tomayko.com/src/adoc-themes/)
@@ -539,44 +539,174 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Install &amp; configure DHCP for PXE using</h1>
+<h1>Ganglia</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>TODO: Change this note to : Install PXE server</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+gmond : daemon running on all monitored nodes.
+</p>
+</li>
+<li>
+<p>
+gmetad : run on only master. Collects data from gmond instances.
+</p>
+</li>
+<li>
+<p>
+head node : "bridge" for group nodes.
+</p>
+</li>
+<li>
+<p>
+GMOND: sender &#8658; collect metrics
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+receiver &#8658; aggregate all metrics send from other hosts
+</p>
+</li>
+<li>
+<p>
+keep an in memory cached of all metrics
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+GMETAD: pools gmonds and stores metrics to RRD files
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
+<h2 id="_generate_default_configuration_if_not_present">Generate default configuration if not present</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum -y install dhcpd
+<div class="content"><div class="highlight"><pre>gmond --default_config &gt; /etc/gmond.conf
 </pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_start_service">Start service</h2>
+<h2 id="_classic_node_configuration">Classic node configuration</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>service dhcpd start
-chkconfig dhcpd on
+<div class="content"><div class="highlight"><pre>cluster <span class="o">{</span>
+    <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;cluster1&quot;</span>
+<span class="o">}</span>
+
+udp_send_channel <span class="o">{</span>
+    <span class="nv">host</span> <span class="o">=</span> head_node1
+    <span class="nv">port</span> <span class="o">=</span> 8649
+<span class="o">}</span>
+
+tcp_accept_channel <span class="o">{</span>
+    <span class="nv">port</span> <span class="o">=</span> 8649
+<span class="o">}</span>
+
+<span class="c"># to comment : multicast and udp_recv_channel</span>
+</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+gmond.conf
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+cluster:name = clustername
+</p>
+</li>
+<li>
+<p>
+udp_send_channel:host = 10.2.3.36 + :port = 8649
+</p>
+</li>
+<li>
+<p>
+udp_recv_channel:empty
+</p>
+</li>
+<li>
+<p>
+tcp_accept_channel:port = 8649
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_head_node_configuration">Head node configuration</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>cluster <span class="o">{</span>
+    <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;cluster1&quot;</span>
+<span class="o">}</span>
+
+udp_recv_channel <span class="o">{</span>
+    <span class="nv">port</span> <span class="o">=</span> 8649
+<span class="o">}</span>
+
+tcp_accept_channel <span class="o">{</span>
+    <span class="nv">port</span> <span class="o">=</span> 8649
+<span class="o">}</span>
+
+<span class="c"># to comment : multicast and udp_send_channel</span>
 </pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configure_the_dhcp">Configure the DHCP</h2>
+<h2 id="_master">Master</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>cat &gt;&gt; /etc/dhcp/dhcpd.conf <span class="s">&lt;&lt; EOF</span>
-<span class="s">subnet 192.168.0.0 netmask 255.255.255.0 {</span>
-<span class="s">    range 192.168.0.100 192.168.0.200;</span>
-<span class="s">    filename &quot;pxelinux.0&quot;;</span>
-<span class="s">    option routers 192.168.0.1;</span>
-<span class="s">    option domain-name-servers 89.2.0.1;</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
-</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+gmond.conf
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+cluster:name = clustername
+</p>
+</li>
+<li>
+<p>
+udp_send_channel:host = 10.2.3.36 + :port = 8649
+</p>
+</li>
+<li>
+<p>
+udp_recv_channel:host = 10.2.3.36 + :port = 8649
+</p>
+</li>
+<li>
+<p>
+tcp_accept_channel:port = 8649
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+gmetad.conf
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+data_source "clustername" 12.2.3.36
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>

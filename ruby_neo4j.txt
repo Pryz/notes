@@ -5,7 +5,8 @@ http://maxdemarzi.com/2012/01/04/getting-started-with-ruby-and-neo4j/
 
 Install the gem and launch neo4j
 ---------------
-By default neo4j is binded on http://localhost:7474 but you can change it in neo4j/conf/neo4j-server.properties file.
+By default neo4j is binded on http://localhost:7474 but you can change it in 
+neo4j/conf/neo4j-server.properties file.
 [source,bash]
 ----
 gem install neography

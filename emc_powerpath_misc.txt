@@ -1,0 +1,52 @@
+EMC PowerPath - misc
+====================
+
+Add a LUN
+---------
+
+[source,bash]
+----
+# Number of loops depends of the host
+for i in 0 1 2 3; do echo "- - -" > /sys/class/scsi_host/host$i/scan; done
+# Configure new finded LUN(s)
+powermt config
+powermt display
+----
+
+Delete a LUN
+------------
+
+[source,bash]
+----
+----
+
+Add new path
+------------
+
+[source,bash]
+----
+# Connect the path(s) to the host, then
+# Discover new path(s)
+for i in 1 2 3; do echo "- - -" > /sys/class/scsi_host/host$i/scan; done
+
+# Configure new path(s)
+powermt config
+
+# Check if powerpath see new path(s)
+powermt display dev=all
+
+# Test new path(s)
+powermt restore
+
+# Save the configuration
+powermt save
+----
+
+
+Get key from installed host
+---------------------------
+
+[source,bash]
+----
+powermt check_registration
+----

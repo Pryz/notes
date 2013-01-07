@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Install &amp; configure DHCP for PXE using</title>
+<title>RHEL IO Tuning (for Oracle)</title>
 <style type="text/css">
 /* ---------------------------------------------------------------------------
  *  Pryz theme based on Bare Theme (http://tomayko.com/src/adoc-themes/)
@@ -539,44 +539,85 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Install &amp; configure DHCP for PXE using</h1>
+<h1>RHEL IO Tuning (for Oracle)</h1>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph"><p>TODO: Change this note to : Install PXE server</p></div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
+<h2 id="_i_o_elevators">I/O Elevators</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum -y install dhcpd
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_start_service">Start service</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>service dhcpd start
-chkconfig dhcpd on
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_the_dhcp">Configure the DHCP</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>cat &gt;&gt; /etc/dhcp/dhcpd.conf <span class="s">&lt;&lt; EOF</span>
-<span class="s">subnet 192.168.0.0 netmask 255.255.255.0 {</span>
-<span class="s">    range 192.168.0.100 192.168.0.200;</span>
-<span class="s">    filename &quot;pxelinux.0&quot;;</span>
-<span class="s">    option routers 192.168.0.1;</span>
-<span class="s">    option domain-name-servers 89.2.0.1;</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
-</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+CFQ (Completely Fair Queuing)
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Per process queue
+</p>
+</li>
+<li>
+<p>
+Each process queue gets fixed time slice (process priority)
+</p>
+</li>
+<li>
+<p>
+Default algorithm for RHEL
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Deadline
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Two queues per device, one for read and one for writes
+</p>
+</li>
+<li>
+<p>
+I/Os dispatched based on time spent in queue
+</p>
+</li>
+<li>
+<p>
+Recommended for single instance databases with dedicated storage
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Noop
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+FIFO
+</p>
+</li>
+<li>
+<p>
+Simple I/O Merging
+</p>
+</li>
+<li>
+<p>
+Lowest CPU Cost
+</p>
+</li>
+<li>
+<p>
+Recommended for CPU-limited env
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>

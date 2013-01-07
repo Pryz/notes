@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Install &amp; configure DHCP for PXE using</title>
+<title>JBoss - Use vault to encrypt password</title>
 <style type="text/css">
 /* ---------------------------------------------------------------------------
  *  Pryz theme based on Bare Theme (http://tomayko.com/src/adoc-themes/)
@@ -539,44 +539,70 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Install &amp; configure DHCP for PXE using</h1>
+<h1>JBoss - Use vault to encrypt password</h1>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph"><p>TODO: Change this note to : Install PXE server</p></div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="_install_dependencies">Install dependencies</h2>
+<h2 id="_create_the_vault_and_store_password">Create the vault and store password</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>yum -y install dhcpd
+<div class="content"><div class="highlight"><pre><span class="c"># Create the keystore</span>
+keytool -genkey -keyalg RSA -keysize 1024 -alias vault -keystore vault.keystore
+
+<span class="c"># Store password into the keystore with the vault</span>
+./vault.sh
+
+<span class="c">#  Enter directory to store encrypted files (... \ based on Unix or Windows:/home/student/</span>
+<span class="c">#  Enter Keystore URL:/home/student/vault.keystore</span>
+<span class="c">#  Enter Keystore password:</span>
+<span class="c">#  Enter Keystore password again:</span>
+<span class="c">#  Values match</span>
+<span class="c">#  Enter 8 character salt:12345678</span>
+<span class="c">#  Enter iteration count as a number (Eg: 44):50</span>
+<span class="c">#  (...)</span>
+<span class="c">#  ********************************************</span>
+<span class="c">#  Masked Password:MASK-20Mquir8d.W/ashplp.8ZZ</span>
+<span class="c">#  salt:12345678</span>
+<span class="c">#  Iteration Count:50</span>
+<span class="c">#  ********************************************</span>
+<span class="c">#  Enter Keystore Alias:vault</span>
+<span class="c">#  (...)</span>
+<span class="c">#  Please enter a Digit::   0: Store a password  1: Check whether password exists  2: Exit</span>
+<span class="c">#  0</span>
+<span class="c">#  (...)</span>
+<span class="c">#  Please make note of the following:</span>
+<span class="c">#  ********************************************</span>
+<span class="c">#  Vault Block:postgres</span>
+<span class="c">#  Attribute Name:postgres</span>
+<span class="c">#  Shared Key:MjU5MmU3YzAtNmQ3Yi00MDNiLWIwNjUtNmUzMjQ3YzE3ZTNjTElORV9CUkVBS3ZhdWx0</span>
+<span class="c">#  Configuration should be done as follows:</span>
+<span class="c">#  VAULT::postgres::postgres::MjU5MmU3YzAtNmQ3Yi00MDNiLWIwNjUtNmUzMjQ3YzE3ZTNjTElORV9CUkVBS3ZhdWx0</span>
+<span class="c">#  ********************************************</span>
 </pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_start_service">Start service</h2>
+<h2 id="_use_the_encrypted_password_in_datasource">Use the encrypted password in Datasource</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>service dhcpd start
-chkconfig dhcpd on
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_configure_the_dhcp">Configure the DHCP</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre>cat &gt;&gt; /etc/dhcp/dhcpd.conf <span class="s">&lt;&lt; EOF</span>
-<span class="s">subnet 192.168.0.0 netmask 255.255.255.0 {</span>
-<span class="s">    range 192.168.0.100 192.168.0.200;</span>
-<span class="s">    filename &quot;pxelinux.0&quot;;</span>
-<span class="s">    option routers 192.168.0.1;</span>
-<span class="s">    option domain-name-servers 89.2.0.1;</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
-</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Edit domain.xml
+</p>
+</li>
+<li>
+<p>
+Find the Datasource and replace the password by :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+VAULT::postgres::postgres::MjU5MmU3YzAtNmQ3Yi00MDNiLWIwNjUtNmUzMjQ3YzE3ZTNjTElORV9CUkVBS3ZhdWx0
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
