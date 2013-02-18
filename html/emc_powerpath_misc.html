@@ -558,7 +558,16 @@ powermt display
 <h2 id="_delete_a_lun">Delete a LUN</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>
+<div class="content"><div class="highlight"><pre><span class="c"># disable I/O on the device and then</span>
+powermt display <span class="nv">dev</span><span class="o">=</span>emcpowerX <span class="c"># get all sdX paths</span>
+powermt remove <span class="nv">dev</span><span class="o">=</span>emcpowerX
+powermt release <span class="nv">dev</span><span class="o">=</span>emcpowerX
+<span class="c"># Now the device is not use/usable anymore</span>
+<span class="c"># You have to clean all the paths</span>
+<span class="k">for </span>i in d f h; <span class="k">do </span><span class="nb">echo </span>1 &gt; /sys/block/sd<span class="nv">$i</span>/device/delete
+<span class="c"># You can now remove the device from the rack</span>
+<span class="c"># Check all remaining devices</span>
+powermt display <span class="nv">dev</span><span class="o">=</span>all
 </pre></div></div></div>
 </div>
 </div>

@@ -1,0 +1,7 @@
+LVM filter for mpath
+====================
+
+[source,bash]
+----
+filter = [ "a/dev/mpath/.*", "r/dev/sd.*/", "r/.*/" ]
+----

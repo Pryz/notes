@@ -18,6 +18,16 @@ Delete a LUN
 
 [source,bash]
 ----
+# disable I/O on the device and then
+powermt display dev=emcpowerX # get all sdX paths
+powermt remove dev=emcpowerX
+powermt release dev=emcpowerX
+# Now the device is not use/usable anymore
+# You have to clean all the paths
+for i in d f h; do echo 1 > /sys/block/sd$i/device/delete
+# You can now remove the device from the rack
+# Check all remaining devices
+powermt display dev=all
 ----
 
 Add new path

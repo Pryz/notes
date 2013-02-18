@@ -1,0 +1,16 @@
+Ubuntu : init and runlevel
+==========================
+
+How to get current runlevel
+---------------------------
+[source,bash]
+----
+runlevel
+----
+
+Enable service during start
+---------------------------
+[source,bash]
+----
+update-rc.d SERVICENAME defaults
+----

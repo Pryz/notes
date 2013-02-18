@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.6" />
-<title>Notes</title>
+<title>Samba shares with AD</title>
 <style type="text/css">
 /* ---------------------------------------------------------------------------
  *  Pryz theme based on Bare Theme (http://tomayko.com/src/adoc-themes/)
@@ -270,71 +270,76 @@ hidden {
 }
 
 /* vim: set ft=css ts=4 sw=4 noexpandtab: */
-/*
-  pygmentize filter
-*/
-.highlight .hll { background-color: #ffffcc }
-.highlight  { background: #f4f4f4; }
-.highlight .c { color: #008800; font-style: italic } /* Comment */
-.highlight .err { border: 1px solid #FF0000 } /* Error */
-.highlight .k { color: #AA22FF; font-weight: bold } /* Keyword */
-.highlight .o { color: #666666 } /* Operator */
-.highlight .cm { color: #008800; font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: #008800 } /* Comment.Preproc */
-.highlight .c1 { color: #008800; font-style: italic } /* Comment.Single */
-.highlight .cs { color: #008800; font-weight: bold } /* Comment.Special */
-.highlight .gd { color: #A00000 } /* Generic.Deleted */
-.highlight .ge { font-style: italic } /* Generic.Emph */
-.highlight .gr { color: #FF0000 } /* Generic.Error */
-.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.highlight .gi { color: #00A000 } /* Generic.Inserted */
-.highlight .go { color: #808080 } /* Generic.Output */
-.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.highlight .gs { font-weight: bold } /* Generic.Strong */
-.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.highlight .gt { color: #0040D0 } /* Generic.Traceback */
-.highlight .kc { color: #AA22FF; font-weight: bold } /* Keyword.Constant */
-.highlight .kd { color: #AA22FF; font-weight: bold } /* Keyword.Declaration */
-.highlight .kn { color: #AA22FF; font-weight: bold } /* Keyword.Namespace */
-.highlight .kp { color: #AA22FF } /* Keyword.Pseudo */
-.highlight .kr { color: #AA22FF; font-weight: bold } /* Keyword.Reserved */
-.highlight .kt { color: #00BB00; font-weight: bold } /* Keyword.Type */
-.highlight .m { color: #666666 } /* Literal.Number */
-.highlight .s { color: #BB4444 } /* Literal.String */
-.highlight .na { color: #BB4444 } /* Name.Attribute */
-.highlight .nb { color: #AA22FF } /* Name.Builtin */
-.highlight .nc { color: #0000FF } /* Name.Class */
-.highlight .no { color: #880000 } /* Name.Constant */
-.highlight .nd { color: #AA22FF } /* Name.Decorator */
-.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #00A000 } /* Name.Function */
-.highlight .nl { color: #A0A000 } /* Name.Label */
-.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.highlight .nv { color: #B8860B } /* Name.Variable */
-.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.highlight .w { color: #bbbbbb } /* Text.Whitespace */
-.highlight .mf { color: #666666 } /* Literal.Number.Float */
-.highlight .mh { color: #666666 } /* Literal.Number.Hex */
-.highlight .mi { color: #666666 } /* Literal.Number.Integer */
-.highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sb { color: #BB4444 } /* Literal.String.Backtick */
-.highlight .sc { color: #BB4444 } /* Literal.String.Char */
-.highlight .sd { color: #BB4444; font-style: italic } /* Literal.String.Doc */
-.highlight .s2 { color: #BB4444 } /* Literal.String.Double */
-.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.highlight .sh { color: #BB4444 } /* Literal.String.Heredoc */
-.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.highlight .sx { color: #008000 } /* Literal.String.Other */
-.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
-.highlight .s1 { color: #BB4444 } /* Literal.String.Single */
-.highlight .ss { color: #B8860B } /* Literal.String.Symbol */
-.highlight .bp { color: #AA22FF } /* Name.Builtin.Pseudo */
-.highlight .vc { color: #B8860B } /* Name.Variable.Class */
-.highlight .vg { color: #B8860B } /* Name.Variable.Global */
-.highlight .vi { color: #B8860B } /* Name.Variable.Instance */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+.hll { background-color: #222222 }
+.c { color: #104e8b } /* Comment */
+.err { color: #333333; border: 1px solid #FF0000 } /* Error */
+.g { color: #333333 } /* Generic */
+.k { color: #b8860b } /* Keyword */
+.l { color: #333333 } /* Literal */
+.n { color: #000000 } /* Name */
+.o { color: #000000 } /* Operator */
+.x { color: #333333 } /* Other */
+.p { color: #000000 } /* Punctuation */
+.cm { color: #104e8b } /* Comment.Multiline */
+.cp { color: #104e8b } /* Comment.Preproc */
+.c1 { color: #104e8b } /* Comment.Single */
+.cs { color: #104e8b; font-weight: bold } /* Comment.Special */
+.gd { color: #8b1a1a } /* Generic.Deleted */
+.ge { color: #333333; font-style: italic } /* Generic.Emph */
+.gr { color: #FF0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00cd00 } /* Generic.Inserted */
+.go { color: #808080 } /* Generic.Output */
+.gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.gs { color: #333333; font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #0040D0 } /* Generic.Traceback */
+.kc { color: #8b8b00 } /* Keyword.Constant */
+.kd { color: #00cd00 } /* Keyword.Declaration */
+.kn { color: #75507b } /* Keyword.Namespace */
+.kp { color: #cd0000 } /* Keyword.Pseudo */
+.kr { color: #8b8b00 } /* Keyword.Reserved */
+.kt { color: #00cd00 } /* Keyword.Type */
+.ld { color: #333333 } /* Literal.Date */
+.m { color: #ff3030 } /* Literal.Number */
+.s { color: #8b1a1a } /* Literal.String */
+.na { color: #333333 } /* Name.Attribute */
+.nb { color: #75507b } /* Name.Builtin */
+.nc { color: #cd0000 } /* Name.Class */
+.no { color: #4e9a06 } /* Name.Constant */
+.nd { color: #333333 } /* Name.Decorator */
+.ni { color: #333333 } /* Name.Entity */
+.ne { color: #666699; font-weight: bold } /* Name.Exception */
+.nf { color: #008b8b } /* Name.Function */
+.nl { color: #333333 } /* Name.Label */
+.nn { color: #4e9a06 } /* Name.Namespace */
+.nx { color: #333333 } /* Name.Other */
+.py { color: #333333 } /* Name.Property */
+.nt { color: #333333 } /* Name.Tag */
+.nv { color: #008b8b } /* Name.Variable */
+.ow { color: #8b8b00 } /* Operator.Word */
+.w { color: #333333 } /* Text.Whitespace */
+.mf { color: #ff3030 } /* Literal.Number.Float */
+.mh { color: #ff3030 } /* Literal.Number.Hex */
+.mi { color: #ff3030 } /* Literal.Number.Integer */
+.mo { color: #ff3030 } /* Literal.Number.Oct */
+.sb { color: #8b1a1a } /* Literal.String.Backtick */
+.sc { color: #8b1a1a } /* Literal.String.Char */
+.sd { color: #8b1a1a } /* Literal.String.Doc */
+.s2 { color: #8b1a1a } /* Literal.String.Double */
+.se { color: #8b1a1a } /* Literal.String.Escape */
+.sh { color: #8b1a1a } /* Literal.String.Heredoc */
+.si { color: #6a5acd } /* Literal.String.Interpol */
+.sx { color: #8b1a1a } /* Literal.String.Other */
+.sr { color: #6a5acd } /* Literal.String.Regex */
+.s1 { color: #8b1a1a } /* Literal.String.Single */
+.ss { color: #8b1a1a } /* Literal.String.Symbol */
+.bp { color: #75507b } /* Name.Builtin.Pseudo */
+.vc { color: #008b8b } /* Name.Variable.Class */
+.vg { color: #008b8b } /* Name.Variable.Global */
+.vi { color: #008b8b } /* Name.Variable.Instance */
+.il { color: #ff3030 } /* Literal.Number.Integer.Long */
 
 </style>
 <script type="text/javascript">
@@ -534,146 +539,117 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Notes</h1>
+<h1>Samba shares with AD</h1>
 </div>
 <div id="content">
-<a name="preamble"></a>
-<p><a href="https://github.com/pryz">github.com/Pryz</a></p>
-<hr>
-<h2><a name="_list"></a>List</h2>
-<div id="hacked-ulist"><input class="search" /><span class="sort" data-sort="linklist">Sort by name</span><ul class="list">
-<li><p class="linklist">
-<a href="dhcpd_pxe.html">Install &amp; configure DHCP for PXE using</a>
-</p></li>
-<li><p class="linklist">
-<a href="emc_powerpath_misc.html">EMC PowerPath - misc</a>
-</p></li>
-<li><p class="linklist">
-<a href="misc_bash.html">Misc bash commands</a>
-</p></li>
-<li><p class="linklist">
-<a href="lvm.html">LVM - Logical Volume Manager</a>
-</p></li>
-<li><p class="linklist">
-<a href="memory_tuning.html">Memory Tuning</a>
-</p></li>
-<li><p class="linklist">
-<a href="device_mapper_lvm.html">Device-mapper and LVM tips</a>
-</p></li>
-<li><p class="linklist">
-<a href="generate_sar.html">Generate sar file of the current session</a>
-</p></li>
-<li><p class="linklist">
-<a href="raid_lvm_kickstart.html">Set LVM over RAID in ks provisioning</a>
-</p></li>
-<li><p class="linklist">
-<a href="limit_bandwith.html">Tune and limit the nework bandwidth</a>
-</p></li>
-<li><p class="linklist">
-<a href="ubuntu_init.html">Ubuntu : init and runlevel</a>
-</p></li>
-<li><p class="linklist">
-<a href="io_benchmark.html">Disk performance benchmark</a>
-</p></li>
-<li><p class="linklist">
-<a href="chroot_sftp.html">How to create a chrooted SFTP platform</a>
-</p></li>
-<li><p class="linklist">
-<a href="misc_ubuntu.html">Misc informations about Ubuntu</a>
-</p></li>
-<li><p class="linklist">
-<a href="del_lun_mpath.html">Delete mpath device</a>
-</p></li>
-<li><p class="linklist">
-<a href="iptables.html">Iptables</a>
-</p></li>
-<li><p class="linklist">
-<a href="add_lun_mpath.html">Add new LUN with mpath</a>
-</p></li>
-<li><p class="linklist">
-<a href="emc_powerpath_install.html">EMC PowerPath installation</a>
-</p></li>
-<li><p class="linklist">
-<a href="samba_winbind.html">Samba shares with AD</a>
-</p></li>
-<li><p class="linklist">
-<a href="lvm_move_vg.html">Move Volume Group from a host to another</a>
-</p></li>
-<li><p class="linklist">
-<a href="css_custom_font.html">CSS - Use custom font</a>
-</p></li>
-<li><p class="linklist">
-<a href="git_tips.html">GIT tips</a>
-</p></li>
-<li><p class="linklist">
-<a href="linux_perf.html">Linux perf &amp; troubleshooting</a>
-</p></li>
-<li><p class="linklist">
-<a href="jboss_misc.html">JBoss misc</a>
-</p></li>
-<li><p class="linklist">
-<a href="iscsi_centos.html">Use iscsi on Centos</a>
-</p></li>
-<li><p class="linklist">
-<a href="index.html">Notes</a>
-</p></li>
-<li><p class="linklist">
-<a href="storage.html">Misc Storage (SAN, EMC, …)</a>
-</p></li>
-<li><p class="linklist">
-<a href="ganglia.html">Ganglia</a>
-</p></li>
-<li><p class="linklist">
-<a href="lvm_filter_mpath.html">LVM filter for mpath</a>
-</p></li>
-<li><p class="linklist">
-<a href="editable_browser.html">Editable browser</a>
-</p></li>
-<li><p class="linklist">
-<a href="acl.html">ACL management for Linux filesystem</a>
-</p></li>
-<li><p class="linklist">
-<a href="vim_tips.html">VIM tips</a>
-</p></li>
-<li><p class="linklist">
-<a href="selinux_usage.html">SELinux usage</a>
-</p></li>
-<li><p class="linklist">
-<a href="jboss_https.html">JBoss - Setup a HTTPS connection</a>
-</p></li>
-<li><p class="linklist">
-<a href="rhel_io_tuning.html">RHEL IO Tuning (for Oracle)</a>
-</p></li>
-<li><p class="linklist">
-<a href="pxe.html">PXE setup</a>
-</p></li>
-<li><p class="linklist">
-<a href="kickstarts.html">Kickstarts notes</a>
-</p></li>
-<li><p class="linklist">
-<a href="nfs.html">NFS</a>
-</p></li>
-<li><p class="linklist">
-<a href="jboss_vault.html">JBoss - Use vault to encrypt password</a>
-</p></li>
-<li><p class="linklist">
-<a href="ruby_neo4j.html">Neo4j for Ruby</a>
-</p></li>
+<div class="sect1">
+<h2 id="_install_samba_and_winbind">Install samba and winbind</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>yum -y install samba-common samba-client samba-winbind
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_change_authentification_system">Change authentification system</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>authconfig --enablewinbind <span class="se">\</span>
+--enablesmbauth <span class="se">\</span>
+--smbsecurity<span class="o">=</span>ads <span class="se">\</span>
+--smbworkgroup<span class="o">=</span>YOURWORKGROUP <span class="se">\</span>
+--smbrealm<span class="o">=</span>YOURDOMAIN.NET <span class="se">\</span>
+--smbservers<span class="o">=</span>dc.yourdomain.net <span class="se">\</span>
+--winbindtemplateshel<span class="o">=</span>/sbin/nologin <span class="se">\</span>
+--enablewinbindusedefaultdomain <span class="se">\</span>
+--update
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_join_the_domain">Join the domain</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>net ads join admin@YOURDOMAIN.NET
+net ads testjoin
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_check_the_authentification">Check the authentification</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>wbinfo -u
+wbinfo -g
+getent passwd
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_samba_share">Configure samba share</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># Share example (/etc/samba/smb.conf)</span>
+ <span class="o">[</span>DBshare<span class="o">]</span>
+   <span class="nv">comment</span> <span class="o">=</span> Database share
+   <span class="nv">path</span> <span class="o">=</span> /home/db/smb
+   <span class="nb">read </span><span class="nv">only</span> <span class="o">=</span> yes
+   <span class="nv">browseable</span> <span class="o">=</span> yes
+   guest <span class="nv">ok</span> <span class="o">=</span> no
+   valid <span class="nv">users</span> <span class="o">=</span> @thedomain<span class="se">\t</span>hegroup1,@thedomain<span class="se">\t</span>hegroup2
+<span class="c"># if you have enabled &quot;winbind use default domain&quot;</span>
+   valid <span class="nv">users</span> <span class="o">=</span> @thegroup1, @thegroup2
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_restart_samba">Restart samba</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>/etc/init.d/samba restart
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_samba">Test samba</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>smbclient -U user -L smbserver
+smbclient -U user //srv.yourdomain.net/theshare
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting">Troubleshooting</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+If the Domain Controller is a Windows Server 2008 R2, you need to install
+samba3x
+</p>
+</li>
 </ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>mkdir /tmp/smb_bkp
+cp -Rf /etc/samba/* /tmp/smb_bkp
+rpm -e --nodeps samba samba-client samba-common
+yum -y install samba3x samba3x-common samba3x-client
+</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+You can use Windows group to set folders/files permissions
+</p>
+</li>
+</ul></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-02-13 16:03:07 CET
 </div>
 </div>
-<script src="https://raw.github.com/javve/list/master/list.min.js"></script>
-<script type="text/javascript">
-var options = {
-    valueNames: [ 'linklist' ]
-};
-
-var hackerList = new List('hacked-ulist', options);
-</script>
 </body>
 </html>
