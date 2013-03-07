@@ -546,13 +546,12 @@ asciidoc.install();
 <h2 id="_source_host">Source host</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content">
-<pre><code>umount /opt/data
-# disable the VG that you want to move
+<div class="content"><div class="highlight"><pre>umount /opt/data
+<span class="c"># disable the VG that you want to move</span>
 vgchange -an datavg
-# export it in order to prevent usage or modification
-vgexport datavg</code></pre>
-</div></div>
+<span class="c"># export it in order to prevent usage or modification</span>
+vgexport datavg
+</pre></div></div></div>
 <div class="paragraph"><p>Then : unplug the storage device and plug it to the destination host.</p></div>
 </div>
 </div>
@@ -560,16 +559,15 @@ vgexport datavg</code></pre>
 <h2 id="_destination_host">Destination host</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content">
-<pre><code># find PVs
+<div class="content"><div class="highlight"><pre><span class="c"># find PVs</span>
 pvscan
-# import the VG configuration
+<span class="c"># import the VG configuration</span>
 vgimport datavg
-# activate the VG
+<span class="c"># activate the VG</span>
 vgchange -ay datavg
-# use it
-mount /dev/datavg/data /opt/data</code></pre>
-</div></div>
+<span class="c"># use it</span>
+mount /dev/datavg/data /opt/data
+</pre></div></div></div>
 </div>
 </div>
 </div>
