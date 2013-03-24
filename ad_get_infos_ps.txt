@@ -1,0 +1,9 @@
+Microsoft AD get info with powershell
+=====================================
+
+[bash,source]
+----
+import-module activedirectory
+Get-ADUser -identity username
+Get-ADDomainController
+----

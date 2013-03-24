@@ -1,0 +1,14 @@
+Bash - Select n arg from the last command
+=========================================
+
+[source,bash]
+----
+# Example
+cp -p afile /path/to/adir/
+
+# ls to /path/to/adir/
+ls !$
+# or
+# cat afile
+cat !:2
+----

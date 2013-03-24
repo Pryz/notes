@@ -60,7 +60,7 @@ end
 
 desc "Generate Index file"
 task :genindex, [:theme, :backend] do |t, args|
-    args.with_defaults(:theme => "pryz", :backend => "index_list")
+    args.with_defaults(:theme => "", :backend => "index_bootstrap")
     puts "Building index with the theme : #{args.theme} and the backend : #{args.backend}"
     index_file = "index.txt"
     FileUtils.cd(html_folder)

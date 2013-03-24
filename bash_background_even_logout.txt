@@ -1,0 +1,7 @@
+Bash - Keep task in background even you logout
+==============================================
+
+[source,bash]
+----
+nohup ./mytask.sh &
+----

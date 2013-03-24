@@ -1,0 +1,23 @@
+Network sniffer tips & tools
+============================
+
+
+Capture network
+---------------
+
+[source,bash]
+----
+tethereal -i eth0 -f 'tcp port 22' -w /tmp/capture_ssh.cap
+----
+
+Read capture
+------------
+
+[source,bash]
+----
+# Read ascii
+tcpdump -A -r /tmp/capture_ssh.cap
+
+# Read hex & ascii
+tcpdump -XX -r /tmp/capture_ssh.cap
+----
