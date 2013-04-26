@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Samba shares with AD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+Samba shares with AD
+</h1>
+<div class="sect1">
+<h2 id="_install_samba_and_winbind">Install samba and winbind</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>yum -y install samba-common samba-client samba-winbind
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_change_authentification_system">Change authentification system</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>authconfig --enablewinbind <span class="se">\</span>
+--enablesmbauth <span class="se">\</span>
+--smbsecurity<span class="o">=</span>ads <span class="se">\</span>
+--smbworkgroup<span class="o">=</span>YOURWORKGROUP <span class="se">\</span>
+--smbrealm<span class="o">=</span>YOURDOMAIN.NET <span class="se">\</span>
+--smbservers<span class="o">=</span>dc.yourdomain.net <span class="se">\</span>
+--winbindtemplateshel<span class="o">=</span>/sbin/nologin <span class="se">\</span>
+--enablewinbindusedefaultdomain <span class="se">\</span>
+--update
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_join_the_domain">Join the domain</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>net ads join admin@YOURDOMAIN.NET
+net ads testjoin
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_check_the_authentification">Check the authentification</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>wbinfo -u
+wbinfo -g
+getent passwd
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_samba_share">Configure samba share</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># Share example (/etc/samba/smb.conf)</span>
+ <span class="o">[</span>DBshare<span class="o">]</span>
+   <span class="nv">comment</span> <span class="o">=</span> Database share
+   <span class="nv">path</span> <span class="o">=</span> /home/db/smb
+   <span class="nb">read </span><span class="nv">only</span> <span class="o">=</span> yes
+   <span class="nv">browseable</span> <span class="o">=</span> yes
+   guest <span class="nv">ok</span> <span class="o">=</span> no
+   valid <span class="nv">users</span> <span class="o">=</span> @thedomain<span class="se">\t</span>hegroup1,@thedomain<span class="se">\t</span>hegroup2
+<span class="c"># if you have enabled &quot;winbind use default domain&quot;</span>
+   valid <span class="nv">users</span> <span class="o">=</span> @thegroup1, @thegroup2
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_restart_samba">Restart samba</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>/etc/init.d/samba restart
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_samba">Test samba</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>smbclient -U user -L smbserver
+smbclient -U user //srv.yourdomain.net/theshare
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting">Troubleshooting</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+If the Domain Controller is a Windows Server 2008 R2, you need to install
+samba3x
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>mkdir /tmp/smb_bkp
+cp -Rf /etc/samba/* /tmp/smb_bkp
+rpm -e --nodeps samba samba-client samba-common
+yum -y install samba3x samba3x-common samba3x-client
+</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+You can use Windows group to set folders/files permissions
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>

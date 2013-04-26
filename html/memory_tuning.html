@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Memory Tuning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+Memory Tuning
+</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>free -m
+<span class="c"># Most of the memory used if for buffers and cache since</span>
+<span class="c"># Linux always tries to use RAM to speed up disk operations</span>
+
+<span class="c"># Page Cache size</span>
+getconf PAGE_SIZE
+</pre></div></div></div>
+<div class="paragraph"><p>TLB : Translation Lookaside Buffers</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_page_cache">Page Cache</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Page Cache content data of files and executable programs and is used to reduce
+the number of disk reads.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>vm.min_free_kbytes <span class="o">=</span> 23005
+<span class="c"># Page reclaim thresholds</span>
+<span class="c"># If too high =&gt; swap</span>
+<span class="c"># If too low =&gt; contention</span>
+
+<span class="nv">swappiness</span> <span class="o">=</span> <span class="o">[</span>0-100<span class="o">]</span>
+<span class="c"># Balance to swapping out</span>
+
+nr_pdflush_theads
+<span class="c"># nb thread to flush Page Cache</span>
+<span class="c"># control by dirty params</span>
+
+<span class="nv">dirty_writeback_centisecs</span> <span class="o">=</span> 500
+<span class="c"># How often pdflush wakes up to write data to disk</span>
+<span class="c"># Not make sense to set less than 100</span>
+<span class="c"># May be benefcial to decrease it on systems with lots of memory and active</span>
+<span class="c"># writing processes</span>
+
+<span class="nv">dirty_expire_centisecs</span> <span class="o">=</span> 3000
+<span class="c"># How long data can be in the Page Cache</span>
+<span class="c"># Good to set lower but now too low =&gt; I/O congestion</span>
+
+<span class="nv">dirty_background_ratio</span> <span class="o">=</span> 10
+
+<span class="nv">dirty_ratio</span> <span class="o">=</span> 40
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_swap_space">Swap space</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For Oracle 10G, if RAM &gt; 4GB then SWAP = 4GB</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hugepages">HugePages</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>vm.nr_hugepages <span class="o">=</span> 2048
+<span class="c"># Nb of allocated pages.</span>
+<span class="c"># HugePages size = Hugepagesize (/proc/meminfo) * vm.nr_hugepages</span>
+
+vm.hugetlb_shm_group
+<span class="c"># Define groups wich can use HugePages system</span>
+
+kernel.shmmax
+<span class="c"># Max size of shared memory segment</span>
+<span class="c"># Has to be &gt; SGA size</span>
+
+kernel.shmall
+<span class="c"># Max amount of shared memory that can be allocated</span>
+<span class="c"># Has to be &gt; total SGAs size. /!\ 1MB = 1024KB</span>
+
+memlock
+<span class="c"># Max amount of memory that can be allocated by 1 user</span>
+</pre></div></div></div>
+<div class="sect2">
+<h3 id="_sizing_hugepages">Sizing HugePages</h3>
+<div class="paragraph"><p>The size of the HugePages depends of what you need to put in preallocated pages.
+In Oracle context, HugePages size &gt;= SGA size.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_how_to_know_if_hugepages_are_used">How to know if HugePages are used ?</h3>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>grep Huge /proc/meminfo
+<span class="c"># or</span>
+ipcs -m
+</pre></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>RHEL IO Tuning (for Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+RHEL IO Tuning (for Oracle)
+</h1>
+<div class="sect1">
+<h2 id="_i_o_elevators">I/O Elevators</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+CFQ (Completely Fair Queuing)
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Per process queue
+</p>
+</li>
+<li>
+<p>
+Each process queue gets fixed time slice (process priority)
+</p>
+</li>
+<li>
+<p>
+Default algorithm for RHEL
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Deadline
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Two queues per device, one for read and one for writes
+</p>
+</li>
+<li>
+<p>
+I/Os dispatched based on time spent in queue
+</p>
+</li>
+<li>
+<p>
+Recommended for single instance databases with dedicated storage
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Noop
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+FIFO
+</p>
+</li>
+<li>
+<p>
+Simple I/O Merging
+</p>
+</li>
+<li>
+<p>
+Lowest CPU Cost
+</p>
+</li>
+<li>
+<p>
+Recommended for CPU-limited env
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>

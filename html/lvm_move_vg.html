@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Move Volume Group from a host to another</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+Move Volume Group from a host to another
+</h1>
+<div class="sect1">
+<h2 id="_source_host">Source host</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>umount /opt/data
+<span class="c"># disable the VG that you want to move</span>
+vgchange -an datavg
+<span class="c"># export it in order to prevent usage or modification</span>
+vgexport datavg
+</pre></div></div></div>
+<div class="paragraph"><p>Then : unplug the storage device and plug it to the destination host.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_destination_host">Destination host</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># find PVs</span>
+pvscan
+<span class="c"># import the VG configuration</span>
+vgimport datavg
+<span class="c"># activate the VG</span>
+vgchange -ay datavg
+<span class="c"># use it</span>
+mount /dev/datavg/data /opt/data
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>

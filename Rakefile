@@ -9,15 +9,15 @@ txt_folder = "./" # Where you write your notes
 
 desc "Default task : build html and index"
 task :default do
-    Rake::Task[:genhtml].invoke
+    Rake::Task[:genhtml].invoke("note_bootstrap")
     sleep 0.2
-    Rake::Task[:genindex].invoke
+    Rake::Task[:genindex].invoke("index_bootstrap")
 end
 
 desc "Generate HTML files from .txt asciidoc files"
-task :genhtml, [:theme, :backend] do |t, args|
-    args.with_defaults(:theme => "pryz", :backend => "lofic_backend")
-    puts "Building notes with the theme : #{args.theme} and the backend : lofic"
+task :genhtml, [:backend] do |t, args|
+#    args.with_defaults(:backend => "note_bootstrap")
+    puts "Building notes..."
 
     if not File.directory? html_folder
         puts "mkdir html"
@@ -59,9 +59,8 @@ task :genfile, [:file, :theme, :backend] do |t, args|
 end
 
 desc "Generate Index file"
-task :genindex, [:theme, :backend] do |t, args|
-    args.with_defaults(:theme => "", :backend => "index_bootstrap")
-    puts "Building index with the theme : #{args.theme} and the backend : #{args.backend}"
+task :genindex, [:backend] do |t, args|
+    puts "Building index..."
     index_file = "index.txt"
     FileUtils.cd(html_folder)
     index = File.open(index_file, 'w+')

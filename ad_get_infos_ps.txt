@@ -1,7 +1,7 @@
 Microsoft AD get info with powershell
 =====================================
 
-[bash,source]
+[source,bash]
 ----
 import-module activedirectory
 Get-ADUser -identity username

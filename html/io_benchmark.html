@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Disk performance benchmark</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+Disk performance benchmark
+</h1>
+<div class="sect1">
+<h2 id="_write_tests">Write tests</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Basic write with cache</div>
+<div class="content"><div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/home/db/outfile <span class="nv">count</span><span class="o">=</span>1024 <span class="nv">bs</span><span class="o">=</span>2048k
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">Write in direct IO</div>
+<div class="content"><div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">iflag</span><span class="o">=</span>direct <span class="nv">of</span><span class="o">=</span>/home/db/outfile <span class="nv">oflag</span><span class="o">=</span>direct <span class="nv">count</span><span class="o">=</span>10240 <span class="nv">bs</span><span class="o">=</span>2048k
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">Write in fast data sync to device</div>
+<div class="content"><div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/tmp/test.data <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>1024 <span class="nv">conv</span><span class="o">=</span>fdatasync
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_read_tests">Read tests</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Read</div>
+<div class="content"><div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/home/db/outfile <span class="nv">of</span><span class="o">=</span>/dev/null <span class="nv">bs</span><span class="o">=</span>4096k
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">Read with and without cache</div>
+<div class="content"><div class="highlight"><pre>hdparm -t -T /dev/mapper/datavg-datalv
+</pre></div></div></div>
+<div class="listingblock">
+<div class="title">More informations about command</div>
+<div class="content"><div class="highlight"><pre><span class="nv">COMMAND</span><span class="o">=</span><span class="sb">`</span>ls -la<span class="sb">`</span>
+/usr/bin/time -v <span class="nv">$COMMAND</span>
+<span class="c"># Major (requiring I/O) page faults: 5</span>
+<span class="c"># Minor (reclaiming a frame) page faults: 443</span>
+</pre></div></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_generate_variable_disk_io">How to generate variable disk IO</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Create a random big file (4GB)</div>
+<div class="content"><div class="highlight"><pre>dd <span class="k">if</span><span class="o">=</span>/dev/random <span class="nv">of</span><span class="o">=</span>/tmp/largefile <span class="nv">bs</span><span class="o">=</span>1024 <span class="nv">count</span><span class="o">=</span>4000000
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>

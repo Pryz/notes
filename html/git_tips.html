@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>GIT tips</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+GIT tips
+</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="c"># Merge master with a debug branch</span>
+git merge --no-commit -s resolve debug_branch_name
+
+<span class="c"># Delete a remote branch</span>
+git push origin --delete remote_branch_name
+<span class="c"># or</span>
+git branch -rd origin/remote_branch_name
+
+<span class="c"># Github - enable ssh keys</span>
+git remote <span class="nb">set</span>-url origin git@github.com:user/repo.git
+
+<span class="c"># Create a local repository</span>
+<span class="nv">NAMEREPO</span><span class="o">=</span><span class="s1">&#39;myrepo&#39;</span>
+<span class="nv">REPOPATH</span><span class="o">=</span><span class="s1">&#39;/opt/git&#39;</span>
+git init
+git add .
+git commit -a
+<span class="nb">cd</span> /opt/git
+git clone --bare /home/bob/<span class="nv">$NAMEREPO</span> <span class="nv">$NAMEREPO</span>.git
+<span class="nb">cd</span> <span class="nv">$NAMEREPO</span>.git
+touch git-daemon-export-ok
+git --bare update-server-info
+chmod a+x hooks/post-update
+cat &gt; <span class="nv">$REPOPATH</span>/<span class="nv">$NAMEREPO</span>/config <span class="s">&lt;&lt; EOF</span>
+<span class="s">[daemon]</span>
+<span class="s">        receivepack = true</span>
+<span class="s">EOF</span>
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>

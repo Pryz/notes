@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>Use iscsi on Centos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/pygments.css" type="text/css">
+<style type="text/css">
+a:link {
+        text-decoration:none !important;
+            color:#1C1C1C !important;
+}
+a:link:hover {
+        text-decoration:underline !important;
+}
+.sort {
+        margin:0 0 10px 15px;
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body >
+<div class="container">
+<h1>
+Use iscsi on Centos
+</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>yum -y install iscsi-initiator-utils</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discover_iscsi_targets">Discover iSCSI targets</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><code>iscsiadm -m discovery -t st -p $IP_storage_srv</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_log_in_to_iscsi_targets">Log in to iSCSI targets</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><code>iscsiadm -m node -T iqn.2012-10.net.example:disks.lab -p $IP_storage_srv</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_log_out_and_delete_local_targets">Log out and delete local targets</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><code>iscsiadm -m node -T iqn.2012-10.net.example:disks.lab -p $IP_storage_srv -u
+iscsiadm -m node -T iqn.2012-10.net.example:disks.lab -p $IP_storage_srv -o delete</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+</body>
+</html>
