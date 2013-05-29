@@ -39,21 +39,32 @@ Install &amp; configure DHCP for PXE using
 <h2 id="_install_dependencies">Install dependencies</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>yum -y install dhcpd
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_start_service">Start service</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>service dhcpd start
+chkconfig dhcpd on
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_configure_the_dhcp">Configure the DHCP</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>cat &gt;&gt; /etc/dhcp/dhcpd.conf <span class="s">&lt;&lt; EOF</span>
+<span class="s">subnet 192.168.0.0 netmask 255.255.255.0 {</span>
+<span class="s">    range 192.168.0.100 192.168.0.200;</span>
+<span class="s">    filename &quot;pxelinux.0&quot;;</span>
+<span class="s">    option routers 192.168.0.1;</span>
+<span class="s">    option domain-name-servers 89.2.0.1;</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</pre></div></div></div>
 </div>
 </div>
 </div>

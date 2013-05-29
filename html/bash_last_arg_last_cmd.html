@@ -33,7 +33,15 @@ Bash - Select n arg from the last command
 <div id="preamble">
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># Example</span>
+cp -p afile /path/to/adir/
+
+<span class="c"># ls to /path/to/adir/</span>
+ls !<span class="err">$</span>
+<span class="c"># or</span>
+<span class="c"># cat afile</span>
+cat !:2
+</pre></div></div></div>
 </div>
 </div>
 </div>

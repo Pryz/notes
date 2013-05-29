@@ -55,7 +55,9 @@ Then create the keystore
 </li>
 </ul></div>
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># Follow the procedure and note the password</span>
+keytool --genkey -keyalg RSA -alias ssl -keystore ssl.keystore
+</pre></div></div></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -64,7 +66,12 @@ Then we create the ssl configuration with the CLI
 </li>
 </ul></div>
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="nb">cd</span> /profile<span class="o">=</span>ha/subsystem<span class="o">=</span>web/connector<span class="o">=</span>https/ssl
+configuration:add<span class="o">(</span><span class="nv">name</span><span class="o">=</span>https<span class="o">)</span>
+configuration:write-attribute<span class="o">(</span><span class="nv">name</span><span class="o">=</span>certificate-key-file,value<span class="o">=</span>/home/student/ssl.keystore<span class="o">)</span>
+configuration:write-attribute<span class="o">(</span><span class="nv">name</span><span class="o">=</span>password,value<span class="o">=</span>plokiploki<span class="o">)</span>
+configuration:write-attribute<span class="o">(</span><span class="nv">name</span><span class="o">=</span>key-alias,value<span class="o">=</span>ssl<span class="o">)</span>
+</pre></div></div></div>
 <div class="ulist"><ul>
 <li>
 <p>

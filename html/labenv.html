@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.7" />
-<title>ACL management for Linux filesystem</title>
+<title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -28,31 +28,26 @@ a:link:hover {
 <body >
 <div class="container">
 <h1>
-ACL management for Linux filesystem
 </h1>
 <div class="sect1">
-<h2 id="_manage_acl">Manage ACL</h2>
+<h2 id="_install_dependencies">Install dependencies</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># Set ACL for an user</span>
-setfacl -m u:username:rwx file
-<span class="c"># Remove ACL for an user</span>
-setfacl -x u:username file
-<span class="c"># See the changes</span>
-getfacl file
-</pre></div></div></div>
+<div class="content">
+<pre><code>apt-get install virt-manager libvirt-bin augeas-doc gawk-doc augeas-tools qemu-kvm qemu radvd python-gnome2-doc python-pyorbit-dbg debootstrap
+apt-get install bind9 tftpd dhcp3-server apache2
+update-rc.d -f dhcp3-server remove
+update-rc.d -f bind9 remove</code></pre>
+</div></div>
+<div class="paragraph"><p>vi /etc/dhcp/dhcpd.conf
+service isc-dhcp-server restart</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tune_filesystem">Tune filesystem</h2>
+<h2 id="_get_old_configuration">Get old configuration</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># List filesystem informations</span>
-tune2fs -l /dev/mapper/vgdata-lvdata
-<span class="c"># To active ACL</span>
-tune2fs -o user_xattr,acl /dev/mapper/vgdata-lvdata
-mount -o remount,acl /mount_point
-</pre></div></div></div>
+<div class="paragraph"><p>cat /media/ju/bowser/backup/toad/etc/hosts &gt;&gt; /etc/hosts
+rsync /media/ju/bowser/backup/toad/etc/bind/<strong>labo.fr</strong> /etc/bind/</p></div>
 </div>
 </div>
 </div>

@@ -34,42 +34,52 @@ SELinux usage
 <h2 id="_install_dependencies">Install dependencies</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>semanage <span class="c"># yum install policycoreutil-python</span>
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_on_off">On/Off</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>setenforce 1
+getenforce
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_show_file_8217_s_selinux_settings">Show file&#8217;s selinux settings</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>ls -Z <span class="o">[</span>file<span class="o">]</span>
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_selinux_booleans">SELinux booleans</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>getsebool -a
+setsebool -P boolean value
+semanage boolean -l
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_monitor_selinux_violations">Monitor selinux violations</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>yum instal setroubleshoot-server
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_modify_selinux_setting_on_file_s">Modify SELinux setting on file(s)</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>semanage fcontext -a -f <span class="s2">&quot;&quot;</span> -t httpd_sys_content_t <span class="s1">&#39;/var/www/html/test_site(/.*)?&#39;</span> <span class="c"># marche pas !!!</span>
+restorecon -RFv /var/www/html/test_site
+</pre></div></div></div>
 </div>
 </div>
 </div>

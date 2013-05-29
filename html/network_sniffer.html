@@ -34,14 +34,20 @@ Network sniffer tips &amp; tools
 <h2 id="_capture_network">Capture network</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>tethereal -i eth0 -f <span class="s1">&#39;tcp port 22&#39;</span> -w /tmp/capture_ssh.cap
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_read_capture">Read capture</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># Read ascii</span>
+tcpdump -A -r /tmp/capture_ssh.cap
+
+<span class="c"># Read hex &amp; ascii</span>
+tcpdump -XX -r /tmp/capture_ssh.cap
+</pre></div></div></div>
 </div>
 </div>
 </div>

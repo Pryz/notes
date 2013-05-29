@@ -34,7 +34,12 @@ Move Volume Group from a host to another
 <h2 id="_source_host">Source host</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>umount /opt/data
+<span class="c"># disable the VG that you want to move</span>
+vgchange -an datavg
+<span class="c"># export it in order to prevent usage or modification</span>
+vgexport datavg
+</pre></div></div></div>
 <div class="paragraph"><p>Then : unplug the storage device and plug it to the destination host.</p></div>
 </div>
 </div>
@@ -42,7 +47,15 @@ Move Volume Group from a host to another
 <h2 id="_destination_host">Destination host</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># find PVs</span>
+pvscan
+<span class="c"># import the VG configuration</span>
+vgimport datavg
+<span class="c"># activate the VG</span>
+vgchange -ay datavg
+<span class="c"># use it</span>
+mount /dev/datavg/data /opt/data
+</pre></div></div></div>
 </div>
 </div>
 </div>

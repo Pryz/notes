@@ -34,18 +34,37 @@ Iptables
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">Save current running configuration</div>
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>service iptables save
+</pre></div></div></div>
 <div class="listingblock">
 <div class="title">Firewalling</div>
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>iptables -P INPUT DROP <span class="c"># drop all input packages</span>
+iptables -A INPUT -j ACCEPT <span class="c"># accept all input packages</span>
+iptables -F <span class="c"># to flush all rules</span>
+iptables -A INPUT -i lo -j ACCEPT <span class="c"># accept input packages from loopback</span>
+iptables -A INPUT -m state --state ESTABLISHED,RELATED
+iptables -A INPUT -m state --state NEW -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -s 192.168.123.0/24 -j REJECT <span class="c"># reject all input packages from network</span>
+iptables -A INPUT -p icmp -s 192.168.123.0/24 -j ACCEPT <span class="c"># accept all icmp traffic from network</span>
+</pre></div></div></div>
 <div class="listingblock">
 <div class="title">NAT</div>
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>iptables -t nat -L
+<span class="c"># tous les packages provenant d&#39;eth0 auront la même IP source</span>
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+<span class="c"># tous les packages provenant d&#39;eth0 auront la même IP source</span>
+iptables -t nat -A POSTROUTING -s 192.168.123.143 -j MASQUERADE
+<span class="c"># les packages a destination du port 80 seront forwardés vers l&#39;ip 192.168.123.143</span>
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.123.143
+</pre></div></div></div>
 <div class="listingblock">
 <div class="title">Allow ip forwarding</div>
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>sysctl -w net.ipv4.ip_forward<span class="o">=</span>1
+</pre></div></div></div>
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="nb">export </span><span class="nv">FACTER_foo</span><span class="o">=</span>1
+facter foo
+</pre></div></div></div>
 </div>
 </div>
 </div>

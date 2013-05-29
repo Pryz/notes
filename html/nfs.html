@@ -34,21 +34,27 @@ NFS
 <h2 id="_install_dependencies">Install dependencies</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>yum groupinstall nfs-file-server
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>vim /etc/export
+<span class="c"># i.e</span>
+<span class="c"># /var/ftp/pub  192.168.0.0/24(ro,sync)</span>
+<span class="c"># /var/www/html *.labo.fr(rw,sync)</span>
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_apply_new_exports">Apply new exports</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>exportfs -rv
+</pre></div></div></div>
 </div>
 </div>
 </div>

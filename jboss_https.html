@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.7" />
-<title>ACL management for Linux filesystem</title>
+<title>JBoss - Setup a HTTPS connection</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -28,31 +28,57 @@ a:link:hover {
 <body >
 <div class="container">
 <h1>
-ACL management for Linux filesystem
+JBoss - Setup a HTTPS connection
 </h1>
-<div class="sect1">
-<h2 id="_manage_acl">Manage ACL</h2>
+<div id="preamble">
 <div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+In the choosen profile, go to : Web &#8594; Servlet/HTTP
+</p>
+</li>
+<li>
+<p>
+Add a HTTPS Connector
+</p>
+</li>
+<li>
+<p>
+Check the HTTPS port in Socket Binding (By default : 8443)
+</p>
+</li>
+<li>
+<p>
+Then create the keystore
+</p>
+</li>
+</ul></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># Set ACL for an user</span>
-setfacl -m u:username:rwx file
-<span class="c"># Remove ACL for an user</span>
-setfacl -x u:username file
-<span class="c"># See the changes</span>
-getfacl file
-</pre></div></div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tune_filesystem">Tune filesystem</h2>
-<div class="sectionbody">
+<div class="content"></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Then we create the ssl configuration with the CLI
+</p>
+</li>
+</ul></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># List filesystem informations</span>
-tune2fs -l /dev/mapper/vgdata-lvdata
-<span class="c"># To active ACL</span>
-tune2fs -o user_xattr,acl /dev/mapper/vgdata-lvdata
-mount -o remount,acl /mount_point
-</pre></div></div></div>
+<div class="content"></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+In order to test : deploy an application and test it.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+i.e : <a href="https://10.0.1.14:8543/example">https://10.0.1.14:8543/example</a> (8443 + port offset)
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>

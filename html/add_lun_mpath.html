@@ -33,7 +33,29 @@ Add new LUN with mpath
 <div id="preamble">
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># refresh new devices</span>
+ls /sys/class/scsi_host
+<span class="c">#host0 host1 host2 host3 host4</span>
+<span class="k">for </span>i in 0 1 2 3 4; <span class="k">do </span><span class="nb">echo</span> <span class="s2">&quot;- - -&quot;</span> &gt; /sys/class/scsi_host/host<span class="nv">$i</span>/scan; <span class="k">done</span>
+
+<span class="c"># get one of the new sdX devices (paths) with fdisk</span>
+<span class="c"># get the SCSI id of the new LUN</span>
+scsi_id -gus /block/sdX
+
+<span class="c"># vi /etc/multipath.conf</span>
+<span class="c"># blacklist_exceptions {</span>
+<span class="c">#    ...</span>
+<span class="c">#    wwid &quot;THE_SCSI_ID_OF_THE_NEW_LUN&quot;</span>
+<span class="c"># }</span>
+
+<span class="c"># use multipathd to create the mpathX device</span>
+multipathd -k
+<span class="c"># multipathd&gt; reconfigure</span>
+<span class="c"># multipathd&gt; CTRL+D</span>
+
+<span class="c"># check if the new device is configure</span>
+multipath -ll
+</pre></div></div></div>
 </div>
 </div>
 </div>

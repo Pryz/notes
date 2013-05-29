@@ -1,0 +1,7 @@
+Simple get IP
+=============
+
+[source,bash]
+----
+curl http://ipecho.net/plain; echo
+----

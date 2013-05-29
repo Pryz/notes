@@ -33,7 +33,24 @@ Kickstarts notes
 <div id="preamble">
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># Very minimal OS</span>
+%packages --nobase
+@core
+
+%post
+/sbin/chkconfig smartd off
+<span class="nb">echo</span> <span class="s2">&quot;RUN_FIRSTBOOT=NO&quot;</span> &gt; /etc/sysconfig/firstboot
+
+cp -p /boot/grub/grub.conf /boot/grub/grub.conf.orig
+ed /boot/grub/grub.conf <span class="s">&lt;&lt;EOF</span>
+<span class="s">g!hiddenmenu!s!!#hiddenmenu!gp</span>
+<span class="s">wq</span>
+<span class="s">EOF</span>
+
+<span class="nv">initfile</span><span class="o">=</span>/etc/inittab
+cp -f <span class="nv">$initfile</span> <span class="nv">$initfile</span>.orig
+sed -i <span class="s1">&#39;s/^id:5:/id:3:/g&#39;</span> <span class="nv">$initfile</span>
+</pre></div></div></div>
 </div>
 </div>
 </div>

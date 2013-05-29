@@ -1,0 +1,7 @@
+Create an ISO from files
+========================
+
+[source,bash]
+----
+mkisofs -o [filename.iso] [path]
+----

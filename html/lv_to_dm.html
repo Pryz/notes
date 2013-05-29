@@ -33,7 +33,8 @@ LV to DM
 <div id="preamble">
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre>lvdisplay | awk <span class="s1">&#39;/LV Name/{n=$3}/Block device/{d=$3; sub(&quot;.*:&quot;,&quot;dm-&quot;,d); print d,n;}&#39;</span>
+</pre></div></div></div>
 </div>
 </div>
 </div>

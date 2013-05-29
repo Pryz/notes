@@ -34,7 +34,39 @@ JBoss - Use vault to encrypt password
 <h2 id="_create_the_vault_and_store_password">Create the vault and store password</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"></div></div>
+<div class="content"><div class="highlight"><pre><span class="c"># Create the keystore</span>
+keytool -genkey -keyalg RSA -keysize 1024 -alias vault -keystore vault.keystore
+
+<span class="c"># Store password into the keystore with the vault</span>
+./vault.sh
+
+<span class="c">#  Enter directory to store encrypted files (... \ based on Unix or Windows:/home/student/</span>
+<span class="c">#  Enter Keystore URL:/home/student/vault.keystore</span>
+<span class="c">#  Enter Keystore password:</span>
+<span class="c">#  Enter Keystore password again:</span>
+<span class="c">#  Values match</span>
+<span class="c">#  Enter 8 character salt:12345678</span>
+<span class="c">#  Enter iteration count as a number (Eg: 44):50</span>
+<span class="c">#  (...)</span>
+<span class="c">#  ********************************************</span>
+<span class="c">#  Masked Password:MASK-20Mquir8d.W/ashplp.8ZZ</span>
+<span class="c">#  salt:12345678</span>
+<span class="c">#  Iteration Count:50</span>
+<span class="c">#  ********************************************</span>
+<span class="c">#  Enter Keystore Alias:vault</span>
+<span class="c">#  (...)</span>
+<span class="c">#  Please enter a Digit::   0: Store a password  1: Check whether password exists  2: Exit</span>
+<span class="c">#  0</span>
+<span class="c">#  (...)</span>
+<span class="c">#  Please make note of the following:</span>
+<span class="c">#  ********************************************</span>
+<span class="c">#  Vault Block:postgres</span>
+<span class="c">#  Attribute Name:postgres</span>
+<span class="c">#  Shared Key:MjU5MmU3YzAtNmQ3Yi00MDNiLWIwNjUtNmUzMjQ3YzE3ZTNjTElORV9CUkVBS3ZhdWx0</span>
+<span class="c">#  Configuration should be done as follows:</span>
+<span class="c">#  VAULT::postgres::postgres::MjU5MmU3YzAtNmQ3Yi00MDNiLWIwNjUtNmUzMjQ3YzE3ZTNjTElORV9CUkVBS3ZhdWx0</span>
+<span class="c">#  ********************************************</span>
+</pre></div></div></div>
 </div>
 </div>
 <div class="sect1">
