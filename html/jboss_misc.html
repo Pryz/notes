@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>JBoss misc</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -34,14 +34,7 @@ JBoss misc
 <h2 id="_create_a_postgresql_driver">Create a postgresql driver</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>jar tf postgresql-9.0.jar|grep -i driver
-<span class="c">#org/postgresql/Driver$1.class</span>
-
-mkdir -p META-INF/services
-<span class="nb">echo </span>org.postgresql.Driver &gt; META-INF/services/java.sql.Driver
-
-jar uf postgresql-9.0.jar META-INF/services/java.sql.Driver
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 </div>

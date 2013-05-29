@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>Ganglia</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -77,29 +77,14 @@ GMETAD: pools gmonds and stores metrics to RRD files
 <h2 id="_generate_default_configuration_if_not_present">Generate default configuration if not present</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>gmond --default_config &gt; /etc/gmond.conf
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_classic_node_configuration">Classic node configuration</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>cluster <span class="o">{</span>
-    <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;cluster1&quot;</span>
-<span class="o">}</span>
-
-udp_send_channel <span class="o">{</span>
-    <span class="nv">host</span> <span class="o">=</span> head_node1
-    <span class="nv">port</span> <span class="o">=</span> 8649
-<span class="o">}</span>
-
-tcp_accept_channel <span class="o">{</span>
-    <span class="nv">port</span> <span class="o">=</span> 8649
-<span class="o">}</span>
-
-<span class="c"># to comment : multicast and udp_recv_channel</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -135,20 +120,7 @@ tcp_accept_channel:port = 8649
 <h2 id="_head_node_configuration">Head node configuration</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>cluster <span class="o">{</span>
-    <span class="nv">name</span> <span class="o">=</span> <span class="s2">&quot;cluster1&quot;</span>
-<span class="o">}</span>
-
-udp_recv_channel <span class="o">{</span>
-    <span class="nv">port</span> <span class="o">=</span> 8649
-<span class="o">}</span>
-
-tcp_accept_channel <span class="o">{</span>
-    <span class="nv">port</span> <span class="o">=</span> 8649
-<span class="o">}</span>
-
-<span class="c"># to comment : multicast and udp_send_channel</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 <div class="sect1">

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>How to get a coredump from Apache</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -35,27 +35,13 @@ How to get a coredump from Apache
 <div class="sectionbody">
 <div class="listingblock">
 <div class="title">To get the cordedump</div>
-<div class="content"><div class="highlight"><pre><span class="nb">echo</span> <span class="s2">&quot;deb http://backports.debian.org/debian-backports squeeze-backports main&quot;</span> <span class="se">\</span>
-&gt;&gt; /etc/apt/sources.list
-apt-get update
-apt-get -t squeeze-backports install gdb
-apt-get install apache2-dbg php5-dbg
-mkdir /tmp/apache-coredumps
-<span class="nb">echo</span> <span class="s2">&quot;CoreDumpDirectory /tmp/apache-coredumps&quot;</span> &gt;&gt; /etc/apache2/httpd.conf
-<span class="nb">ulimit</span> -c unlimited
-apachectl restart
-</pre></div></div></div>
+<div class="content"></div></div>
 <div class="listingblock">
 <div class="title">To read the cordedump</div>
-<div class="content"><div class="highlight"><pre>gdb apache2 -core /tmp/apache-coredumps/core
-</pre></div></div></div>
+<div class="content"></div></div>
 <div class="paragraph"><p>Or</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>gdb /usr/local/apache2/bin/httpd /tmp/apache-coredumps/core
-<span class="c"># (gdb) bt full</span>
-<span class="c"># If MPM Worker</span>
-<span class="c"># (gdb) thread apply all bt full</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 </div>

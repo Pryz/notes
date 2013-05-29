@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>Delete mpath device</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -33,14 +33,7 @@ Delete mpath device
 <div id="preamble">
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># remove LVM layer : vgremove, pvremove</span>
-<span class="c"># show all mpath devices</span>
-multipath -ll <span class="c"># note sdX paths for the choosen mpathX</span>
-<span class="c"># flush mpath configuration</span>
-multipath -f mpathX
-<span class="c"># delete paths</span>
-<span class="k">for </span>i in f h; <span class="k">do </span><span class="nb">echo </span>1 &gt; /sys/block/sd<span class="nv">$i</span>/device/delete; <span class="k">done</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 </div>

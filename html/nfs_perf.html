@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>Optimizing NFS Performance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -34,11 +34,7 @@ Optimizing NFS Performance
 <div class="sectionbody">
 <div class="paragraph"><p>source : <a href="http://nfs.sourceforge.net/nfs-howto/ar01s05.html">http://nfs.sourceforge.net/nfs-howto/ar01s05.html</a></p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>grep MAXBLKSIZE /usr/include/linux/nfsd/const.h
-<span class="c"># 32*1024 = 32768</span>
-mount -t nfs srv:/opt/share /mnt/nfs_share <span class="se">\</span>
--o rw,intr,rsize<span class="o">=</span>32768,wsize<span class="o">=</span>32768
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>EMC PowerPath installation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -85,10 +85,7 @@ Check in /etc/multipath.conf
 </li>
 </ul></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>blacklist <span class="o">{</span>
-    devnode <span class="s2">&quot;*&quot;</span>
-<span class="o">}</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -97,37 +94,7 @@ Then
 </li>
 </ul></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># get the rpm on powerlink</span>
-rpm -ivh EMCpower*.rpm
-
-<span class="c"># follow the installation process &amp; set the licence key</span>
-emcpreg -install
-
-<span class="c"># start powerpath</span>
-/etc/init.d/PowerPath
-
-<span class="c"># Set the usage policy (i.e failovering)</span>
-powermt <span class="nb">set </span>policy
-
-<span class="c"># Save the configuration</span>
-powermt save
-
-<span class="c"># Try to display devices</span>
-powermt display <span class="nv">dev</span><span class="o">=</span>all
-
-<span class="c"># Manage the devices mapping</span>
-emcpadm
-
-<span class="c"># Then check if /etc/modprobe.conf is correctly configured</span>
-<span class="c"># i.e :</span>
-<span class="c"># options scsi_mod max_scsi_luns = 256</span>
-<span class="c"># And in /etc/lvm/lvm.conf, check in the EMC doc, depends on OS release</span>
-<span class="c"># i.e :</span>
-<span class="c"># filter = [&quot;a/sda[1-9]$/&quot;, &quot;a/emcpower.*/&quot;, &quot;r/.*/&quot;]</span>
-<span class="c"># finally</span>
-
-vgscan
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 <div class="sect1">
@@ -146,10 +113,7 @@ Attach new LUNs to the system
 </li>
 </ul></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># Save original initrd and build a new one</span>
-cp /boot/initrd-<span class="sb">`</span>uname -r<span class="sb">`</span>.img /boot/initrd-<span class="sb">`</span>uname -r<span class="sb">`</span>.orig.img
-mkinitrd -f /boot/initrd-<span class="sb">`</span>uname -r<span class="sb">`</span>.img <span class="sb">`</span>uname -r<span class="sb">`</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 <div class="ulist"><ul>
 <li>
 <p>

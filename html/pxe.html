@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>PXE setup</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -34,57 +34,7 @@ PXE setup
 <h2 id="_installation">Installation</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># Install dependencies</span>
-yum install tftp-server syslinux
-
-<span class="c"># Active tftp with xinetd</span>
-sed -i <span class="s1">&#39;s/disable\s=\sno/disable\s=\syes&#39;</span> /etc/xinetd.d/tftp
-service xinetd restart
-
-<span class="c"># Build the tftpboot</span>
-cp /usr/lib/syslinux/<span class="o">{</span>pxelinux.0,menu.c32,<span class="o">}</span> /tftpboot/
-mkdir /tftpboot/pxelinux.cfg
-
-<span class="c"># Copy system components</span>
-mkdir -p /tftpboot/images/rhel5u8-x86_64
-cp /mnt/cdrom/isolinux/initrd.img /mnt/cdrom/isolinux/vmlinuz /tftpboot/images/rhel5u8-x86_64
-
-<span class="c"># Setup the DHCPD to load the pxelinux.0 file</span>
-cat &gt;&gt; /etc/dhcpd.conf <span class="s">&lt;&lt; EOF</span>
-<span class="s">subnet 192.168.123.0 netmask 255.255.255.0 {</span>
-<span class="s">    range 192.168.123.100 192.168.123.200;</span>
-<span class="s">    filename &quot;pxelinux.0&quot;;</span>
-<span class="s">    option routers 192.168.123.42;</span>
-<span class="s">    next-server 192.168.123.42;</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
-
-<span class="c"># Create the PXE default menu</span>
-cat &gt; /tftpboot/pxelinux.cfg/default <span class="s">&lt;&lt; EOF</span>
-<span class="s">default menu.c32</span>
-<span class="s">prompt 0</span>
-<span class="s">timeout 300</span>
-<span class="s">#default centos6</span>
-
-<span class="s">menu title pxe menu</span>
-
-<span class="s">label centos6</span>
-<span class="s">    menu label centos6</span>
-<span class="s">    kernel images/pxeboot/vmlinuz</span>
-<span class="s">    append initrd=images/pxeboot/initrd.img ks=http://192.168.123.42/ks/ks-rhel6.cfg</span>
-
-<span class="s">label lab</span>
-<span class="s">    menu label lab</span>
-<span class="s">    kernel images/pxeboot/vmlinuz</span>
-<span class="s">    append initrd=images/pxeboot/initrd.img ks=http://192.168.123.42/ks/ks-el6-lab.cfg</span>
-
-<span class="s">label infra</span>
-<span class="s">    menu label infra</span>
-<span class="s">    kernel images/pxeboot/vmlinuz</span>
-<span class="s">    append initrd=images/pxeboot/initrd.img ks=http://192.168.123.42/ks/ks-el6-infra.cfg</span>
-
-<span class="s">EOF</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 <div class="sect1">

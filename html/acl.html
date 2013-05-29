@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>ACL management for Linux filesystem</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -34,25 +34,14 @@ ACL management for Linux filesystem
 <h2 id="_manage_acl">Manage ACL</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># Set ACL for an user</span>
-setfacl -m u:username:rwx file
-<span class="c"># Remove ACL for an user</span>
-setfacl -x u:username file
-<span class="c"># See the changes</span>
-getfacl file
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_tune_filesystem">Tune filesystem</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># List filesystem informations</span>
-tune2fs -l /dev/mapper/vgdata-lvdata
-<span class="c"># To active ACL</span>
-tune2fs -o user_xattr,acl /dev/mapper/vgdata-lvdata
-mount -o remount,acl /mount_point
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 </div>

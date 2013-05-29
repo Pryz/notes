@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.7" />
 <title>Oracle misc notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -33,20 +33,9 @@ Oracle misc notes
 <div id="preamble">
 <div class="sectionbody">
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># connect as sysdba</span>
-sqlplus / as sysdba
-
-<span class="c"># connect with tns</span>
-sqlplus <span class="err">&#39;</span>user@<span class="o">(</span><span class="nv">DESCRIPTION</span><span class="o">=(</span><span class="nv">ADDRESS</span><span class="o">=(</span><span class="nv">PROTOCOL</span><span class="o">=</span>TCP<span class="o">)(</span><span class="nv">Host</span><span class="o">=</span>dbhostname<span class="o">)</span><span class="se">\</span>
-<span class="o">(</span><span class="nv">Port</span><span class="o">=</span>1521<span class="o">))(</span><span class="nv">CONNECT_DATA</span><span class="o">=(</span><span class="nv">SID</span><span class="o">=</span>dbsid<span class="o">)))</span>
-</pre></div></div></div>
+<div class="content"></div></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="c"># get instance informations</span>
-<span class="k">select</span> * from v<span class="nv">$instance</span>;
-
-<span class="c"># get all registered username</span>
-<span class="k">select </span>username from dba_users;
-</pre></div></div></div>
+<div class="content"></div></div>
 </div>
 </div>
 </div>
