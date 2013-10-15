@@ -21,4 +21,11 @@ fuser 7000/tcp
 # Change or add word into line begin with
 sed -i '/system/ s/$/ wordtotheend/' filename
 sed -i '/^aword/ s/toto/tata/' filename
+
+# Add something at the begining of the line
+sed -i '/pattern/ s/^/first word/'
+
+# Rescan disks devices
+find /sys -name rescan -exec sh -c 'echo "1" > $1' -- {} \;
+find /sys -name rescan | xargs -I {} sh -c "echo 1 > {}"
 ----

@@ -31,3 +31,10 @@ cat > $REPOPATH/$NAMEREPO/config << EOF
         receivepack = true
 EOF
 ----
+
+Debug
+-----
+-----------------------------------------------------------------------------
+GIT_TRACE=1 GIT_CURL_VERBOSE=1 git clone https://whololo/git
+-----------------------------------------------------------------------------
+
