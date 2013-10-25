@@ -3,20 +3,13 @@ Misc bash commands
 
 [source,bash]
 ----
-# Get start time of a process
-ps -p 3147 -f
-
-# for oneliner
-for i in `cat some_list`; do some_command $i; done
-
 # dm maps to
 lvdisplay|awk  '/LV Name/{n=$3} /Block device/{d=$3; sub(".*:","dm-0",d); print d,n;}'
 
-# Show network connections
-netstat -tulpn
-
 # Identify wich process use the port ...
 fuser 7000/tcp
+# or 
+lsof -i :7000
 
 # Change or add word into line begin with
 sed -i '/system/ s/$/ wordtotheend/' filename
@@ -28,4 +21,15 @@ sed -i '/pattern/ s/^/first word/'
 # Rescan disks devices
 find /sys -name rescan -exec sh -c 'echo "1" > $1' -- {} \;
 find /sys -name rescan | xargs -I {} sh -c "echo 1 > {}"
+
+# Call revious command
+rm /path/to/file # Permission denied
+sudo !!
+
+# Most recent command starting with 'cp'
+!cp
+
+# Numbered command from the history
+history | grep sed # 129 sed -i 's/toto/tata/g' file
+!129
 ----
