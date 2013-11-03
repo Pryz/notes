@@ -4,7 +4,10 @@ Misc bash commands
 [source,bash]
 ----
 # Get start time of a process
-ps -p 3147 -f
+ps -f -p 3147
+
+# Identify wich process use the port ...
+fuser 7000/tcp
 
 # for oneliner
 for i in `cat some_list`; do some_command $i; done
@@ -12,13 +15,13 @@ for i in `cat some_list`; do some_command $i; done
 # dm maps to
 lvdisplay|awk  '/LV Name/{n=$3} /Block device/{d=$3; sub(".*:","dm-0",d); print d,n;}'
 
-# Show network connections
-netstat -tulpn
-
-# Identify wich process use the port ...
-fuser 7000/tcp
-
 # Change or add word into line begin with
 sed -i '/system/ s/$/ wordtotheend/' filename
 sed -i '/^aword/ s/toto/tata/' filename
+
+# Delete line match with
+sed -i '/^#/d' filename
+
+# Show config file without commented lines
+grep -v '^#' /etc/file.conf | tr -s '\n'
 ----

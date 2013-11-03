@@ -31,3 +31,12 @@ cat > $REPOPATH/$NAMEREPO/config << EOF
         receivepack = true
 EOF
 ----
+
+.Use Proxy
+-----------------------------------------------------------------------------
+cat >> ~/.gitconfig <<EOF
+[http]
+    proxy = http://user@proxy.my.domain:port
+EOF
+-----------------------------------------------------------------------------
+
