@@ -1,5 +1,12 @@
 Ubuntu : init and runlevel
 ==========================
+//////
+:copyright: 2013, Julien Fabre
+:revinfo:
+v1.0, Julien Fabre, 2013-11-06: Initial version
+:convert: html
+//////
+
 
 How to get current runlevel
 ---------------------------

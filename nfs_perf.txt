@@ -1,5 +1,12 @@
 Optimizing NFS Performance
 ==========================
+//////
+:copyright: 2013, Julien Fabre
+:revinfo:
+v1.0, Julien Fabre, 2013-11-06: Initial version
+:convert: html
+//////
+
 
 source : http://nfs.sourceforge.net/nfs-howto/ar01s05.html
 

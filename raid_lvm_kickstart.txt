@@ -1,5 +1,12 @@
 Set LVM over RAID in ks provisioning
 ====================================
+//////
+:copyright: 2013, Julien Fabre
+:revinfo:
+v1.0, Julien Fabre, 2013-11-06: Initial version
+:convert: html
+//////
+
 
 [source,bash]
 ----

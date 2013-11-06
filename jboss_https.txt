@@ -1,5 +1,12 @@
 JBoss - Setup a HTTPS connection
 ================================
+//////
+:copyright: 2013, Julien Fabre
+:revinfo:
+v1.0, Julien Fabre, 2013-11-06: Initial version
+:convert: html
+//////
+
 
 * In the choosen profile, go to : Web -> Servlet/HTTP
 * Add a HTTPS Connector

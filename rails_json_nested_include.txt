@@ -1,0 +1,24 @@
+= Rails - Nested include in as_json
+//////
+:copyright: 2013, Julien Fabre
+:revinfo:
+v1.0, Julien Fabre, 2013-11-06: Initial version
+:convert: html
+//////
+
+
+Rails 3 syntax.
+
+-----------------------------------------------------------------------------
+def as_json(options=nil)    
+  super({
+    only: :name, 
+    include: {
+      weapons: {
+        only: [:name, :ammo]
+      }
+    }
+    })
+end 
+-----------------------------------------------------------------------------
+
