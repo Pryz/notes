@@ -18,9 +18,13 @@ fuser 7000/tcp
 # or 
 lsof -i :7000
 
+
 # Change or add word into line begin with
 sed -i '/system/ s/$/ wordtotheend/' filename
 sed -i '/^aword/ s/toto/tata/' filename
+
+# Show config file without commented lines
+grep -v '^#' /etc/file.conf | tr -s '\n'
 
 # Add something at the begining of the line
 sed -i '/pattern/ s/^/first word/'
