@@ -1,0 +1,23 @@
+RAID
+====
+
+.Table of write penalties
+[width="40%",options="header"]
+|==========================
+| RAID type | Write penalty 
+| RAID0     | 2             
+| RAID1     | 4             
+| RAID10    | 10            
+|==========================
+
+
+[width="15%"]
+|=======
+|1 |2 |A
+|3 |4 |B
+|5 |6 |C
+|=======
+
+| t | toto |
+| tototo | toto |
+

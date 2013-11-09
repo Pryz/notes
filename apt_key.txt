@@ -1,0 +1,17 @@
+= Deal with apt-key
+//////
+:copyright: 2013, Pryz
+:revinfo:
+v1.0, Pryz, 2013-11-09: Initial version
+:convert: html
+//////
+
+== Add a key
+[source,bash]
+-----------------------------------------------------------------------------
+apt-key adv --recv-keys --keyserver keyserver.example.com keyid
+-----------------------------------------------------------------------------
+
+== List of keyservers
+* keyserver.ubuntu.com
+* subkeys.pgp.net
