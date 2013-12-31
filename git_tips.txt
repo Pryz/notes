@@ -122,9 +122,35 @@ git reset --hard HEAD^
 git push --force
 -----------------------------------------------------------------------------
 
-.Delete a submodul
+.Delete a submodule
 -----------------------------------------------------------------------------
 git deinit submodulename
 git rm --cache path/to/submodule
 -----------------------------------------------------------------------------
 
+.Other submodule tips
+-----------------------------------------------------------------------------
+git push --recurse-submodules=on-demand/check
+
+git submodule foreach git pull origin master
+-----------------------------------------------------------------------------
+
+.Reflogs
+-----------------------------------------------------------------------------
+git reflog
+git log --walk-reflogs
+-----------------------------------------------------------------------------
+
+.Aliases
+-----------------------------------------------------------------------------
+[alias]
+    co      = checkout
+    ci      = commit
+    st      = status
+    br      = branch
+    hist    = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    type    = cat-file -t
+    dump    = cat-file -p
+    lol     = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    pushall = push --recurse-submodules=on-demand
+-----------------------------------------------------------------------------
