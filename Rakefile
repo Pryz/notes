@@ -34,7 +34,8 @@ task :genhtml, [:backend] do |t, args|
     until txtfilelist.empty?
         Thread.new { 
             file=txtfilelist.pop
-            %x[asciidoc  --backend=#{args.backend} --theme=#{args.theme} #{file}] 
+            #%x[asciidoc  --backend=#{args.backend} --theme=#{args.theme} #{file}] 
+            %x[asciidoc -b bootstrap -a linkcss -a theme=default -a themedir=themes/3 -a bsver=3 -a jumbotron -a totop #{file}]
         } unless Thread.list.length > 32
     end
     loop do
@@ -91,6 +92,7 @@ EOT
         end
     end
     index.close
-    %x[asciidoc --theme=#{args.theme} --backend=#{args.backend} #{index_file}]
+    #%x[asciidoc --theme=#{args.theme} --backend=#{args.backend} #{index_file}]
+    %x[asciidoc --backend=index_bootstrap #{index_file}]
     File.delete(index_file)
 end
