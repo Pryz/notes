@@ -104,3 +104,11 @@ Get informations
 dmsetup info
 dmsetup ls
 ----
+
+Tips
+----
+[source,bash]
+----
+# Get the LV repartition
+lvm -a -o +devices
+----

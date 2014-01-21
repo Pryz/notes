@@ -1,6 +1,12 @@
-Redis cli
-=========
+= Redis cli
+//////
+:copyright: 2013, Pryz
+:revinfo:
+v1.0, Pryz, 2013-11-13: Initial version
+:convert: html
+//////
 
+.Commands
 -----------------------------------------------------------------------------
 # List all keys
 keys *
@@ -10,5 +16,17 @@ smembers KEY
 
 # Add key member
 sadd KEY MEMBERVALUE
+
+# Set a simple variable
+set class:variable "value"
+
+# Delete a variable
+del class::variable
 -----------------------------------------------------------------------------
+
+.Delete multiple variables with xargs
+-----------------------------------------------------------------------------
+redis-cli KEYS "common*" | xargs redis-cli DEL
+-----------------------------------------------------------------------------
+
 
