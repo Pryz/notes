@@ -1,0 +1,28 @@
+= Postgresql performance tracking
+
+Table : pg_stat_user_tables
+
+* heap_blks_read : Number of disk blocks read from this table
+* heap_blks_hit	: Number of buffer hits in this table
+* ratio : cache hit rate. Need to be about 99%. If not increase the cache size	
+
+rtsdb=# SELECT sum(heap_blks_read) as heap_read, sum(heap_blks_hit) as heap_hit, sum(heap_blks_hit)/(sum(heap_blks_hit)+sum(heap_blks_read)) as ratio FROM pg_statio_user_tables;
+ heap_read |  heap_hit  |         ratio          
+-----------+------------+------------------------
+   5222966 | 3705936846 | 0.99859263242097212062
+(1 row)
+
+
+rtsdb=# 	SELECT relname, 100*idx_scan/(seq_scan+idx_scan) percent_of_times_index_used, n_live_tup rows_in_table FROM pg_stat_user_tables WHERE seq_scan + idx_scan > 0 ORDER BY n_live_tup DESC;
+        relname         | percent_of_times_index_used | rows_in_table 
+------------------------+-----------------------------+---------------
+ baselinecontent        |                          99 |        441853
+ version                |                          99 |        259329
+ ruleartifact           |                          99 |        199570
+ ruleartifactsibling    |                          99 |        199570
+ rplftrgt               |                          99 |        117748
+ definition             |                          99 |        115853
+ bompathentry           |                          94 |         43724
+ brstudio               |                          88 |         43075
+ ruleprojecttag         |                          88 |         41477
+
