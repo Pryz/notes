@@ -35,7 +35,7 @@ task :genhtml, [:backend] do |t, args|
         Thread.new { 
             file=txtfilelist.pop
             #%x[asciidoc  --backend=#{args.backend} --theme=#{args.theme} #{file}] 
-            %x[asciidoc -b bootstrap -a linkcss -a theme=default -a themedir=themes/3 -a bsver=3 -a jumbotron -a totop #{file}]
+            %x[asciidoc --backend=bootstrap -a source-highlighter=pygments -a theme=readable -a totop -a footer-fullwidth -a jumbotron #{file}]
         } unless Thread.list.length > 32
     end
     loop do
@@ -66,8 +66,7 @@ task :genindex, [:backend] do |t, args|
     FileUtils.cd(html_folder)
     index = File.open(index_file, 'w+')
     head_content = <<EOT
-Notes 
-===== 
+=== Notes 
 
 link:#{subheader_link}
 
