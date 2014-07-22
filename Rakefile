@@ -16,7 +16,6 @@ end
 
 desc "Generate HTML files from .txt asciidoc files"
 task :genhtml, [:backend] do |t, args|
-#    args.with_defaults(:backend => "note_bootstrap")
     puts "Building notes..."
 
     if not File.directory? html_folder
@@ -34,7 +33,6 @@ task :genhtml, [:backend] do |t, args|
     until txtfilelist.empty?
         Thread.new { 
             file=txtfilelist.pop
-            #%x[asciidoc  --backend=#{args.backend} --theme=#{args.theme} #{file}] 
             %x[asciidoc --backend=bootstrap -a source-highlighter=pygments -a theme=readable -a totop -a footer-fullwidth -a jumbotron #{file}]
         } unless Thread.list.length > 32
     end
@@ -91,7 +89,6 @@ EOT
         end
     end
     index.close
-    #%x[asciidoc --theme=#{args.theme} --backend=#{args.backend} #{index_file}]
     %x[asciidoc --backend=index_bootstrap #{index_file}]
     File.delete(index_file)
 end
