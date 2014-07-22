@@ -1,5 +1,7 @@
+Jenkins notes for Puppet workflow
+=================================
 
-
+[source,bash]
 -----------------------------------------------------------------------------
 for file in $(find . -iname '*.pp'); do
     puppet parser validate --render-as s --modulepath=modules "$file" \
@@ -7,12 +9,14 @@ for file in $(find . -iname '*.pp'); do
 done;
 -----------------------------------------------------------------------------
 
+[source,bash]
 -----------------------------------------------------------------------------
 find . -iname *.pp -exec puppet-lint --no-autoloader_layout-check \
 --log-format "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}" {} \;
 -----------------------------------------------------------------------------
 
 .Git polling when receives a push
+[source,bash]
 -----------------------------------------------------------------------------
 GITURL=git://puppet.localdomain
 REPONAME=zabbix
@@ -23,11 +27,13 @@ http://jenkins:8080/git/notifyCommit?url=$GITURL/$REPONAME
 -----------------------------------------------------------------------------
 
 .Get jenkins cli
+[source,bash]
 -----------------------------------------------------------------------------
 wget http://jenkins:8080/jnlpJars/jenkins-cli.jar
 -----------------------------------------------------------------------------
 
 .Script to create a job with the cli
+[source,bash]
 -----------------------------------------------------------------------------
 #!/bin/bash
 
