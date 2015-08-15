@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Technical notes\n\n\nhttps://github.com/Pryz", 
+            "text": "Technical notes\n\n\nBlob of technical notes. I use these pages as a personal wiki.\n\n\nhttps://github.com/Pryz", 
             "title": "Home"
         }, 
         {
             "location": "/#technical-notes", 
-            "text": "https://github.com/Pryz", 
+            "text": "Blob of technical notes. I use these pages as a personal wiki.  https://github.com/Pryz", 
             "title": "Technical notes"
         }, 
         {
@@ -81,6 +81,26 @@
             "title": "Commands"
         }, 
         {
+            "location": "/aws/", 
+            "text": "AMIs\n\n\n\n\nhttp://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html\n\n\nhttps://cloudnative.io/blog/2014/07/paravirtual-vs-hvm-images/\n\n\nUse HVM for  Amazon Linux AMI 2013.09.02 (or later) or any Linux AMI with a version 3.8 (or newer kernel)\n\n\n\n\nVirtualization type\n\n\n\n\nhttp://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html\n\n\n\n\nPerformance\n\n\n\n\nhttp://brendangregg.com/blog/2015-03-03/performance-tuning-linux-instances-on-ec2.html\n\n\nSR-IOV : VPC with C3, C4, R3 and I2 + HVM", 
+            "title": "Aws"
+        }, 
+        {
+            "location": "/aws/#amis", 
+            "text": "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html  https://cloudnative.io/blog/2014/07/paravirtual-vs-hvm-images/  Use HVM for  Amazon Linux AMI 2013.09.02 (or later) or any Linux AMI with a version 3.8 (or newer kernel)", 
+            "title": "AMIs"
+        }, 
+        {
+            "location": "/aws/#virtualization-type", 
+            "text": "http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html", 
+            "title": "Virtualization type"
+        }, 
+        {
+            "location": "/aws/#performance", 
+            "text": "http://brendangregg.com/blog/2015-03-03/performance-tuning-linux-instances-on-ec2.html  SR-IOV : VPC with C3, C4, R3 and I2 + HVM", 
+            "title": "Performance"
+        }, 
+        {
             "location": "/bash_aliases/", 
             "text": "alias h?=\"history | grep\"", 
             "title": "Bash aliases"
@@ -94,6 +114,41 @@
             "location": "/bash_last_arg_last_cmd/", 
             "text": "# Example\ncp -p afile /path/to/adir/\n\n# ls to /path/to/adir/\nls !$\n# or\n\nALT+.\n\n# or\n# cat afile\ncat !:2", 
             "title": "Bash last arg last cmd"
+        }, 
+        {
+            "location": "/bash_misc/", 
+            "text": "Misc\n\n\n# dm maps to\nlvdisplay|awk  '/LV Name/{n=$3} /Block device/{d=$3; sub(\n.*:\n,\ndm-0\n,d); print d,n;}'\n\n# Identify wich process use the port ...\nfuser 7000/tcp\n# or\nlsof -i :7000\n\n\n# Change or add word into line begin with\nsed -i '/system/ s/$/ wordtotheend/' filename\nsed -i '/^aword/ s/toto/tata/' filename\n\n# Show config file without commented lines\ngrep -v '^#' /etc/file.conf | tr -s '\\n'\n\n# Add something at the begining of the line\nsed -i '/pattern/ s/^/first word/'\n\n# Rescan disks devices\nfind /sys -name rescan -exec sh -c 'echo \n1\n \n $1' -- {} \\;\nfind /sys -name rescan | xargs -I {} sh -c \necho 1 \n {}\n\n\n# Call revious command\nrm /path/to/file # Permission denied\nsudo !!\n\n# Most recent command starting with 'cp'\n!cp\n\n# Numbered command from the history\nhistory | grep sed #\u00a0129 sed -i 's/toto/tata/g' file\n!129\n\n\n\n\nOneliners\n\n\n# Array contains item ?\n[[ \n$array\n =~ \n$item\n\u00a0]]\n\n\n\n\ndie\n\n\ndie () {\n    echo \n2 \n$@\n\n    exit 1\n}\n\n\n\n\nerror\n\n\nerr() {\n    echo \n[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@\n \n2\n}\n\n\n\n\nlazy log\n\n\nexec 42\n1\nexec \n /tmp/log.test\n\necho \nI'm writing to the log :)\n\n\nexec 1\n42 42\n-\n\n# OR\n\nexec 42\n /tmp/log.test\nexec 1\n42-\n\necho \nI'm writing to the log too :)\n\n\nexec 42\n-\nexec \n1\n\n\n\n\nAdd field in JSON with JQ\n\n\ncat projects.json | jq 'map(. + {useCodeDeploy:false})' \n projects_new.json", 
+            "title": "Bash misc"
+        }, 
+        {
+            "location": "/bash_misc/#misc", 
+            "text": "# dm maps to\nlvdisplay|awk  '/LV Name/{n=$3} /Block device/{d=$3; sub( .*: , dm-0 ,d); print d,n;}'\n\n# Identify wich process use the port ...\nfuser 7000/tcp\n# or\nlsof -i :7000\n\n\n# Change or add word into line begin with\nsed -i '/system/ s/$/ wordtotheend/' filename\nsed -i '/^aword/ s/toto/tata/' filename\n\n# Show config file without commented lines\ngrep -v '^#' /etc/file.conf | tr -s '\\n'\n\n# Add something at the begining of the line\nsed -i '/pattern/ s/^/first word/'\n\n# Rescan disks devices\nfind /sys -name rescan -exec sh -c 'echo  1    $1' -- {} \\;\nfind /sys -name rescan | xargs -I {} sh -c  echo 1   {} \n\n# Call revious command\nrm /path/to/file # Permission denied\nsudo !!\n\n# Most recent command starting with 'cp'\n!cp\n\n# Numbered command from the history\nhistory | grep sed #\u00a0129 sed -i 's/toto/tata/g' file\n!129", 
+            "title": "Misc"
+        }, 
+        {
+            "location": "/bash_misc/#oneliners", 
+            "text": "# Array contains item ?\n[[  $array  =~  $item \u00a0]]", 
+            "title": "Oneliners"
+        }, 
+        {
+            "location": "/bash_misc/#die", 
+            "text": "die () {\n    echo  2  $@ \n    exit 1\n}", 
+            "title": "die"
+        }, 
+        {
+            "location": "/bash_misc/#error", 
+            "text": "err() {\n    echo  [$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@   2\n}", 
+            "title": "error"
+        }, 
+        {
+            "location": "/bash_misc/#lazy-log", 
+            "text": "exec 42 1\nexec   /tmp/log.test\n\necho  I'm writing to the log :) \n\nexec 1 42 42 -\n\n# OR\n\nexec 42  /tmp/log.test\nexec 1 42-\n\necho  I'm writing to the log too :) \n\nexec 42 -\nexec  1", 
+            "title": "lazy log"
+        }, 
+        {
+            "location": "/bash_misc/#add-field-in-json-with-jq", 
+            "text": "cat projects.json | jq 'map(. + {useCodeDeploy:false})'   projects_new.json", 
+            "title": "Add field in JSON with JQ"
         }, 
         {
             "location": "/bash_replace_from_last/", 
@@ -169,6 +224,26 @@
             "location": "/dhcpd_pxe/#configure-the-dhcp", 
             "text": "cat   /etc/dhcp/dhcpd.conf   EOF\nsubnet 192.168.0.0 netmask 255.255.255.0 {\n    range 192.168.0.100 192.168.0.200;\n    filename  pxelinux.0 ;\n    option routers 192.168.0.1;\n    option domain-name-servers 89.2.0.1;\n}\nEOF", 
             "title": "Configure the DHCP"
+        }, 
+        {
+            "location": "/docker/", 
+            "text": "Log : /var/log/upstart/docker.log\nDefault socket : /var/run/docker.sock\n\n\nMount shared folder for boot2docker\n\n\nVBoxManage sharedfolder add boot2docker-vm -name home -hostpath /Users\n\n\n\n\nClean all docker untagged images\n\n\ndocker rmi $(docker images | awk '/^\nnone\n/ { print $3 }')\n\n\n\n\nNAT port to container\n\n\niptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000", 
+            "title": "Docker"
+        }, 
+        {
+            "location": "/docker/#mount-shared-folder-for-boot2docker", 
+            "text": "VBoxManage sharedfolder add boot2docker-vm -name home -hostpath /Users", 
+            "title": "Mount shared folder for boot2docker"
+        }, 
+        {
+            "location": "/docker/#clean-all-docker-untagged-images", 
+            "text": "docker rmi $(docker images | awk '/^ none / { print $3 }')", 
+            "title": "Clean all docker untagged images"
+        }, 
+        {
+            "location": "/docker/#nat-port-to-container", 
+            "text": "iptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000", 
+            "title": "NAT port to container"
         }, 
         {
             "location": "/editable_browser/", 
@@ -264,6 +339,36 @@
             "location": "/git_tips/", 
             "text": "# Merge master with a debug branch\ngit merge --no-commit -s resolve debug_branch_name\n\n# Delete a remote branch\ngit push origin --delete remote_branch_name\n# or\ngit branch -rd origin/remote_branch_name\n\n# Github - enable ssh keys\ngit remote set-url origin git@github.com:user/repo.git\n\n# Create a local repository\nNAMEREPO='myrepo'\nREPOPATH='/opt/git'\ngit init\ngit add .\ngit commit -a\ncd /opt/git\ngit clone --bare /home/bob/$NAMEREPO $NAMEREPO.git\ncd $NAMEREPO.git\ntouch git-daemon-export-ok\ngit --bare update-server-info\nchmod a+x hooks/post-update\ncat \n $REPOPATH/$NAMEREPO/config \n EOF\n[daemon]\n        receivepack = true\nEOF\n\n\n\n\nUse Proxy.\n\n\ncat \n ~/.gitconfig \nEOF\n[http]\n    proxy = http://user@proxy.my.domain:port\nEOF\n\n\n\nDebug.\n\n\nGIT_TRACE=1 GIT_CURL_VERBOSE=1 git clone https://whololo/git\n\n\n\nUnstage a file.\n\n\ngit reset HEAD filename\n\n\n\nDelete a remote branch.\n\n\ngit push origin :branchname\n\n\n\nUse tage to versioning.\n\n\n# Add a new tag\ngit tag -a \"v0.1\" -m \"comment\"\n\n# Push the tag\ngit push --tags\n\n# Rollback to tag\ngit checkout tagname\n\n\n\nWith branch : use rebase !.\n\n\ngit fetch\ngit rebase\n# if conflicts\ngit add filewithconflict\ngit rebase --continue\n#or\ngit rebase --skip\n#or\ngit rebase --abort\n\n\n\nColors and logs.\n\n\ngit config --global color.ui true\ngit log --oneline -p\ngit log --oneline --stat\ngit log --oneline --graph\n\n\n\nGit diff five commits ago.\n\n\ngit diff HEAD~5\n\n\n\nGit log with changes.\n\n\ngit log -p\n\n\n\nInteractive rebase.\n\n\ngit rebase -i HEAD~4\n\n\n\nDelete a tag in local \n remote.\n\n\ngit tag -d v0.1\ngit push origin :refs/tags/v0.1\n\n\n\nDelete last commit.\n\n\ngit reset --hard HEAD^\ngit push --force\n\n\n\nDelete a submodule.\n\n\ngit deinit submodulename\ngit rm --cache path/to/submodule\n\n\n\nOther submodule tips.\n\n\ngit push --recurse-submodules=on-demand/check\n\ngit submodule foreach git pull origin master\n\n\n\nReflogs.\n\n\ngit reflog\ngit log --walk-reflogs\n\n\n\nAliases.\n\n\n[alias]\n    co      = checkout\n    ci      = commit\n    st      = status\n    br      = branch\n    hist    = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short\n    type    = cat-file -t\n    dump    = cat-file -p\n    lol     = log --graph --decorate --pretty=oneline --abbrev-commit --all\n    pushall = push --recurse-submodules=on-demand\n\n\n\nGit GUI.\n\n\ngitx", 
             "title": "Git tips"
+        }, 
+        {
+            "location": "/gor/", 
+            "text": "Install Golang and Gor\n\n\napt-get install golang\nmkdir /usr/local/go; export GOPATH=/usr/local/go\ngo get github.com/buger/gor\ncd $GOPATH/src/github.com/buger/gor\ngo build\n\n\n\n\nReplicate HTTP traffic from port 8080 to Trusty02 port 8042\n\n\n./gor --input-raw :8080 --output-http \nhttp://trusty02:8042\n\n\n\n\n\nCheck replicated traffic with tcpdump :\n\n\ntcpdump -i eth1 -s 0 'tcp port 8042'\n\n\n\n\nDump with header\n\n\ntcpdump -vvvs 1024 -l -i eth1 -n host 172.28.128.3\n\n\n\n\nSame with files\n\n\n# write to file\ngor --input-raw :80 --output-file /tmp/requests.gor\n\n# read from file\ngor --input-file /tmp/requests.gor --output-http \nhttp://trusty02:8042", 
+            "title": "Gor"
+        }, 
+        {
+            "location": "/gor/#install-golang-and-gor", 
+            "text": "apt-get install golang\nmkdir /usr/local/go; export GOPATH=/usr/local/go\ngo get github.com/buger/gor\ncd $GOPATH/src/github.com/buger/gor\ngo build", 
+            "title": "Install Golang and Gor"
+        }, 
+        {
+            "location": "/gor/#replicate-http-traffic-from-port-8080-to-trusty02-port-8042", 
+            "text": "./gor --input-raw :8080 --output-http  http://trusty02:8042", 
+            "title": "Replicate HTTP traffic from port 8080 to Trusty02 port 8042"
+        }, 
+        {
+            "location": "/gor/#check-replicated-traffic-with-tcpdump", 
+            "text": "tcpdump -i eth1 -s 0 'tcp port 8042'", 
+            "title": "Check replicated traffic with tcpdump :"
+        }, 
+        {
+            "location": "/gor/#dump-with-header", 
+            "text": "tcpdump -vvvs 1024 -l -i eth1 -n host 172.28.128.3", 
+            "title": "Dump with header"
+        }, 
+        {
+            "location": "/gor/#same-with-files", 
+            "text": "# write to file\ngor --input-raw :80 --output-file /tmp/requests.gor\n\n# read from file\ngor --input-file /tmp/requests.gor --output-http  http://trusty02:8042", 
+            "title": "Same with files"
         }, 
         {
             "location": "/gpg_notes/", 
@@ -364,6 +469,51 @@
             "location": "/jenkins_puppet/", 
             "text": "for file in $(find . -iname '*.pp'); do\n    puppet parser validate --render-as s --modulepath=modules \n$file\n \\\n    || exit 1;\ndone;\n\n\n\n\nfind . -iname *.pp -exec puppet-lint --no-autoloader_layout-check \\\n--log-format \n%{path}:%{linenumber}:%{check}:%{KIND}:%{message}\n {} \\;\n\n\n\n\nGit polling when receives a push.\n\n\nGITURL=git://puppet.localdomain\nREPONAME=zabbix\ncat \n /var/lib/git/$REPONAME/hooks/post-receive\n#!/bin/bash\nexec curl --silent \\\nhttp://jenkins:8080/git/notifyCommit?url=$GITURL/$REPONAME\n\n\n\n\nGet jenkins cli.\n\n\nwget http://jenkins:8080/jnlpJars/jenkins-cli.jar\n\n\n\n\nScript to create a job with the cli.\n\n\n#!/bin/bash\n\nif [ -z $1 ]; then\n    echo \nUsage : $O \njobname|modulename\n\n    exit 1\nfi\n\njobname=$1\njenkinsurl=http://jenkins:8080/\n\ncp config.xml.sample config.xml\nsed -i \ns/REPONAME/$jobname/g\n config.xml\ncat config.xml | java -jar jenkins-cli.jar -s $jenkinsurl create-job $jobname", 
             "title": "Jenkins puppet"
+        }, 
+        {
+            "location": "/kafka/", 
+            "text": "Troubleshooting\n\n\nUnder-replicated partitions\n\n\nexport ZK=\n--zookeeper zk01,zk02,zk03:2181/kafka\n\n/opt/kafka/bin/kafka-topics.sh $ZK --describe --under-replicated-partitions\n\n\n\n\nUnder-replicated partitions can mean :\n\n\n\n\nThe Cluster is overloaded and followers are not able to catch up on leaders. Check load, network, ...\n\n\nWe lost one or more Kafka instances. If so check we have at least 1 leader for each partition.  If not the partition will be unavailable.\n\n\nWe have or had inconsistencies on the Zookeeper cluster (leading to standalone zookeepers at 1 point). Check the ZK and Exhibitor logs on each Zookeeper servers.\n\n\n\n\nUnavailable partitions\n\n\nexport ZK=\n--zookeeper zk01,zk02,zk03:2181/kafka\n\n/opt/kafka/bin/kafka-topics.sh $ZK --describe --unavailable-partitions\n\n\n\n\nIf a partition is unavailable it means that it has no leader (and no in-sync replicas to promote to leader), and thus no reads and writes can be done on it.  If it ever happens, check if all servers are up, and escalate to stats team. Those will also appear with a \"-1\" in the leader column when checking the \"--under-replicated-partitions\".\n\n\nServer is leader of no partition\n\n\nEach server is the preferred replica for a set of partitions.  The preferred replica for a partition is the default leader.  Each server should be the preferred replica for the same number of partitions as all the other servers. However, it is possible that, as leadership is transferred among replicas, certain servers will not be leader of any partitions, and others will be the leader of too many.  If this is the case, reads and writes will be imbalanced across the cluster.\n\n\nexport ZK=\n--zookeeper zk01,zk02,zk03:2181/kafka\n\n/opt/kafka/bin/kafka-preferred-replica-election.sh $ZK\n\n\n\n\nIncrease of replication factor on an existing topic\n\n\nFollow: http://kafka.apache.org/documentation.html#basic_ops_increase_replication_factor\nIn our case, that would be for example:\n\n\nexport ZK=\n--zookeeper zk01,zk02,zk03:2181/kafka\n\n/opt/kafka/bin/kafka-topics.sh $ZK --describe\ncat /mnt/increase-replication-factor.json\n{\nversion\n:1,\n\npartitions\n:[\n{\ntopic\n:\nmy_topic\n,\npartition\n:0,\nreplicas\n:[2,3,7]}\n]}\n/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/increase-replication-factor.json --execute\n/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/increase-replication-factor.json --verify\n\n\n\n\nChange the \"Preferred Replica\" of a partition\n\n\ncat /mnt/change-replicas.json\n{\nversion\n:1,\n\npartitions\n:[\n{\ntopic\n:\nmy_topic\n,\npartition\n:3,\nreplicas\n:[4,1,7]}\n]}\nexport ZK=\n--zookeeper zk01,zk02,zk03:2181/kafka\n\n/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/change-replicas.json --execute\n/opt/kafka/bin/kafka-preferred-replica-election.sh $ZK\n\n\n\n\nChange the retention period of a topic\n\n\n/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic my_topic --config retention.ms=43200000\n/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic my_topic --deleteConfig retention.ms\n\n\n\n\nAdd more partitions to a topic\n\n\n/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic rollup_event --partitions 12\n\n\n\n\nAdding partitions invole a rebalancing of the topic", 
+            "title": "Kafka"
+        }, 
+        {
+            "location": "/kafka/#troubleshooting", 
+            "text": "", 
+            "title": "Troubleshooting"
+        }, 
+        {
+            "location": "/kafka/#under-replicated-partitions", 
+            "text": "export ZK= --zookeeper zk01,zk02,zk03:2181/kafka \n/opt/kafka/bin/kafka-topics.sh $ZK --describe --under-replicated-partitions  Under-replicated partitions can mean :   The Cluster is overloaded and followers are not able to catch up on leaders. Check load, network, ...  We lost one or more Kafka instances. If so check we have at least 1 leader for each partition.  If not the partition will be unavailable.  We have or had inconsistencies on the Zookeeper cluster (leading to standalone zookeepers at 1 point). Check the ZK and Exhibitor logs on each Zookeeper servers.", 
+            "title": "Under-replicated partitions"
+        }, 
+        {
+            "location": "/kafka/#unavailable-partitions", 
+            "text": "export ZK= --zookeeper zk01,zk02,zk03:2181/kafka \n/opt/kafka/bin/kafka-topics.sh $ZK --describe --unavailable-partitions  If a partition is unavailable it means that it has no leader (and no in-sync replicas to promote to leader), and thus no reads and writes can be done on it.  If it ever happens, check if all servers are up, and escalate to stats team. Those will also appear with a \"-1\" in the leader column when checking the \"--under-replicated-partitions\".", 
+            "title": "Unavailable partitions"
+        }, 
+        {
+            "location": "/kafka/#server-is-leader-of-no-partition", 
+            "text": "Each server is the preferred replica for a set of partitions.  The preferred replica for a partition is the default leader.  Each server should be the preferred replica for the same number of partitions as all the other servers. However, it is possible that, as leadership is transferred among replicas, certain servers will not be leader of any partitions, and others will be the leader of too many.  If this is the case, reads and writes will be imbalanced across the cluster.  export ZK= --zookeeper zk01,zk02,zk03:2181/kafka \n/opt/kafka/bin/kafka-preferred-replica-election.sh $ZK", 
+            "title": "Server is leader of no partition"
+        }, 
+        {
+            "location": "/kafka/#increase-of-replication-factor-on-an-existing-topic", 
+            "text": "Follow: http://kafka.apache.org/documentation.html#basic_ops_increase_replication_factor\nIn our case, that would be for example:  export ZK= --zookeeper zk01,zk02,zk03:2181/kafka \n/opt/kafka/bin/kafka-topics.sh $ZK --describe\ncat /mnt/increase-replication-factor.json\n{ version :1, partitions :[\n{ topic : my_topic , partition :0, replicas :[2,3,7]}\n]}\n/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/increase-replication-factor.json --execute\n/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/increase-replication-factor.json --verify", 
+            "title": "Increase of replication factor on an existing topic"
+        }, 
+        {
+            "location": "/kafka/#change-the-preferred-replica-of-a-partition", 
+            "text": "cat /mnt/change-replicas.json\n{ version :1, partitions :[\n{ topic : my_topic , partition :3, replicas :[4,1,7]}\n]}\nexport ZK= --zookeeper zk01,zk02,zk03:2181/kafka \n/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/change-replicas.json --execute\n/opt/kafka/bin/kafka-preferred-replica-election.sh $ZK", 
+            "title": "Change the \"Preferred Replica\" of a partition"
+        }, 
+        {
+            "location": "/kafka/#change-the-retention-period-of-a-topic", 
+            "text": "/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic my_topic --config retention.ms=43200000\n/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic my_topic --deleteConfig retention.ms", 
+            "title": "Change the retention period of a topic"
+        }, 
+        {
+            "location": "/kafka/#add-more-partitions-to-a-topic", 
+            "text": "/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic rollup_event --partitions 12  Adding partitions invole a rebalancing of the topic", 
+            "title": "Add more partitions to a topic"
         }, 
         {
             "location": "/kickstarts/", 
@@ -529,11 +679,6 @@
             "location": "/memory_tuning/#how-to-know-if-hugepages-are-used", 
             "text": "grep Huge /proc/meminfo\n# or\nipcs -m", 
             "title": "How to know if HugePages are used ?"
-        }, 
-        {
-            "location": "/misc_bash/", 
-            "text": "# dm maps to\nlvdisplay|awk  '/LV Name/{n=$3} /Block device/{d=$3; sub(\n.*:\n,\ndm-0\n,d); print d,n;}'\n\n# Identify wich process use the port ...\nfuser 7000/tcp\n# or\nlsof -i :7000\n\n\n# Change or add word into line begin with\nsed -i '/system/ s/$/ wordtotheend/' filename\nsed -i '/^aword/ s/toto/tata/' filename\n\n# Show config file without commented lines\ngrep -v '^#' /etc/file.conf | tr -s '\\n'\n\n# Add something at the begining of the line\nsed -i '/pattern/ s/^/first word/'\n\n# Rescan disks devices\nfind /sys -name rescan -exec sh -c 'echo \n1\n \n $1' -- {} \\;\nfind /sys -name rescan | xargs -I {} sh -c \necho 1 \n {}\n\n\n# Call revious command\nrm /path/to/file # Permission denied\nsudo !!\n\n# Most recent command starting with 'cp'\n!cp\n\n# Numbered command from the history\nhistory | grep sed #\u00a0129 sed -i 's/toto/tata/g' file\n!129\n\n\n\n\nOneliners.\n\n\n# Array contains item ?\n[[ \n$array\n =~ \n$item\n\u00a0]]\n\n\n\n\ndie.\n\n\ndie () {\n    echo \n2 \n$@\n\n    exit 1\n}\n\n\n\n\nerror.\n\n\nerr() {\n    echo \n[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@\n \n2\n}\n\n\n\n\neasy log.\n\n\nexec 42\n1\nexec \n /tmp/log.test\n\necho \nI'm writing to the log :)\n\n\nexec 1\n42 42\n-\n\n# OR\n\nexec 42\n /tmp/log.test\nexec 1\n42-\n\necho \nI'm writing to the log too :)\n\n\nexec 42\n-\nexec \n1\n\n\n\n\nother.\n\n\npstree PID", 
-            "title": "Misc bash"
         }, 
         {
             "location": "/misc_problems/", 
@@ -799,6 +944,26 @@
             "location": "/ssh_tunnel/", 
             "text": "# Create a SOCKS 5 Tunnel\nssh -vvv -N -D 8888 root@remotehost.domain\n\n# Forward local to remote port\nssh -vvv -N -L 8888:127.0.0.1:80 root@remotehost.domain", 
             "title": "Ssh tunnel"
+        }, 
+        {
+            "location": "/statsd/", 
+            "text": "Send counter\n\n\necho -n \u201cevents.restart.occurences:1|c\n | nc -w 1 -u docker 8125\n\n\n\n\nSend Gauges\n\n\necho -n \nsystem.cpu.goblets:10|g\n | nc -w 1 -u docker 8125\n\n\n\n\nSend Timers\n\n\necho -n \u201capp.produce.latency:60|ms\n | nc -w 1 -u docker 8125", 
+            "title": "Statsd"
+        }, 
+        {
+            "location": "/statsd/#send-counter", 
+            "text": "echo -n \u201cevents.restart.occurences:1|c  | nc -w 1 -u docker 8125", 
+            "title": "Send counter"
+        }, 
+        {
+            "location": "/statsd/#send-gauges", 
+            "text": "echo -n  system.cpu.goblets:10|g  | nc -w 1 -u docker 8125", 
+            "title": "Send Gauges"
+        }, 
+        {
+            "location": "/statsd/#send-timers", 
+            "text": "echo -n \u201capp.produce.latency:60|ms  | nc -w 1 -u docker 8125", 
+            "title": "Send Timers"
         }, 
         {
             "location": "/testing-puppet/", 

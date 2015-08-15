@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kafka - Notes</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Kafka";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Notes</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../acl/">Acl</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ad_get_infos_ps/">Ad get infos ps</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../add_lun_mpath/">Add lun mpath</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../android_hacks/">Android hacks</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../android_sdk/">Android sdk</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../apache2_coredumps/">Apache2 coredumps</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../apt_key/">Apt key</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../asciidoc/">Asciidoc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../aws/">Aws</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bash_aliases/">Bash aliases</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bash_background_even_logout/">Bash background even logout</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bash_last_arg_last_cmd/">Bash last arg last cmd</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bash_misc/">Bash misc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bash_replace_from_last/">Bash replace from last</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../build_deb/">Build deb</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../build_raskiidoc/">Build raskiidoc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../chroot_sftp/">Chroot sftp</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../create_floppy_ks/">Create floppy ks</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../create_iso/">Create iso</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../css_custom_font/">Css custom font</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../debian_services/">Debian services</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../del_lun_mpath/">Del lun mpath</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../device_mapper_lvm/">Device mapper lvm</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../dhcpd_pxe/">Dhcpd pxe</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../docker/">Docker</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../editable_browser/">Editable browser</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../emc_powerpath_install/">Emc powerpath install</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../emc_powerpath_misc/">Emc powerpath misc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../encrypt_pass_ks/">Encrypt pass ks</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ganglia/">Ganglia</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../gem2rpm/">Gem2rpm</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../generate_sar/">Generate sar</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../git_tips/">Git tips</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../gor/">Gor</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../gpg_notes/">Gpg notes</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../hiera_redis/">Hiera redis</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../http_ssl_certificate/">Http ssl certificate</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../io_benchmark/">Io benchmark</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../iptables/">Iptables</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../iscsi_centos/">Iscsi centos</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../iso_bootstrap/">Iso bootstrap</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../jboss_https/">Jboss https</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../jboss_misc/">Jboss misc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../jboss_vault/">Jboss vault</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../jenkins_puppet/">Jenkins puppet</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Kafka</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#troubleshooting">Troubleshooting</a></li>
+                
+                    <li><a class="toctree-l4" href="#under-replicated-partitions">Under-replicated partitions</a></li>
+                
+                    <li><a class="toctree-l4" href="#unavailable-partitions">Unavailable partitions</a></li>
+                
+                    <li><a class="toctree-l4" href="#server-is-leader-of-no-partition">Server is leader of no partition</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#increase-of-replication-factor-on-an-existing-topic">Increase of replication factor on an existing topic</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#change-the-preferred-replica-of-a-partition">Change the "Preferred Replica" of a partition</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#change-the-retention-period-of-a-topic">Change the retention period of a topic</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#add-more-partitions-to-a-topic">Add more partitions to a topic</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../kickstarts/">Kickstarts</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../labenv/">Labenv</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ldapsearch/">Ldapsearch</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../limit_bandwith/">Limit bandwith</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../linux_perf/">Linux perf</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../logstash/">Logstash</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../lv_to_dm/">Lv to dm</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../lvm/">Lvm</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../lvm_filter_mpath/">Lvm filter mpath</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../lvm_move_vg/">Lvm move vg</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../manpage_asciidoc/">Manpage asciidoc</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../memory_tuning/">Memory tuning</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../misc_problems/">Misc problems</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../misc_ubuntu/">Misc ubuntu</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../mysql/">Mysql</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../network_sniffer/">Network sniffer</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../nfs/">Nfs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../nfs_perf/">Nfs perf</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../nginx/">Nginx</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../oracle/">Oracle</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../pgql/">Pgql</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../postgresql_perf/">Postgresql perf</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../puppet_issues/">Puppet issues</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../pxe/">Pxe</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../python_simplehttp/">Python simplehttp</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../raid/">Raid</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../raid_lvm_kickstart/">Raid lvm kickstart</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../rails_4_rbenv/">Rails 4 rbenv</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../rails_json_nested_include/">Rails json nested include</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../rbenv_ubuntu/">Rbenv ubuntu</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../redis_cli/">Redis cli</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../rhel_io_tuning/">Rhel io tuning</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../rsyslog/">Rsyslog</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ruby_load_path/">Ruby load path</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ruby_methodlogger/">Ruby methodlogger</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ruby_neo4j/">Ruby neo4j</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../samba_winbind/">Samba winbind</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../selinux_usage/">Selinux usage</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../simple_get_ip/">Simple get ip</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ssh_tunnel/">Ssh tunnel</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../statsd/">Statsd</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../testing-puppet/">Testing puppet</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../traceroute/">Traceroute</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ubuntu_init/">Ubuntu init</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ubuntu_spice_xpi/">Ubuntu spice xpi</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../vagrant/">Vagrant</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../vim_tips/">Vim tips</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../wget_socks5/">Wget socks5</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Notes</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Kafka</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="under-replicated-partitions">Under-replicated partitions</h2>
+<pre><code>export ZK=&quot;--zookeeper zk01,zk02,zk03:2181/kafka&quot;
+/opt/kafka/bin/kafka-topics.sh $ZK --describe --under-replicated-partitions
+</code></pre>
+
+<p>Under-replicated partitions can mean :</p>
+<ul>
+<li>The Cluster is overloaded and followers are not able to catch up on leaders. Check load, network, ...</li>
+<li>We lost one or more Kafka instances. If so check we have at least 1 leader for each partition.  If not the partition will be unavailable.</li>
+<li>We have or had inconsistencies on the Zookeeper cluster (leading to standalone zookeepers at 1 point). Check the ZK and Exhibitor logs on each Zookeeper servers.</li>
+</ul>
+<h2 id="unavailable-partitions">Unavailable partitions</h2>
+<pre><code>export ZK=&quot;--zookeeper zk01,zk02,zk03:2181/kafka&quot;
+/opt/kafka/bin/kafka-topics.sh $ZK --describe --unavailable-partitions
+</code></pre>
+
+<p>If a partition is unavailable it means that it has no leader (and no in-sync replicas to promote to leader), and thus no reads and writes can be done on it.  If it ever happens, check if all servers are up, and escalate to stats team. Those will also appear with a "-1" in the leader column when checking the "--under-replicated-partitions".</p>
+<h2 id="server-is-leader-of-no-partition">Server is leader of no partition</h2>
+<p>Each server is the preferred replica for a set of partitions.  The preferred replica for a partition is the default leader.  Each server should be the preferred replica for the same number of partitions as all the other servers. However, it is possible that, as leadership is transferred among replicas, certain servers will not be leader of any partitions, and others will be the leader of too many.  If this is the case, reads and writes will be imbalanced across the cluster.</p>
+<pre><code>export ZK=&quot;--zookeeper zk01,zk02,zk03:2181/kafka&quot;
+/opt/kafka/bin/kafka-preferred-replica-election.sh $ZK
+</code></pre>
+
+<h1 id="increase-of-replication-factor-on-an-existing-topic">Increase of replication factor on an existing topic</h1>
+<p>Follow: http://kafka.apache.org/documentation.html#basic_ops_increase_replication_factor
+In our case, that would be for example:</p>
+<pre><code>export ZK=&quot;--zookeeper zk01,zk02,zk03:2181/kafka&quot;
+/opt/kafka/bin/kafka-topics.sh $ZK --describe
+cat /mnt/increase-replication-factor.json
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[
+{&quot;topic&quot;:&quot;my_topic&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[2,3,7]}
+]}
+/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/increase-replication-factor.json --execute
+/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/increase-replication-factor.json --verify
+</code></pre>
+
+<h1 id="change-the-preferred-replica-of-a-partition">Change the "Preferred Replica" of a partition</h1>
+<pre><code>cat /mnt/change-replicas.json
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[
+{&quot;topic&quot;:&quot;my_topic&quot;,&quot;partition&quot;:3,&quot;replicas&quot;:[4,1,7]}
+]}
+export ZK=&quot;--zookeeper zk01,zk02,zk03:2181/kafka&quot;
+/opt/kafka/bin/kafka-reassign-partitions.sh $ZK --reassignment-json-file /mnt/change-replicas.json --execute
+/opt/kafka/bin/kafka-preferred-replica-election.sh $ZK
+</code></pre>
+
+<h1 id="change-the-retention-period-of-a-topic">Change the retention period of a topic</h1>
+<pre><code>/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic my_topic --config retention.ms=43200000
+/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic my_topic --deleteConfig retention.ms
+</code></pre>
+
+<h1 id="add-more-partitions-to-a-topic">Add more partitions to a topic</h1>
+<pre><code>/opt/kafka/bin/kafka-topics.sh $ZK --alter --topic rollup_event --partitions 12
+</code></pre>
+
+<p>Adding partitions invole a rebalancing of the topic</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../kickstarts/" class="btn btn-neutral float-right" title="Kickstarts"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../jenkins_puppet/" class="btn btn-neutral" title="Jenkins puppet"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../jenkins_puppet/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../kickstarts/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
