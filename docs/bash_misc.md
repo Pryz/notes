@@ -1,3 +1,5 @@
+# Misc
+
 ``` bash
 # dm maps to
 lvdisplay|awk  '/LV Name/{n=$3} /Block device/{d=$3; sub(".*:","dm-0",d); print d,n;}'
@@ -34,14 +36,14 @@ history | grep sed # 129 sed -i 's/toto/tata/g' file
 !129
 ```
 
-**Oneliners.**
+# Oneliners
 
 ``` bash
 # Array contains item ?
 [[ "$array" =~ "$item" ]]
 ```
 
-**die.**
+# die
 
 ``` bash
 die () {
@@ -50,7 +52,7 @@ die () {
 }
 ```
 
-**error.**
+# error
 
 ``` bash
 err() {
@@ -58,7 +60,7 @@ err() {
 }
 ```
 
-**easy log.**
+# lazy log
 
 ``` bash
 exec 42>&1
@@ -79,6 +81,8 @@ exec 42>&-
 exec >&1
 ```
 
-**other.**
+# Add field in JSON with JQ
 
-    pstree PID
+```
+cat projects.json | jq 'map(. + {useCodeDeploy:false})' > projects_new.json
+```
