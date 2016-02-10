@@ -171,6 +171,14 @@
 
     
     <url>
+     <loc>None/curl_format/</loc>
+     <lastmod>2016-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>None/debian_services/</loc>
      <lastmod>2016-02-10</lastmod>
      <changefreq>daily</changefreq>
@@ -740,6 +748,14 @@
     
     <url>
      <loc>None/tcddump/</loc>
+     <lastmod>2016-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/test_bibi/</loc>
      <lastmod>2016-02-10</lastmod>
      <changefreq>daily</changefreq>
     </url>

@@ -186,6 +186,11 @@
             "title": "Css custom font"
         }, 
         {
+            "location": "/curl_format/", 
+            "text": "Display curl statistics with -w :\n\n\n# Create the format file\n$ cat \n /tmp/curl-formats.txt \nEOF\n\\n\n            time_namelookup:  %{time_namelookup}\\n\n               time_connect:  %{time_connect}\\n\n            time_appconnect:  %{time_appconnect}\\n\n           time_pretransfer:  %{time_pretransfer}\\n\n              time_redirect:  %{time_redirect}\\n\n         time_starttransfer:  %{time_starttransfer}\\n\n                            ----------\\n\n                 time_total:  %{time_total}\\n\n\\n\nEOF\n\n# Execute curl\ncurl -v -o /dev/null -w \n@./curl-format.txt\n -s 'http://test.domain.com'", 
+            "title": "Curl format"
+        }, 
+        {
             "location": "/debian_services/", 
             "text": "Simple add service.\n\n\nupdate-rc.d fw.rules defaults\n\n\n\nSimple del service.\n\n\nupdate-rc.d fw.rules remove\n\n\n\nHeader for a service.\n\n\n### BEGIN INIT INFO\n# Provides:          fw.rules\n# Required-Start:    mountkernfs ifupdown $local_fs\n# X-Start-Before:    networking\n# Default-Start:     2 3 4 5\n# Required-Stop:\n# Default-Stop:      0 1 6\n# Short-Description: Configure the iptables firewall.\n# Description:       Configure the iptables firewall.\n### END INIT INFO\n\n\n\nFind a service.\n\n\nls /etc/rc*.d/*|grep service_name", 
             "title": "Debian services"
@@ -1019,6 +1024,16 @@
             "location": "/tcddump/", 
             "text": "# -nn not lookup hostnames\n# -X print in hex and ascii\n# -S absolute TCP seq numbers\n# -s get full lenght packet\ntcpdump -nn -X -S -s 0 port 389", 
             "title": "Tcddump"
+        }, 
+        {
+            "location": "/test_bibi/", 
+            "text": "Hello world :)", 
+            "title": "Test bibi"
+        }, 
+        {
+            "location": "/test_bibi/#hello-world", 
+            "text": "", 
+            "title": "Hello world :)"
         }, 
         {
             "location": "/testing-puppet/", 

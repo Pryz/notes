@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Network sniffer - Notes</title>
+  <title>Test bibi - Notes</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -20,7 +20,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Network sniffer";
+    var mkdocs_page_name = "Test bibi";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -519,18 +519,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Network sniffer</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#capture-network">Capture network</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#read-capture">Read capture</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../network_sniffer/">Network sniffer</a>
         
     </li>
 <li>
@@ -718,8 +708,15 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../test_bibi/">Test bibi</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Test bibi</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#hello-world">Hello world :)</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -802,7 +799,7 @@
     
       
     
-    <li>Network sniffer</li>
+    <li>Test bibi</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -812,17 +809,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="capture-network">Capture network</h1>
-<pre><code class="bash">tethereal -i eth0 -f 'tcp port 22' -w /tmp/capture_ssh.cap
-</code></pre>
-
-<h1 id="read-capture">Read capture</h1>
-<pre><code class="bash"># Read ascii
-tcpdump -A -r /tmp/capture_ssh.cap
-
-# Read hex &amp; ascii
-tcpdump -XX -r /tmp/capture_ssh.cap
-</code></pre>
+                <h1 id="hello-world">Hello world :)</h1>
               
             </div>
           </div>
@@ -830,10 +817,10 @@ tcpdump -XX -r /tmp/capture_ssh.cap
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../nfs/" class="btn btn-neutral float-right" title="Nfs"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../testing-puppet/" class="btn btn-neutral float-right" title="Testing puppet"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../mysql/" class="btn btn-neutral" title="Mysql"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../tcddump/" class="btn btn-neutral" title="Tcddump"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -859,10 +846,10 @@ tcpdump -XX -r /tmp/capture_ssh.cap
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../mysql/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../tcddump/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../nfs/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../testing-puppet/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
