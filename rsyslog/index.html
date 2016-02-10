@@ -226,6 +226,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../django/">Django</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../docker/">Docker</a>
         
     </li>
@@ -234,6 +241,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../editable_browser/">Editable browser</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../elasticsearch/">Elasticsearch</a>
         
     </li>
 <li>
@@ -345,6 +359,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../java_troubleshooting/">Java troubleshooting</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../jboss_https/">Jboss https</a>
         
     </li>
@@ -360,6 +381,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../jboss_vault/">Jboss vault</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../jenkins/">Jenkins</a>
         
     </li>
 <li>
@@ -608,7 +636,13 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#tcp-and-udp">TCP and UDP</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#rsyslog-with-tlsssl">Rsyslog with TLS/SSL</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#templating">Templating</a></li>
                 
             
             </ul>
@@ -674,6 +708,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../tcddump/">Tcddump</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../testing-puppet/">Testing puppet</a>
         
     </li>
@@ -696,6 +737,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../ubuntu_spice_xpi/">Ubuntu spice xpi</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../update_alternative/">Update alternative</a>
         
     </li>
 <li>
@@ -753,7 +801,8 @@
           <div role="main">
             <div class="section">
               
-                <pre><code># Remote with UDP
+                <h1 id="tcp-and-udp">TCP and UDP</h1>
+<pre><code># Remote with UDP
 *.* @rsyslogserver.localdomain:514
 # Remote with TCP
 *.* @@rsyslogserver.localdomain:514
@@ -779,6 +828,11 @@ $ActionSendStreamDriverAuthMode x509/name
 $ActionSendStreamDriverPermittedPeer rsyslog.localdomain
 $ActionSendStreamDriverMode 1
 *.* @@rsyslogserver.localdomain:10514
+</code></pre>
+<h1 id="templating">Templating</h1>
+<p>Send to logstash instance on port 5514 using specific template</p>
+<pre><code>$template logstash,&quot;%msg%\n&quot;
+if $programname == 'haproxy' then @@logstash:5514;logstash
 </code></pre>
               
             </div>

@@ -226,6 +226,11 @@
             "title": "Configure the DHCP"
         }, 
         {
+            "location": "/django/", 
+            "text": "Play with the shell\n\n\nexport DJANGO_SETTINGS_MODULE=settings.docker.py\npython manage.py shell\n\n# Then do whatever you want\nfor app in RegisteredApps.objects.all():\n  print app.name\n\nnew_app = RegisteredApps(name=\ntest\n, order=100)\nnew_app.save()\n\n\n\n\nCollect statics\n\n\npython manage.py collectstatic --settings=settings.docker.py", 
+            "title": "Django"
+        }, 
+        {
             "location": "/docker/", 
             "text": "Log : /var/log/upstart/docker.log\nDefault socket : /var/run/docker.sock\n\n\nMount shared folder for boot2docker\n\n\nVBoxManage sharedfolder add boot2docker-vm -name home -hostpath /Users\n\n\n\n\nClean all docker untagged images\n\n\ndocker rmi $(docker images | awk '/^\nnone\n/ { print $3 }')\n\n\n\n\nNAT port to container\n\n\niptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000", 
             "title": "Docker"
@@ -249,6 +254,21 @@
             "location": "/editable_browser/", 
             "text": "data:text/html, \nbody contenteditable\nstyle=\nfont-size:1rem;line-height:1.4;max-width:60rem;margin:0\nauto;padding:4rem;", 
             "title": "Editable browser"
+        }, 
+        {
+            "location": "/elasticsearch/", 
+            "text": "Elasticsearch\n\n\nMaintenance\n\n\ncurl -H 'Content-Type: application/json' -X PUT -d '{\ntransient\n:{\ncluster.routing.allocation.enable\n : \nnone\n}}' http://es-node01.lab:9200/_cluster/settings\n\ncurl -H 'Content-Type: application/json' -X POST http://es-node01.lab:9200/_cluster/nodes/_local/_shutdown\n\ncurl -H 'Content-Type: application/json' -X PUT -d '{\ntransient\n:{\ncluster.routing.allocation.enable\n : \nall\n}}' http://es-node01.lab:9200/_cluster/settings\n\n\ncurl 'localhost:9200/_cat/master?v'\n\ncurl http://log-elasticsearch01.us-east-1d.public:9200/_cat/shards", 
+            "title": "Elasticsearch"
+        }, 
+        {
+            "location": "/elasticsearch/#elasticsearch", 
+            "text": "", 
+            "title": "Elasticsearch"
+        }, 
+        {
+            "location": "/elasticsearch/#maintenance", 
+            "text": "curl -H 'Content-Type: application/json' -X PUT -d '{ transient :{ cluster.routing.allocation.enable  :  none }}' http://es-node01.lab:9200/_cluster/settings\n\ncurl -H 'Content-Type: application/json' -X POST http://es-node01.lab:9200/_cluster/nodes/_local/_shutdown\n\ncurl -H 'Content-Type: application/json' -X PUT -d '{ transient :{ cluster.routing.allocation.enable  :  all }}' http://es-node01.lab:9200/_cluster/settings\n\n\ncurl 'localhost:9200/_cat/master?v'\n\ncurl http://log-elasticsearch01.us-east-1d.public:9200/_cat/shards", 
+            "title": "Maintenance"
         }, 
         {
             "location": "/emc_powerpath_install/", 
@@ -436,6 +456,21 @@
             "title": "Iso bootstrap"
         }, 
         {
+            "location": "/java_troubleshooting/", 
+            "text": "Using jstatd\n\n\n# cat /opt/java/jstatd.all.policy\ngrant codebase \nfile:/opt/java/lib/tools.jar\n {\n     permission java.security.AllPermission;\n};\n\n\n\n\n/opt/java/bin/jstatd -p 2345 -J-Djava.security.policy=/opt/java/jstatd.all.policy -J-Djava.rmi.server.hostname=$fqdn\n\n\n\n\nGarbage collector resources", 
+            "title": "Java troubleshooting"
+        }, 
+        {
+            "location": "/java_troubleshooting/#using-jstatd", 
+            "text": "# cat /opt/java/jstatd.all.policy\ngrant codebase  file:/opt/java/lib/tools.jar  {\n     permission java.security.AllPermission;\n};  /opt/java/bin/jstatd -p 2345 -J-Djava.security.policy=/opt/java/jstatd.all.policy -J-Djava.rmi.server.hostname=$fqdn", 
+            "title": "Using jstatd"
+        }, 
+        {
+            "location": "/java_troubleshooting/#garbage-collector-resources", 
+            "text": "", 
+            "title": "Garbage collector resources"
+        }, 
+        {
             "location": "/jboss_https/", 
             "text": "In the choosen profile, go to : Web \u2192 Servlet/HTTP\n\n\n\n\n\n\nAdd a HTTPS Connector\n\n\n\n\n\n\nCheck the HTTPS port in Socket Binding (By default : 8443)\n\n\n\n\n\n\nThen create the keystore\n\n\n\n\n\n\n# Follow the procedure and note the password\nkeytool --genkey -keyalg RSA -alias ssl -keystore ssl.keystore\n\n\n\n\n\n\nThen we create the ssl configuration with the CLI\n\n\n\n\ncd /profile=ha/subsystem=web/connector=https/ssl\nconfiguration:add(name=https)\nconfiguration:write-attribute(name=certificate-key-file,value=/home/student/ssl.keystore)\nconfiguration:write-attribute(name=password,value=plokiploki)\nconfiguration:write-attribute(name=key-alias,value=ssl)\n\n\n\n\n\n\n\n\nIn order to test : deploy an application and test it.\n\n\n\n\ni.e : \nhttps://10.0.1.14:8543/example\n (8443 + port offset)", 
             "title": "Jboss https"
@@ -464,6 +499,11 @@
             "location": "/jboss_vault/#use-the-encrypted-password-in-datasource", 
             "text": "Edit domain.xml    Find the Datasource and replace the password by :   VAULT::postgres::postgres::MjU5MmU3YzAtNmQ3Yi00MDNiLWIwNjUtNmUzMjQ3YzE3ZTNjTElORV9CUkVBS3ZhdWx0", 
             "title": "Use the encrypted password in Datasource"
+        }, 
+        {
+            "location": "/jenkins/", 
+            "text": "Some notes about some Jenkins plugins", 
+            "title": "Jenkins"
         }, 
         {
             "location": "/jenkins_puppet/", 
@@ -832,13 +872,23 @@
         }, 
         {
             "location": "/rsyslog/", 
-            "text": "# Remote with UDP\n*.* @rsyslogserver.localdomain:514\n# Remote with TCP\n*.* @@rsyslogserver.localdomain:514\n\n\n\nRsyslog with TLS/SSL\n\n\nServer.\n\n\n$ModLoad imtcp\n$DefaultNetstreamDriver gtls\n$DefaultNetstreamDriverCAFile ca.pem\n$DefaultNetstreamDriverCertFile server-cert.pem\n$DefaultNetstreamDriverKeyFile server-key.pem\n$ActionSendStreamDriverAuthMode x509/name\n$ActionSendStreamDriverPermittedPeer client.localdomain\n$ActionSendStreamDriverMode 1\n$InputTCPServerRun 10514\n\n\n\nClient.\n\n\n$DefaultNetstreamDriver gtls\n$DefaultNetstreamDriverCAFile ca.pem\n$DefaultNetstreamDriverCertFile client-cert.pem\n$DefaultNetstreamDriverKeyFile client-key.pem\n$ActionSendStreamDriverAuthMode x509/name\n$ActionSendStreamDriverPermittedPeer rsyslog.localdomain\n$ActionSendStreamDriverMode 1\n*.* @@rsyslogserver.localdomain:10514", 
+            "text": "TCP and UDP\n\n\n# Remote with UDP\n*.* @rsyslogserver.localdomain:514\n# Remote with TCP\n*.* @@rsyslogserver.localdomain:514\n\n\n\nRsyslog with TLS/SSL\n\n\nServer.\n\n\n$ModLoad imtcp\n$DefaultNetstreamDriver gtls\n$DefaultNetstreamDriverCAFile ca.pem\n$DefaultNetstreamDriverCertFile server-cert.pem\n$DefaultNetstreamDriverKeyFile server-key.pem\n$ActionSendStreamDriverAuthMode x509/name\n$ActionSendStreamDriverPermittedPeer client.localdomain\n$ActionSendStreamDriverMode 1\n$InputTCPServerRun 10514\n\n\n\nClient.\n\n\n$DefaultNetstreamDriver gtls\n$DefaultNetstreamDriverCAFile ca.pem\n$DefaultNetstreamDriverCertFile client-cert.pem\n$DefaultNetstreamDriverKeyFile client-key.pem\n$ActionSendStreamDriverAuthMode x509/name\n$ActionSendStreamDriverPermittedPeer rsyslog.localdomain\n$ActionSendStreamDriverMode 1\n*.* @@rsyslogserver.localdomain:10514\n\n\n\nTemplating\n\n\nSend to logstash instance on port 5514 using specific template\n\n\n$template logstash,\n%msg%\\n\n\nif $programname == 'haproxy' then @@logstash:5514;logstash", 
             "title": "Rsyslog"
+        }, 
+        {
+            "location": "/rsyslog/#tcp-and-udp", 
+            "text": "# Remote with UDP\n*.* @rsyslogserver.localdomain:514\n# Remote with TCP\n*.* @@rsyslogserver.localdomain:514", 
+            "title": "TCP and UDP"
         }, 
         {
             "location": "/rsyslog/#rsyslog-with-tlsssl", 
             "text": "Server.  $ModLoad imtcp\n$DefaultNetstreamDriver gtls\n$DefaultNetstreamDriverCAFile ca.pem\n$DefaultNetstreamDriverCertFile server-cert.pem\n$DefaultNetstreamDriverKeyFile server-key.pem\n$ActionSendStreamDriverAuthMode x509/name\n$ActionSendStreamDriverPermittedPeer client.localdomain\n$ActionSendStreamDriverMode 1\n$InputTCPServerRun 10514  Client.  $DefaultNetstreamDriver gtls\n$DefaultNetstreamDriverCAFile ca.pem\n$DefaultNetstreamDriverCertFile client-cert.pem\n$DefaultNetstreamDriverKeyFile client-key.pem\n$ActionSendStreamDriverAuthMode x509/name\n$ActionSendStreamDriverPermittedPeer rsyslog.localdomain\n$ActionSendStreamDriverMode 1\n*.* @@rsyslogserver.localdomain:10514", 
             "title": "Rsyslog with TLS/SSL"
+        }, 
+        {
+            "location": "/rsyslog/#templating", 
+            "text": "Send to logstash instance on port 5514 using specific template  $template logstash, %msg%\\n \nif $programname == 'haproxy' then @@logstash:5514;logstash", 
+            "title": "Templating"
         }, 
         {
             "location": "/ruby_load_path/", 
@@ -966,6 +1016,11 @@
             "title": "Send Timers"
         }, 
         {
+            "location": "/tcddump/", 
+            "text": "# -nn not lookup hostnames\n# -X print in hex and ascii\n# -S absolute TCP seq numbers\n# -s get full lenght packet\ntcpdump -nn -X -S -s 0 port 389", 
+            "title": "Tcddump"
+        }, 
+        {
             "location": "/testing-puppet/", 
             "text": "Install dependencies\n\n\napt-get install puppet-lint\ngem install rspec-puppet\ngit clone https://github.com/puppetlabs/puppetlabs_spec_helper.git\ncd puppetlabs_spec_helper\nrake package:gem\ngem install pkg/puppetlabs_spec_helper*.gem\n\n\n\nTest a module\n\n\nspec initialization.\n\n\nrspec-puppet-init\nsed -i \"1s/^/require 'rubygems'\\nrequire 'puppetlabs_spec_helper\\/rake_tasks'\\n/\" Rakefile\nsed -i \"1s/^/require 'rubygems'\\nrequire 'puppetlabs_spec_helper/module_spec_helper'\\n/\" spec/spec_helper.rb\n\n\n\nCreate .fixtures.yml file to deal with dependencies.\n\n\n# i.e for a module which needs stdlib from puppetlabs\ncat \n .fixtures.yml \nEOF\nfixtures:\n  repositories:\n      stdlib: git@github.com:puppetlabs/puppetlabs-stdlib.git\nEOF\n\n\n\nExemple with a Yum module.\n\n\nrequire 'spec_helper'\n\ndescribe 'yum::os' do\n\n  let(:facts){\n    { :operatingsystemrelease =\n '6.3' }\n    { :operatingsystem =\n 'CentOS' }\n    { :osfamily =\n 'RedHat' }\n  }\n\n  it { should contain_class('yum') }\n\n  it do\n    should contain_yumrepo('centos6-os').with({\n      'enabled'   =\n '1',\n      'gpgcheck'  =\n '0',\n    })\n  end\nend", 
             "title": "Testing puppet"
@@ -1004,6 +1059,11 @@
             "location": "/ubuntu_spice_xpi/", 
             "text": "sudo su -\nadd-apt-repository ppa:jasonbrooks/ppa\napt-get update\napt-get install spice-xpi\napt-get -f install", 
             "title": "Ubuntu spice xpi"
+        }, 
+        {
+            "location": "/update_alternative/", 
+            "text": "Register a new alternative\n\n\nupdate-alternatives --install \nlink\n \nname\n \npath\n \npriority # 100 == auto mode\n\n\n# Example\nupdate-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 100\n\n\n\n\nChange to another alternative\n\n\nupdate-alternatives --config ruby\n# or\nupdate-alternative --set ruby /usr/bin/ruby1.9.1", 
+            "title": "Update alternative"
         }, 
         {
             "location": "/vagrant/", 
