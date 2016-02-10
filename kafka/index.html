@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../extra.css" rel="stylesheet">
 
   
   <script>
@@ -829,6 +830,7 @@
               
                 <h1 id="troubleshooting">Troubleshooting</h1>
 <h2 id="under-replicated-partitions">Under-replicated partitions</h2>
+<h3 id="lolo">lolo</h3>
 <pre><code>export ZK=&quot;--zookeeper zk01,zk02,zk03:2181/kafka&quot;
 /opt/kafka/bin/kafka-topics.sh $ZK --describe --under-replicated-partitions
 </code></pre>
