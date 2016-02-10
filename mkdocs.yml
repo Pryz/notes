@@ -1,2 +1,3 @@
 site_name: Notes
 theme: readthedocs
+extra_css: [extra.css]
