@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Rsyslog - Notes</title>
+  <title>Grafana - Notes</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -22,7 +22,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Rsyslog";
+    var mkdocs_page_name = "Grafana";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -325,8 +325,15 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../grafana/">Grafana</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Grafana</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#scripted-dashboards">Scripted dashboards</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -647,21 +654,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Rsyslog</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#tcp-and-udp">TCP and UDP</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#rsyslog-with-tlsssl">Rsyslog with TLS/SSL</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#templating">Templating</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../rsyslog/">Rsyslog</a>
         
     </li>
 <li>
@@ -814,7 +808,7 @@
     
       
     
-    <li>Rsyslog</li>
+    <li>Grafana</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -824,38 +818,70 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="tcp-and-udp">TCP and UDP</h1>
-<pre><code># Remote with UDP
-*.* @rsyslogserver.localdomain:514
-# Remote with TCP
-*.* @@rsyslogserver.localdomain:514
-</code></pre>
-<h1 id="rsyslog-with-tlsssl">Rsyslog with TLS/SSL</h1>
-<p><strong>Server.</strong></p>
-<pre><code>$ModLoad imtcp
-$DefaultNetstreamDriver gtls
-$DefaultNetstreamDriverCAFile ca.pem
-$DefaultNetstreamDriverCertFile server-cert.pem
-$DefaultNetstreamDriverKeyFile server-key.pem
-$ActionSendStreamDriverAuthMode x509/name
-$ActionSendStreamDriverPermittedPeer client.localdomain
-$ActionSendStreamDriverMode 1
-$InputTCPServerRun 10514
-</code></pre>
-<p><strong>Client.</strong></p>
-<pre><code>$DefaultNetstreamDriver gtls
-$DefaultNetstreamDriverCAFile ca.pem
-$DefaultNetstreamDriverCertFile client-cert.pem
-$DefaultNetstreamDriverKeyFile client-key.pem
-$ActionSendStreamDriverAuthMode x509/name
-$ActionSendStreamDriverPermittedPeer rsyslog.localdomain
-$ActionSendStreamDriverMode 1
-*.* @@rsyslogserver.localdomain:10514
-</code></pre>
-<h1 id="templating">Templating</h1>
-<p>Send to logstash instance on port 5514 using specific template</p>
-<pre><code>$template logstash,&quot;%msg%\n&quot;
-if $programname == 'haproxy' then @@logstash:5514;logstash
+                <h2 id="scripted-dashboards">Scripted dashboards</h2>
+<p>Data in <code>/usr/share/grafana/public/dashboards</code></p>
+<pre><code class="javascript">/* global _ */
+
+/*
+ * Scripted Grafana dashboard
+ *
+ * Read JSON source file source.json from &quot;/public/dashboards/source.json&quot; and alter the dashboard settings.
+ */
+
+'use strict';
+
+// accessible variables in this scope
+var window, document, ARGS, $, jQuery, moment, kbn;
+
+return function(callback) {
+
+  // Create callback scope variables
+  var dashboard
+  var datasource
+  var zone_tpl
+
+  // Default values
+  var ds_prefix = &quot;graphite&quot;
+  var vpc = null
+  var zone = &quot;us-east-1a&quot;
+
+  if(!_.isUndefined(ARGS.vpc)) {
+    vpc = ARGS.vpc;
+  }
+  if(!_.isUndefined(ARGS.zone)) {
+    zone = ARGS.zone;
+  }
+
+  if (vpc !== null) {
+    datasource = [ds_prefix, vpc, zone].join(&quot;-&quot;)
+    zone_tpl = [zone, vpc].join(&quot;-&quot;)
+  } else {
+    datasource = [ds_prefix, zone].join(&quot;-&quot;)
+    zone_tpl = zone
+  }
+
+  $.getJSON(&quot;/public/dashboards/source.json&quot;, function() {
+    console.log(&quot;success to get source.json&quot;);
+  }).done(function (dashboard) {
+    // Edit rows with new datasource
+    for (var i = 0; i &lt; dashboard.rows.length; i++) {
+      for (var j = 0; j &lt; dashboard.rows[i].panels.length; j++ ) {
+        dashboard.rows[i].panels[j].datasource = datasource
+      }
+    }
+
+    // Edit templating variables
+    for (var i = 0; i &lt; dashboard.templating.list.length; i++) {
+      if (dashboard.templating.list[i].name == &quot;zone&quot;) {
+        dashboard.templating.list[i].current.text = zone_tpl
+        dashboard.templating.list[i].current.value = zone_tpl
+      }
+    }
+
+    callback(dashboard);
+  });
+
+}
 </code></pre>
               
             </div>
@@ -864,10 +890,10 @@ if $programname == 'haproxy' then @@logstash:5514;logstash
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../ruby_load_path/" class="btn btn-neutral float-right" title="Ruby load path"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../hiera_redis/" class="btn btn-neutral float-right" title="Hiera redis"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../rhel_io_tuning/" class="btn btn-neutral" title="Rhel io tuning"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../gpg_notes/" class="btn btn-neutral" title="Gpg notes"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -893,10 +919,10 @@ if $programname == 'haproxy' then @@logstash:5514;logstash
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../rhel_io_tuning/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../gpg_notes/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../ruby_load_path/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../hiera_redis/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
