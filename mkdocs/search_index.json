@@ -56,19 +56,19 @@
             "title": "For debian systems"
         }, 
         {
-            "location": "/apt_key/", 
-            "text": "Add a key\n\n\napt-key adv --recv-keys --keyserver keyserver.example.com keyid\n\n\n\n\nList of keyservers\n\n\n\n\n\n\nkeyserver.ubuntu.com\n\n\n\n\n\n\nsubkeys.pgp.net", 
-            "title": "Apt key"
+            "location": "/apt/", 
+            "text": "Get 40 length fingerprint\n\n\napt-key adv --list-public-keys --with-fingerprint --with-colons \n\n\n\n\nAdd a key\n\n\napt-key adv --recv-keys --keyserver keyserver.example.com keyid\n\n\n\n\nList of keyservers\n\n\n\n\nkeyserver.ubuntu.com\n\n\nsubkeys.pgp.net", 
+            "title": "Apt"
         }, 
         {
-            "location": "/apt_key/#add-a-key", 
-            "text": "apt-key adv --recv-keys --keyserver keyserver.example.com keyid", 
+            "location": "/apt/#get-40-length-fingerprint", 
+            "text": "apt-key adv --list-public-keys --with-fingerprint --with-colons", 
+            "title": "Get 40 length fingerprint"
+        }, 
+        {
+            "location": "/apt/#add-a-key", 
+            "text": "apt-key adv --recv-keys --keyserver keyserver.example.com keyid  List of keyservers   keyserver.ubuntu.com  subkeys.pgp.net", 
             "title": "Add a key"
-        }, 
-        {
-            "location": "/apt_key/#list-of-keyservers", 
-            "text": "keyserver.ubuntu.com    subkeys.pgp.net", 
-            "title": "List of keyservers"
         }, 
         {
             "location": "/asciidoc/", 

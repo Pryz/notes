@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Apt key - Notes</title>
+  <title>Apt - Notes</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -22,7 +22,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Apt key";
+    var mkdocs_page_name = "Apt";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -102,14 +102,16 @@
           
             <li>
     <li class="toctree-l1 current">
-        <a class="current" href="./">Apt key</a>
+        <a class="current" href="./">Apt</a>
         
             <ul>
             
-                <li class="toctree-l3"><a href="#add-a-key">Add a key</a></li>
+                <li class="toctree-l3"><a href="#get-40-length-fingerprint">Get 40 length fingerprint</a></li>
                 
             
-                <li class="toctree-l3"><a href="#list-of-keyservers">List of keyservers</a></li>
+                <li class="toctree-l3"><a href="#add-a-key">Add a key</a></li>
+                
+                    <li><a class="toctree-l4" href="#list-of-keyservers">List of keyservers</a></li>
                 
             
             </ul>
@@ -811,7 +813,7 @@
     
       
     
-    <li>Apt key</li>
+    <li>Apt</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -821,18 +823,18 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="add-a-key">Add a key</h1>
+                <h2 id="get-40-length-fingerprint">Get 40 length fingerprint</h2>
+<pre><code class="bash">apt-key adv --list-public-keys --with-fingerprint --with-colons 
+</code></pre>
+
+<h2 id="add-a-key">Add a key</h2>
 <pre><code class="bash">apt-key adv --recv-keys --keyserver keyserver.example.com keyid
 </code></pre>
 
-<h1 id="list-of-keyservers">List of keyservers</h1>
+<h3 id="list-of-keyservers">List of keyservers</h3>
 <ul>
-<li>
-<p>keyserver.ubuntu.com</p>
-</li>
-<li>
-<p>subkeys.pgp.net</p>
-</li>
+<li>keyserver.ubuntu.com</li>
+<li>subkeys.pgp.net</li>
 </ul>
               
             </div>
