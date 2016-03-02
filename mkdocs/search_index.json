@@ -237,7 +237,7 @@
         }, 
         {
             "location": "/docker/", 
-            "text": "Log : /var/log/upstart/docker.log\nDefault socket : /var/run/docker.sock\n\n\nMount shared folder for boot2docker\n\n\nVBoxManage sharedfolder add boot2docker-vm -name home -hostpath /Users\n\n\n\n\nClean all docker untagged images\n\n\ndocker rmi $(docker images | awk '/^\nnone\n/ { print $3 }')\n\n\n\n\nNAT port to container\n\n\niptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000", 
+            "text": "Log : /var/log/upstart/docker.log\nDefault socket : /var/run/docker.sock\n\n\nMount shared folder for boot2docker\n\n\nVBoxManage sharedfolder add boot2docker-vm -name home -hostpath /Users\n\n\n\n\nClean all docker untagged images\n\n\ndocker rmi $(docker images | awk '/^\nnone\n/ { print $3 }')\n\n\n\n\nNAT port to container\n\n\niptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000\n\n\n\n\nInstall package on Boot2docker\n\n\nBoot2docker is based on Tiny Linux (see \nhttp://tinycorelinux.net\n)\n\n\nList of extensions : \nhttp://distro.ibiblio.org/tinycorelinux/tcz_2x.html\n\n\n# Install strace\ntce-load -wi strace.tcz\n\n\n\n\nUnattach from container\n\n\nCTRL+p CTRL+q\n\n\nInspect with json\n\n\ndocker inspect --format='{{json .NetworkSettings.Networks }}' container01 | jq '.'\n\ndocker network inspect --format='{{.Name}} {{ range .IPAM.Config }} {{.Subnet}} {{end}}' local_alias\n\n\n\n\nClean up !\n\n\nalias dockercleanup='docker rm -v $(docker ps -a -q -f status=exited)'\nalias dockerpurge='docker rm $(docker ps -a -q); docker rmi $(docker images -q)'\n\n\n\n\nAvoid loosing DNS when you use mulitiple networks (like VPN)\n\n\nVBoxManage modifyvm \ndev\n --natdnsproxy1 on", 
             "title": "Docker"
         }, 
         {
@@ -254,6 +254,31 @@
             "location": "/docker/#nat-port-to-container", 
             "text": "iptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000", 
             "title": "NAT port to container"
+        }, 
+        {
+            "location": "/docker/#install-package-on-boot2docker", 
+            "text": "Boot2docker is based on Tiny Linux (see  http://tinycorelinux.net )  List of extensions :  http://distro.ibiblio.org/tinycorelinux/tcz_2x.html  # Install strace\ntce-load -wi strace.tcz", 
+            "title": "Install package on Boot2docker"
+        }, 
+        {
+            "location": "/docker/#unattach-from-container", 
+            "text": "CTRL+p CTRL+q", 
+            "title": "Unattach from container"
+        }, 
+        {
+            "location": "/docker/#inspect-with-json", 
+            "text": "docker inspect --format='{{json .NetworkSettings.Networks }}' container01 | jq '.'\n\ndocker network inspect --format='{{.Name}} {{ range .IPAM.Config }} {{.Subnet}} {{end}}' local_alias", 
+            "title": "Inspect with json"
+        }, 
+        {
+            "location": "/docker/#clean-up", 
+            "text": "alias dockercleanup='docker rm -v $(docker ps -a -q -f status=exited)'\nalias dockerpurge='docker rm $(docker ps -a -q); docker rmi $(docker images -q)'", 
+            "title": "Clean up !"
+        }, 
+        {
+            "location": "/docker/#avoid-loosing-dns-when-you-use-mulitiple-networks-like-vpn", 
+            "text": "VBoxManage modifyvm  dev  --natdnsproxy1 on", 
+            "title": "Avoid loosing DNS when you use mulitiple networks (like VPN)"
         }, 
         {
             "location": "/editable_browser/", 

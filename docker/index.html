@@ -255,6 +255,21 @@
                 <li class="toctree-l3"><a href="#nat-port-to-container">NAT port to container</a></li>
                 
             
+                <li class="toctree-l3"><a href="#install-package-on-boot2docker">Install package on Boot2docker</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#unattach-from-container">Unattach from container</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#inspect-with-json">Inspect with json</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#clean-up">Clean up !</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#avoid-loosing-dns-when-you-use-mulitiple-networks-like-vpn">Avoid loosing DNS when you use mulitiple networks (like VPN)</a></li>
+                
+            
             </ul>
         
     </li>
@@ -836,6 +851,30 @@ Default socket : /var/run/docker.sock</p>
 
 <h1 id="nat-port-to-container">NAT port to container</h1>
 <pre><code>iptables -t nat -A  DOCKER -p tcp --dport 8001 -j DNAT --to-destination 172.17.0.19:8000
+</code></pre>
+
+<h1 id="install-package-on-boot2docker">Install package on Boot2docker</h1>
+<p>Boot2docker is based on Tiny Linux (see <a href="http://tinycorelinux.net">http://tinycorelinux.net</a>)</p>
+<p>List of extensions : <a href="http://distro.ibiblio.org/tinycorelinux/tcz_2x.html">http://distro.ibiblio.org/tinycorelinux/tcz_2x.html</a></p>
+<pre><code># Install strace
+tce-load -wi strace.tcz
+</code></pre>
+
+<h1 id="unattach-from-container">Unattach from container</h1>
+<p>CTRL+p CTRL+q</p>
+<h1 id="inspect-with-json">Inspect with json</h1>
+<pre><code>docker inspect --format='{{json .NetworkSettings.Networks }}' container01 | jq '.'
+
+docker network inspect --format='{{.Name}} {{ range .IPAM.Config }} {{.Subnet}} {{end}}' local_alias
+</code></pre>
+
+<h1 id="clean-up">Clean up !</h1>
+<pre><code>alias dockercleanup='docker rm -v $(docker ps -a -q -f status=exited)'
+alias dockerpurge='docker rm $(docker ps -a -q); docker rmi $(docker images -q)'
+</code></pre>
+
+<h1 id="avoid-loosing-dns-when-you-use-mulitiple-networks-like-vpn">Avoid loosing DNS when you use mulitiple networks (like VPN)</h1>
+<pre><code class="bash">VBoxManage modifyvm &quot;dev&quot; --natdnsproxy1 on
 </code></pre>
               
             </div>
