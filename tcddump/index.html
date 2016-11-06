@@ -3,7 +3,10 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
   
   <title>Tcddump - Notes</title>
   
@@ -23,6 +26,8 @@
   <script>
     // Current page data
     var mkdocs_page_name = "Tcddump";
+    var mkdocs_page_input_path = "tcddump.md";
+    var mkdocs_page_url = "/tcddump/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -102,13 +107,6 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../apt/">Apt</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
         <a class="" href="../asciidoc/">Asciidoc</a>
         
     </li>
@@ -152,6 +150,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../bash_replace_from_last/">Bash replace from last</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../bluetooth_mouse/">Bluetooth mouse</a>
         
     </li>
 <li>
@@ -207,6 +212,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../debian_laptop/">Debian laptop</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../debian_services/">Debian services</a>
         
     </li>
@@ -229,13 +241,6 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../dhcpd_pxe/">Dhcpd pxe</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../django/">Django</a>
         
     </li>
 <li>
@@ -375,13 +380,6 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../java_troubleshooting/">Java troubleshooting</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
         <a class="" href="../jboss_https/">Jboss https</a>
         
     </li>
@@ -397,13 +395,6 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../jboss_vault/">Jboss vault</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../jenkins/">Jenkins</a>
         
     </li>
 <li>
@@ -710,10 +701,26 @@
 <li>
           
             <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../systemd/">Systemd</a>
+        
+    </li>
+<li>
+          
+            <li>
     <li class="toctree-l1 current">
         <a class="current" href="./">Tcddump</a>
         
             <ul>
+            
+                <li class="toctree-l3"><a href="#tcpdump">tcpdump</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#ngrep">ngrep</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#tshark">tshark</a></li>
+                
             
             </ul>
         
@@ -815,11 +822,58 @@
           <div role="main">
             <div class="section">
               
-                <pre><code class="bash"># -nn not lookup hostnames
+                <h2 id="tcpdump">tcpdump</h2>
+<p>PCAP filters : http://www.tcpdump.org/manpages/pcap-filter.7.html</p>
+<pre><code class="bash"># Capture LDAP traffic and print hex and ascii
+
+# -nn not lookup hostnames
 # -X print in hex and ascii
 # -S absolute TCP seq numbers
 # -s get full lenght packet
 tcpdump -nn -X -S -s 0 port 389
+</code></pre>
+
+<pre><code class="bash"># Capture HTTP traffic and display content
+
+tcpdump -i eth0 -AA port 80
+</code></pre>
+
+<pre><code class="bash"># Capture Kafka traffic for a specific host
+
+tcpdump -i eth0 port 9092 and host kafka01.domain.com
+</code></pre>
+
+<pre><code class="bash"># Capture HTTP traffic and store it in a pcap file
+tcpdump -i eth0 -n -w /tmp/traffic.pcap port 80
+</code></pre>
+
+<pre><code class="bash"># Captupre traffic for a specific destination
+tcpdump -i eth0 dst 10.0.1.2
+</code></pre>
+
+<pre><code class="bash"># Captupre traffic for a specific IP source
+tcpdump -i eth0 src 10.0.1.2
+</code></pre>
+
+<h2 id="ngrep">ngrep</h2>
+<pre><code class="bash"># Capture GET and POST methods from HTTP traffic
+
+ngrep -q -W byline &quot;GET|POST HTTP&quot;
+</code></pre>
+
+<h2 id="tshark">tshark</h2>
+<pre><code class="bash"># Capture HTTP Get traffic and display HTTP method, URI and IP destination
+
+tshark -i eth0 \
+  -R 'http.request.method == &quot;GET&quot;' \
+  -T fields \
+  -e http.request.method -e http.request.uri -e ip.dst
+</code></pre>
+
+<p>With <code>tshark</code> we can use same filters as tcpdump. See pcap filters.</p>
+<pre><code class="bash"># Read .pcap file with tshark
+
+tshark -r /tmp/traffic.pcap
 </code></pre>
               
             </div>
@@ -828,10 +882,10 @@ tcpdump -nn -X -S -s 0 port 389
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../test_bibi/" class="btn btn-neutral float-right" title="Test bibi"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../test_bibi/" class="btn btn-neutral float-right" title="Test bibi">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../statsd/" class="btn btn-neutral" title="Statsd"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../systemd/" class="btn btn-neutral" title="Systemd"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -857,7 +911,7 @@ tcpdump -nn -X -S -s 0 port 389
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../statsd/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../systemd/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../test_bibi/" style="color: #fcfcfc">Next &raquo;</a></span>
