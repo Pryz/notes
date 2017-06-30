@@ -166,6 +166,21 @@
             "title": "Chroot sftp"
         },
         {
+            "location": "/consul/",
+            "text": "Consul\n\n\nForce leave\n\n\ndocker run consul:0.7.4 force-leave -rpc-addr=172.17.42.1:8400 discovery-stage-0184cb8b6e18d3ba",
+            "title": "Consul"
+        },
+        {
+            "location": "/consul/#consul",
+            "text": "",
+            "title": "Consul"
+        },
+        {
+            "location": "/consul/#force-leave",
+            "text": "docker run consul:0.7.4 force-leave -rpc-addr=172.17.42.1:8400 discovery-stage-0184cb8b6e18d3ba",
+            "title": "Force leave"
+        },
+        {
             "location": "/create_floppy_ks/",
             "text": "mkfs.vfat -C \"centos6-floppy.img\" 1440\nmkdir /mnt/floppy\nsudo mkdir /mnt/floppy\nsudo mount -o loop,uid=$UID -t vfat centos6-floppy.img /mnt/floppy\ncp /var/www/ks/ks-rhel6.cfg /mnt/floppy/ks.cfg\nsudo umount /mnt/floppy",
             "title": "Create floppy ks"
@@ -184,16 +199,6 @@
             "location": "/curl_format/",
             "text": "Display curl statistics with -w :\n\n\n# Create the format file\n$ cat > /tmp/curl-formats.txt <<EOF\n\\n\n            time_namelookup:  %{time_namelookup}\\n\n               time_connect:  %{time_connect}\\n\n            time_appconnect:  %{time_appconnect}\\n\n           time_pretransfer:  %{time_pretransfer}\\n\n              time_redirect:  %{time_redirect}\\n\n         time_starttransfer:  %{time_starttransfer}\\n\n                            ----------\\n\n                 time_total:  %{time_total}\\n\n\\n\nEOF\n\n# Execute curl\ncurl -v -o /dev/null -w \"@./curl-format.txt\" -s 'http://test.domain.com'",
             "title": "Curl format"
-        },
-        {
-            "location": "/debian_laptop/",
-            "text": "Some notes about my Debian configuration\n\n\nHardware : Dell XPS 13 late 2015\n\n\nDistribution: Debian\nWindows Manager: i3\nTerminal: urxvt",
-            "title": "Debian laptop"
-        },
-        {
-            "location": "/debian_laptop/#some-notes-about-my-debian-configuration",
-            "text": "Hardware : Dell XPS 13 late 2015  Distribution: Debian\nWindows Manager: i3\nTerminal: urxvt",
-            "title": "Some notes about my Debian configuration"
         },
         {
             "location": "/debian_services/",
@@ -597,7 +602,7 @@
         },
         {
             "location": "/ldapsearch/",
-            "text": "for u in `ldapsearch -LLL -D \"cn=Svc Linux\n    bind,ou=systems,dc=it,dc=vallourec,dc=net\" -w\n    480a1c28004510ec1c3dc07e2e6c6378 -h ldap.it.vallourec.net -b\n    \"cn=N3Linux,ou=groups,dc=it,dc=vallourec,dc=net\" -s sub \"*\" | awk\n    '/memberUid/ {print $2}'`;do ldapsearch -LLL -D \"cn=Svc Linux\n    bind,ou=systems,dc=it,dc=vallourec,dc=net\" -w\n    480a1c28004510ec1c3dc07e2e6c6378 -h ldap.it.vallourec.net -b\n    \"ou=people,dc=it,dc=vallourec,dc=net\" \"(uid=$u)\"| egrep \"cn:|mail\"; echo ;\n    done\n\n\n\nFind all uids from a group.\n\n\nldapsearch -LLL -D \"cn=binduser,ou=systems,dc=lab,dc=domain,dc=local\" \\\n    -w \"password\" -h ldap.domain.local \\\n    -b \"cn=thegroup,ou=groups,dc=lab,dc=domain,dc=local\" \\\n    -s sub \"'memberUid=*\"\n\n\n\nGet a specific user.\n\n\nldapsearch -LLL -D \"cn=binduser,ou=systems,dc=lab,dc=domain,dc=local\" \\\n    -w \"password\" -h ldap.domain.local \\\n    -b \"ou=perople,dc=it,dc=vallourec,dc=net\"\n    \"(uid=my.user)\"\n\n\n\nList all users.\n\n\nldapsearch -LLL -D \"cn=binduser,ou=systems,dc=lab,dc=domain,dc=local\" \\\n    -w \"password\" -h ldap.domain.local \\\n    -b \"ou=perople,dc=it,dc=vallourec,dc=net\"\n    \"(objectclass=*)\"",
+            "text": "for u in `ldapsearch -LLL -D \"cn=Svc Linux\n    bind,ou=systems,dc=it,dc=foobar,dc=net\" -w\n    480a1c28004510ec1c3dc07e2e6c6378 -h ldap.it.foobar.net -b\n    \"cn=N3Linux,ou=groups,dc=it,dc=foobar,dc=net\" -s sub \"*\" | awk\n    '/memberUid/ {print $2}'`;do ldapsearch -LLL -D \"cn=Svc Linux\n    bind,ou=systems,dc=it,dc=foobar,dc=net\" -w\n    480a1c28004510ec1c3dc07e2e6c6378 -h ldap.it.foobar.net -b\n    \"ou=people,dc=it,dc=foobar,dc=net\" \"(uid=$u)\"| egrep \"cn:|mail\"; echo ;\n    done\n\n\n\nFind all uids from a group.\n\n\nldapsearch -LLL -D \"cn=binduser,ou=systems,dc=lab,dc=domain,dc=local\" \\\n    -w \"password\" -h ldap.domain.local \\\n    -b \"cn=thegroup,ou=groups,dc=lab,dc=domain,dc=local\" \\\n    -s sub \"'memberUid=*\"\n\n\n\nGet a specific user.\n\n\nldapsearch -LLL -D \"cn=binduser,ou=systems,dc=lab,dc=domain,dc=local\" \\\n    -w \"password\" -h ldap.domain.local \\\n    -b \"ou=perople,dc=it,dc=foobar,dc=net\"\n    \"(uid=my.user)\"\n\n\n\nList all users.\n\n\nldapsearch -LLL -D \"cn=binduser,ou=systems,dc=lab,dc=domain,dc=local\" \\\n    -w \"password\" -h ldap.domain.local \\\n    -b \"ou=perople,dc=it,dc=foobar,dc=net\"\n    \"(objectclass=*)\"",
             "title": "Ldapsearch"
         },
         {
@@ -633,7 +638,7 @@
         {
             "location": "/linux_perf/#commands-tools",
             "text": "",
-            "title": "Commands &amp; tools"
+            "title": "Commands & tools"
         },
         {
             "location": "/linux_perf/#ganglia",
@@ -759,6 +764,21 @@
             "location": "/misc_ubuntu/#misc-configuration",
             "text": "# Gtk-WARNING **: Unable to locate theme engine in module_path: \u201cpixmap\u201d\nsudo apt-get install gtk2-engines-pixbuf",
             "title": "Misc configuration"
+        },
+        {
+            "location": "/mongodb/",
+            "text": "Misc notes about MongoDB\n\n\nOperations\n\n\nTroubleshooting tools\n\n\nmongostat\nmongotop\n\n\n\n\nList current operations\n\n\ndb.currentOp()\n\n\n\n\nQueries running for longer that X seconds :\n\n\ndb.currentOp().inprog.forEach(\n  if(op.secs_running > X) printjson(op)\n)\n\n\n\n\nMore interesting output with print \n\n\ndb.currentOp().inprog.forEach(\n  function(d) {\n    print(d.secs_running, d.client, d.ns)\n  }\n)\n\n\n\n\nKill a query\n\n\ndb.killOp(<QUERY_ID>)\n\n\n\n\nServer status\n\n\ndb.serverStatus()\n\n\n\n\nSetup replication\n\n\nrs.initiate({_id: \"rsa\", version: 1, members: [{_id: 0, host: \"10.30.75.75:27017\"}, {_id: 1, host: \"10.30.158.17:27017\" }]})",
+            "title": "Mongodb"
+        },
+        {
+            "location": "/mongodb/#misc-notes-about-mongodb",
+            "text": "",
+            "title": "Misc notes about MongoDB"
+        },
+        {
+            "location": "/mongodb/#operations",
+            "text": "Troubleshooting tools  mongostat\nmongotop  List current operations  db.currentOp()  Queries running for longer that X seconds :  db.currentOp().inprog.forEach(\n  if(op.secs_running > X) printjson(op)\n)  More interesting output with print   db.currentOp().inprog.forEach(\n  function(d) {\n    print(d.secs_running, d.client, d.ns)\n  }\n)  Kill a query  db.killOp(<QUERY_ID>)  Server status  db.serverStatus()  Setup replication  rs.initiate({_id: \"rsa\", version: 1, members: [{_id: 0, host: \"10.30.75.75:27017\"}, {_id: 1, host: \"10.30.158.17:27017\" }]})",
+            "title": "Operations"
         },
         {
             "location": "/mysql/",
@@ -1036,41 +1056,6 @@
             "title": "Send Timers"
         },
         {
-            "location": "/systemd/",
-            "text": "Systemd on Debian\n\n\nGet systemd boot time\n\n\nsystemd-analyze\n\n\n\n\nGet systemd log\n\n\njournalctl --since=today\n\n\n\n\nRemote systemd over SSH\n\n\nsystemd --host user@host status nginx\n\n\n\n\nEnable service at boot\n\n\nsystem enable dropbox\n\n\n\n\nDropbox as an example\n\n\nroot@yoshi:~# cat /etc/systemd/system/dropbox.service \n[Unit]\nDescription=Dropbox\nAfter=network.target\n\n[Service]\nExecStart=/bin/sh -c '/usr/bin/dropbox start -i'\nExecStop=/bin/sh -c '/usr/bin/dropbox stop'\nPIDFile=${HOME}/.dropbox/dropbox.pid\nType=forking\nRestart=on-failure\nRestartSec=5\nStartLimitInterval=60s\nStartLimitBurst=3\nUser=ju\nGroup=ju\n\n[Install]\nWantedBy=multi-user.targe",
-            "title": "Systemd"
-        },
-        {
-            "location": "/systemd/#systemd-on-debian",
-            "text": "",
-            "title": "Systemd on Debian"
-        },
-        {
-            "location": "/systemd/#get-systemd-boot-time",
-            "text": "systemd-analyze",
-            "title": "Get systemd boot time"
-        },
-        {
-            "location": "/systemd/#get-systemd-log",
-            "text": "journalctl --since=today",
-            "title": "Get systemd log"
-        },
-        {
-            "location": "/systemd/#remote-systemd-over-ssh",
-            "text": "systemd --host user@host status nginx",
-            "title": "Remote systemd over SSH"
-        },
-        {
-            "location": "/systemd/#enable-service-at-boot",
-            "text": "system enable dropbox",
-            "title": "Enable service at boot"
-        },
-        {
-            "location": "/systemd/#dropbox-as-an-example",
-            "text": "root@yoshi:~# cat /etc/systemd/system/dropbox.service \n[Unit]\nDescription=Dropbox\nAfter=network.target\n\n[Service]\nExecStart=/bin/sh -c '/usr/bin/dropbox start -i'\nExecStop=/bin/sh -c '/usr/bin/dropbox stop'\nPIDFile=${HOME}/.dropbox/dropbox.pid\nType=forking\nRestart=on-failure\nRestartSec=5\nStartLimitInterval=60s\nStartLimitBurst=3\nUser=ju\nGroup=ju\n\n[Install]\nWantedBy=multi-user.targe",
-            "title": "Dropbox as an example"
-        },
-        {
             "location": "/tcddump/",
             "text": "tcpdump\n\n\nPCAP filters : http://www.tcpdump.org/manpages/pcap-filter.7.html\n\n\n# Capture LDAP traffic and print hex and ascii\n\n# -nn not lookup hostnames\n# -X print in hex and ascii\n# -S absolute TCP seq numbers\n# -s get full lenght packet\ntcpdump -nn -X -S -s 0 port 389\n\n\n\n\n# Capture HTTP traffic and display content\n\ntcpdump -i eth0 -AA port 80\n\n\n\n\n# Capture Kafka traffic for a specific host\n\ntcpdump -i eth0 port 9092 and host kafka01.domain.com\n\n\n\n\n# Capture HTTP traffic and store it in a pcap file\ntcpdump -i eth0 -n -w /tmp/traffic.pcap port 80\n\n\n\n\n# Captupre traffic for a specific destination\ntcpdump -i eth0 dst 10.0.1.2\n\n\n\n\n# Captupre traffic for a specific IP source\ntcpdump -i eth0 src 10.0.1.2\n\n\n\n\nngrep\n\n\n# Capture GET and POST methods from HTTP traffic\n\nngrep -q -W byline \"GET|POST HTTP\"\n\n\n\n\ntshark\n\n\n# Capture HTTP Get traffic and display HTTP method, URI and IP destination\n\ntshark -i eth0 \\\n  -R 'http.request.method == \"GET\"' \\\n  -T fields \\\n  -e http.request.method -e http.request.uri -e ip.dst\n\n\n\n\nWith \ntshark\n we can use same filters as tcpdump. See pcap filters.\n\n\n# Read .pcap file with tshark\n\ntshark -r /tmp/traffic.pcap",
             "title": "Tcddump"
@@ -1121,6 +1106,26 @@
             "title": "Traceroute"
         },
         {
+            "location": "/troubleshooting/",
+            "text": "Troubleshooting\n\n\nstrace\n\n\nstrace -f -s1000 -p 56899  -e 'trace=!clock_gettime,futex,select\n\n\n\n\ntcpdump\n\n\ntcpdump -peni any\n\n\n\n\nssh some.remote.host  tcpdump -pni eth0 -s0 -w - -U port 8888 | wireshark -k -i",
+            "title": "Troubleshooting"
+        },
+        {
+            "location": "/troubleshooting/#troubleshooting",
+            "text": "",
+            "title": "Troubleshooting"
+        },
+        {
+            "location": "/troubleshooting/#strace",
+            "text": "strace -f -s1000 -p 56899  -e 'trace=!clock_gettime,futex,select",
+            "title": "strace"
+        },
+        {
+            "location": "/troubleshooting/#tcpdump",
+            "text": "tcpdump -peni any  ssh some.remote.host  tcpdump -pni eth0 -s0 -w - -U port 8888 | wireshark -k -i",
+            "title": "tcpdump"
+        },
+        {
             "location": "/ubuntu_init/",
             "text": "How to get current runlevel\n\n\nrunlevel\n\n\n\n\nEnable service during start\n\n\nupdate-rc.d SERVICENAME defaults",
             "title": "Ubuntu init"
@@ -1136,6 +1141,11 @@
             "title": "Enable service during start"
         },
         {
+            "location": "/ubuntu_sound/",
+            "text": "aplay -l",
+            "title": "Ubuntu sound"
+        },
+        {
             "location": "/ubuntu_spice_xpi/",
             "text": "sudo su -\nadd-apt-repository ppa:jasonbrooks/ppa\napt-get update\napt-get install spice-xpi\napt-get -f install",
             "title": "Ubuntu spice xpi"
@@ -1149,6 +1159,16 @@
             "location": "/vagrant/",
             "text": "KVM Provider.\n\n\nvagrant plugin install vagrant-kvm\n\n\n\nExamples.\n\n\nvagrant box add precise32 http://files.vagrantup.com/precise32.box\nmv ~/.vagrant.d/boxes/precise32/virtualbox ~/.vagrant.d/boxes/precise32/kvm\ncat <<EOF >~/.vagrant.d/boxes/precise32/kvm/metadata.json\n{\"provider\": \"kvm\"}\nEOF",
             "title": "Vagrant"
+        },
+        {
+            "location": "/vault/",
+            "text": "Playing with Vault\n\n\nStart Vault :\n\n\ndocker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=foobar' vault\n\n\n\n\nWrite secrets to it :\n\n\ndocker run -e 'VAULT_ADDR=http://172.17.0.4:8200' -e 'VAULT_TOKEN=foobar' -it vault write secret/okta Token=hotdog PropertyKey=sandwich\n\n\n\n\nRead secrets :\n\n\ndocker run -e 'VAULT_ADDR=http://172.17.0.4:8200' -e 'VAULT_TOKEN=foobar' -it vault read secret/okta",
+            "title": "Vault"
+        },
+        {
+            "location": "/vault/#playing-with-vault",
+            "text": "Start Vault :  docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=foobar' vault  Write secrets to it :  docker run -e 'VAULT_ADDR=http://172.17.0.4:8200' -e 'VAULT_TOKEN=foobar' -it vault write secret/okta Token=hotdog PropertyKey=sandwich  Read secrets :  docker run -e 'VAULT_ADDR=http://172.17.0.4:8200' -e 'VAULT_TOKEN=foobar' -it vault read secret/okta",
+            "title": "Playing with Vault"
         },
         {
             "location": "/vim_tips/",

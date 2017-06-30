@@ -3,12 +3,9 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  
-  
-  <title>Debian laptop - Notes</title>
+  <title>Mongodb - Notes</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -25,9 +22,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Debian laptop";
-    var mkdocs_page_input_path = "debian_laptop.md";
-    var mkdocs_page_url = "/debian_laptop/";
+    var mkdocs_page_name = "Mongodb";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -184,6 +179,13 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../consul/">Consul</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../create_floppy_ks/">Create floppy ks</a>
         
     </li>
@@ -206,20 +208,6 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../curl_format/">Curl format</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Debian laptop</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#some-notes-about-my-debian-configuration">Some notes about my Debian configuration</a></li>
-                
-            
-            </ul>
         
     </li>
 <li>
@@ -519,6 +507,22 @@
 <li>
           
             <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Mongodb</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#misc-notes-about-mongodb">Misc notes about MongoDB</a></li>
+                
+                    <li><a class="toctree-l4" href="#operations">Operations</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
     <li class="toctree-l1 ">
         <a class="" href="../mysql/">Mysql</a>
         
@@ -709,13 +713,6 @@
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" href="../systemd/">Systemd</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
         <a class="" href="../tcddump/">Tcddump</a>
         
     </li>
@@ -744,7 +741,21 @@
           
             <li>
     <li class="toctree-l1 ">
+        <a class="" href="../troubleshooting/">Troubleshooting</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
         <a class="" href="../ubuntu_init/">Ubuntu init</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../ubuntu_sound/">Ubuntu sound</a>
         
     </li>
 <li>
@@ -766,6 +777,13 @@
             <li>
     <li class="toctree-l1 ">
         <a class="" href="../vagrant/">Vagrant</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../vault/">Vault</a>
         
     </li>
 <li>
@@ -806,7 +824,7 @@
     
       
     
-    <li>Debian laptop</li>
+    <li>Mongodb</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -816,11 +834,42 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="some-notes-about-my-debian-configuration">Some notes about my Debian configuration</h2>
-<p>Hardware : Dell XPS 13 late 2015</p>
-<p>Distribution: Debian
-Windows Manager: i3
-Terminal: urxvt</p>
+                <h1 id="misc-notes-about-mongodb">Misc notes about MongoDB</h1>
+<h2 id="operations">Operations</h2>
+<h3 id="troubleshooting-tools">Troubleshooting tools</h3>
+<pre><code>mongostat
+mongotop
+</code></pre>
+
+<h3 id="list-current-operations">List current operations</h3>
+<pre><code>db.currentOp()
+</code></pre>
+
+<p>Queries running for longer that X seconds :</p>
+<pre><code>db.currentOp().inprog.forEach(
+  if(op.secs_running &gt; X) printjson(op)
+)
+</code></pre>
+
+<p>More interesting output with print </p>
+<pre><code>db.currentOp().inprog.forEach(
+  function(d) {
+    print(d.secs_running, d.client, d.ns)
+  }
+)
+</code></pre>
+
+<h3 id="kill-a-query">Kill a query</h3>
+<pre><code>db.killOp(&lt;QUERY_ID&gt;)
+</code></pre>
+
+<h3 id="server-status">Server status</h3>
+<pre><code>db.serverStatus()
+</code></pre>
+
+<h3 id="setup-replication">Setup replication</h3>
+<pre><code>rs.initiate({_id: &quot;rsa&quot;, version: 1, members: [{_id: 0, host: &quot;10.30.75.75:27017&quot;}, {_id: 1, host: &quot;10.30.158.17:27017&quot; }]})
+</code></pre>
               
             </div>
           </div>
@@ -828,10 +877,10 @@ Terminal: urxvt</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../debian_services/" class="btn btn-neutral float-right" title="Debian services">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mysql/" class="btn btn-neutral float-right" title="Mysql"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../curl_format/" class="btn btn-neutral" title="Curl format"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../misc_ubuntu/" class="btn btn-neutral" title="Misc ubuntu"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -857,10 +906,10 @@ Terminal: urxvt</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../curl_format/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../misc_ubuntu/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../debian_services/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../mysql/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

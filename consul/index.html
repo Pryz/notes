@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Vagrant - Notes</title>
+  <title>Consul - Notes</title>
   
 
   <link rel="shortcut icon" href="../img/favicon.ico">
@@ -22,7 +22,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Vagrant";
+    var mkdocs_page_name = "Consul";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -178,8 +178,17 @@
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../consul/">Consul</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Consul</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#consul">Consul</a></li>
+                
+                    <li><a class="toctree-l4" href="#force-leave">Force leave</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -766,12 +775,8 @@
 <li>
           
             <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Vagrant</a>
-        
-            <ul>
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../vagrant/">Vagrant</a>
         
     </li>
 <li>
@@ -819,7 +824,7 @@
     
       
     
-    <li>Vagrant</li>
+    <li>Consul</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -829,15 +834,9 @@
           <div role="main">
             <div class="section">
               
-                <p><strong>KVM Provider.</strong></p>
-<pre><code>vagrant plugin install vagrant-kvm
-</code></pre>
-<p><strong>Examples.</strong></p>
-<pre><code>vagrant box add precise32 http://files.vagrantup.com/precise32.box
-mv ~/.vagrant.d/boxes/precise32/virtualbox ~/.vagrant.d/boxes/precise32/kvm
-cat &lt;&lt;EOF &gt;~/.vagrant.d/boxes/precise32/kvm/metadata.json
-{"provider": "kvm"}
-EOF
+                <h1 id="consul">Consul</h1>
+<h2 id="force-leave">Force leave</h2>
+<pre><code>docker run consul:0.7.4 force-leave -rpc-addr=172.17.42.1:8400 discovery-stage-0184cb8b6e18d3ba
 </code></pre>
               
             </div>
@@ -846,10 +845,10 @@ EOF
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../vault/" class="btn btn-neutral float-right" title="Vault"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../create_floppy_ks/" class="btn btn-neutral float-right" title="Create floppy ks"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../update_alternative/" class="btn btn-neutral" title="Update alternative"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../chroot_sftp/" class="btn btn-neutral" title="Chroot sftp"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -875,10 +874,10 @@ EOF
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../update_alternative/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../chroot_sftp/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../vault/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../create_floppy_ks/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
